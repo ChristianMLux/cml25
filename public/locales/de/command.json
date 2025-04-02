@@ -1,0 +1,26 @@
+{
+    "searchPlaceholder": "Suchen...",
+    "searchLabel": "Befehle durchsuchen",
+    "shortcutHint": "⌘K",
+    "recentlyUsed": "Zuletzt verwendet",
+    "categories": {
+      "navigation": "Navigation",
+      "action": "Aktionen",
+      "settings": "Einstellungen"
+    },
+    "noResults": "Keine Ergebnisse gefunden",
+    "tip": "Tipp: Verwende ↑↓ zum Navigieren, Enter zum Auswählen",
+    "dismiss": "Schließen (Esc)",
+    "navigation": {
+      "home": "Startseite",
+      "projects": "Projekte anzeigen",
+      "about": "Über mich",
+      "contact": "Kontakt"
+    },
+    "actions": {
+      "switchLightTheme": "Zum hellen Design wechseln",
+      "switchDarkTheme": "Zum dunklen Design wechseln",
+      "switchToEnglish": "Auf Englisch umschalten",
+      "switchToGerman": "Auf Deutsch umschalten"
+    }
+  }

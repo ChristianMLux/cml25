@@ -6,7 +6,7 @@ import { CheckCircle } from 'lucide-react';
 interface SkillsShowcaseProps {
   skills: {
     category: string;
-    items: string[];
+    items: (string|undefined)[];
   }[];
 }
 

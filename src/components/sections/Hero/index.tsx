@@ -1,69 +1,89 @@
-'use client';
+"use client";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/Button/button";
+import { useTranslation } from "react-i18next";
+import { useRouter } from "@/lib/i18n-navigation";
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/Button/button';
-
-const animation = {
+const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 }
+  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
 };
 
-export default function Hero() {
+interface Props {
+  locale: string;
+}
+
+export default function Hero({ locale }: Props) {
+  const { t } = useTranslation(["common", "hero"]);
+  const router = useRouter();
+
   return (
-    <section className="relative overflow-hidden py-20 sm:py-32 lg:pb-32 xl:pb-36">
+    <section className="relative overflow-hidden py-20 sm:py-28 lg:py-32">
       <div className="container px-4 md:px-6">
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-          <motion.div 
-            className="flex flex-col justify-center space-y-4"
-            initial={animation.initial}
-            animate={animation.animate}
-            transition={animation.transition}
+        <div className="max-w-4xl">
+          <motion.div
+            className="mb-6"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
           >
-            <span className="inline-flex items-center rounded-lg bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-              Available for Work
+            <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+              {t("hero:availableForWork")}
             </span>
-            
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-              Creative Developer & Designer
-            </h1>
-            
-            <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
-              Building beautiful, functional, and user-friendly digital experiences with modern technologies.
-            </p>
-            
-            <div className="flex flex-col gap-3 min-[400px]:flex-row">
-              <Button>
-                View Projects
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              <Button variant="outline">
-                Contact Me
-              </Button>
-            </div>
           </motion.div>
 
-          <motion.div 
-            className="relative lg:ml-auto"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+          <motion.h1
+            className="text-4xl sm:text-6xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6 mr-6"
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
-            <div className="relative h-[400px] w-full overflow-hidden rounded-lg">
-              <Image
-                src="/hero-image.jpg"
-                alt="Hero Image"
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
+            <span>{t("hero:paragraph1_beforeHighlighted")} </span>
+            <span className="text-primary">
+              {t("hero:paragraph1_highlighted")}
+            </span>{" "}
+            <span>{t("hero:paragraph1_afterHighlighted")} </span>
+          </motion.h1>
+
+          <motion.p
+            className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-[35rem]"
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={{ ...fadeInUp.transition, delay: 0.2 }}
+          >
+            <span>{t("hero:paragraph2")}</span>
+          </motion.p>
+
+          <motion.div
+            className="flex flex-wrap gap-4 mt-2"
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            transition={{ ...fadeInUp.transition, delay: 0.3 }}
+          >
+            <Button
+              size="lg"
+              className="px-7 py-4 w-[10rem] h-auto text-base font-medium shadow-md"
+              onClick={() => router.push(locale + "/projects")}
+            >
+              {t("hero:btn_projects")}
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+
+            <Button
+              variant="outline"
+              className="px-7 w-[10rem] h-auto text-base font-medium border-gray-400 text-gray-800 hover:bg-gray-100/80 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800/50"
+              onClick={() => router.push(locale + "/contact")}
+            >
+              {t("hero:btn_contact")}
+            </Button>
           </motion.div>
         </div>
       </div>
+
+      <div className="absolute -z-10 top-0 right-0 w-1/2 h-full opacity-10 blur-3xl bg-gradient-to-br from-primary/30 to-secondary/30 dark:opacity-5"></div>
     </section>
   );
 }

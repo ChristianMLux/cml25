@@ -1,0 +1,67 @@
+{
+  "title": "Featured Projects",
+  "description": "A small overview of current or past projects. More can be found in the project overview.",
+  "categories": {
+    "all": "All",
+    "web": "Web",
+    "mobile": "Mobile",
+    "design": "Design"
+  },
+
+  "projects": {
+    "spn-platform": {
+      "title": "SparePartsNow GmbH",
+      "description": "I was part of the early development team at this B2B provider for spare parts trading."
+    },
+    "cml25": {
+      "title": "Portfolio Update 2025",
+      "description": "After a few years, it was time to update and optimize the portfolio with the latest technology and my accumulated experience."
+    },
+    "signatures-project": {
+      "title": "Signatures",
+      "description": "A collection of signatures I've made over time"
+    },
+    "safetec-project": {
+      "title": "Safe-Tec",
+      "description": "One of my first websites I wrote. It was a simple update because the old website was 10 years old"
+    },
+    "imaging-for-africa-project": {
+      "title": "Imaging for Africa e.V.",
+      "description": "I built that page for an association of my former boss (SafeTec) and 'modernized' it after a couple of years"
+    },
+    "4-soul-project": {
+      "title": "4 - Soul",
+      "description": "Light-weight page for a group of musicians"
+    },
+    "wooden-portfolio-design": {
+      "title": "Wooden Portfolio Design",
+      "description": "I just messed around a bit with textures and lighting in this early 'Portfolio'"
+    },
+    "cmd-portfolio-design": {
+      "title": "CMD - Croud Media Design",
+      "description": "Imaginary company portfolio design. I just wanted to try some things"
+    },
+    "cc-portfolio-design": {
+      "title": "CC - Design",
+      "description": "Imaginary company portfolio design. I just wanted to try some new things"
+    },
+    "imo-fan-project": {
+      "title": "Imoriath - L2 Fan Project",
+      "description": "I've played a lot of Lineage 2 on this Server and tried to redesign the website several times :D"
+    },
+    "categories": {
+      "web": "Web",
+      "design": "Design",
+      "all": "All"
+    },
+    "ui": {
+      "noDescription": "No description available",
+      "unnamedProject": "Unnamed Project",
+      "loadError": "Project could not be loaded",
+      "technologies": "Technologies",
+      "relatedProjects": "Related Projects",
+      "visitProject": "Visit Project",
+      "viewGitHub": "View on GitHub"
+    }
+  }
+}

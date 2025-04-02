@@ -1,0 +1,40 @@
+{
+  "name": "Christian M. Lux",
+  "navigation": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "darkMode": {
+    "toggle": "Toggle dark mode",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "buttons": {
+    "viewMore": "View more",
+    "viewProjects": "View Projects",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "downloadCV": "Download CV"
+  },
+  "footer": {
+    "copyright": "© {{year}} My Portfolio. All rights reserved.",
+    "imprint": "Imprint",
+    "privacy": "Privacy Policy"
+  },
+  "dialog": {
+    "close": "Close",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "ok": "OK"
+  },
+  "metadata": {
+    "baseTitle": "Portfolio",
+    "baseDescription": "My personal portfolio as a developer.",
+    "homeTitleSuffix": "Home",
+    "projectsTitleSuffix": "Projects",
+    "projectsDescription": "Explore my projects and work experience."
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "title": "Kontakt",
+  "description": "Hast du Fragen oder Projekte? Schreib mir eine Nachricht!",
+  "fields": {
+    "name": "Name",
+    "email": "E-Mail",
+    "subject": "Betreff",
+    "message": "Nachricht"
+  },
+  "placeholders": {
+    "name": "Dein Name",
+    "email": "deine@email.com",
+    "subject": "Projektanfrage",
+    "message": "Beschreibe dein Projekt..."
+  },
+  "buttons": {
+    "send": "Nachricht senden",
+    "sending": "Wird gesendet..."
+  },
+  "validation": {
+    "nameMin": "Name muss mindestens 2 Zeichen lang sein",
+    "emailInvalid": "Gültige E-Mail-Adresse erforderlich",
+    "subjectMin": "Betreff muss mindestens 3 Zeichen lang sein",
+    "messageMin": "Nachricht muss mindestens 10 Zeichen lang sein",
+    "messageMax": "Nachricht darf maximal 500 Zeichen lang sein"
+  },
+  "success": {
+    "title": "Nachricht gesendet",
+    "message": "Vielen Dank für deine Nachricht! Ich werde mich so schnell wie möglich bei dir melden.",
+    "button": "OK"
+  },
+  "error": {
+    "title": "Fehler beim Senden",
+    "message": "Leider konnte deine Nachricht nicht gesendet werden. Bitte versuche es später noch einmal.",
+    "unknownError": "Unbekannter Fehler aufgetreten",
+    "button": "Verstanden"
+  }
+}

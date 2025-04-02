@@ -1,17 +1,78 @@
-import createMiddleware from 'next-intl/middleware';
+import { NextRequest, NextResponse } from "next/server";
+import {
+  locales,
+  defaultLocale,
+  isValidLocale,
+  Locale,
+} from "./config/i18n-config";
 
-export default createMiddleware({
-  // Eine Liste aller unterstützten Locales
-  locales: ['en', 'de'],
-  
-  // Standard-Locale
-  defaultLocale: 'de',
-  
-  // Optional: Locale in der URL anzeigen
-  localePrefix: 'always'
-});
+function isStaticResource(pathname: string): boolean {
+  return (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.includes(".") ||
+    pathname.startsWith("/locales")
+  );
+}
 
-export const config = {
-  // Matcher für die Routen, die die Middleware behandeln soll
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
-}; 
+function hasLocalePrefix(pathname: string): boolean {
+  return locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
+}
+
+function getPreferredLocale(request: NextRequest): Locale {
+  const cookieLocale = request.cookies.get("NEXT_LOCALE")?.value;
+  if (cookieLocale && isValidLocale(cookieLocale)) {
+    return cookieLocale;
+  }
+
+  const acceptLanguage = request.headers.get("accept-language") || "";
+  const preferredLanguageHeader = acceptLanguage
+    .split(",")
+    .map((lang) => lang.split(";")[0].trim().substring(0, 2))
+    .find(isValidLocale);
+
+  if (preferredLanguageHeader) {
+    return preferredLanguageHeader;
+  }
+
+  return defaultLocale;
+}
+
+export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+
+  if (isStaticResource(pathname)) {
+    return NextResponse.next();
+  }
+
+  if (hasLocalePrefix(pathname)) {
+    return NextResponse.next();
+  }
+
+  const preferredLocale = getPreferredLocale(request);
+
+  const newUrl = new URL(
+    `/${preferredLocale}${pathname === "/" ? "" : pathname}`,
+    request.url
+  );
+
+  request.nextUrl.searchParams.forEach((value, key) => {
+    newUrl.searchParams.set(key, value);
+  });
+
+  const response = NextResponse.redirect(newUrl);
+
+  response.cookies.set("NEXT_LOCALE", preferredLocale, {
+    maxAge: 365 * 24 * 60 * 60,
+    path: "/",
+  });
+
+  return response;
+}
+
+export const matcher = [
+  "/((?!api|_next/static|_next/image|favicon.ico|locales).+)",
+  "/",
+];

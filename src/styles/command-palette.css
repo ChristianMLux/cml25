@@ -1,0 +1,51 @@
+.command-palette-dialog {
+  max-width: 640px !important;
+}
+
+.command-palette input {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.command-palette kbd {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 0.75rem;
+}
+
+.command-palette ul {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.command-palette ul::-webkit-scrollbar {
+  width: 6px;
+}
+
+.command-palette ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.command-palette ul::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+.dark .command-palette ul {
+  scrollbar-color: rgba(75, 85, 99, 0.5) transparent;
+}
+
+.dark .command-palette ul::-webkit-scrollbar-thumb {
+  background-color: rgba(75, 85, 99, 0.5);
+}
+
+.command-palette li {
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.command-palette li:active {
+  transform: scale(0.98);
+}

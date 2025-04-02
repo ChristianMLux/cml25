@@ -1,0 +1,15 @@
+{
+    "hero": {
+      "title": "Creative Developer & Designer",
+      "subtitle": "Building beautiful, functional, and user-friendly digital experiences with modern technologies.",
+      "cta": {
+        "projects": "View Projects",
+        "contact": "Contact Me"
+      },
+      "imageAlt": "Developer portrait"
+    },
+    "intro": {
+      "title": "Welcome to my portfolio",
+      "subtitle": "Discover my projects and skills"
+    }
+  }

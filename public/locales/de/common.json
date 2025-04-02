@@ -1,0 +1,43 @@
+{
+  "name": "Christian M. Lux",
+  "navigation": {
+    "home": "Startseite",
+    "projects": "Projekte",
+    "about": "Über mich",
+    "contact": "Kontakt"
+  },
+  "theme": {
+    "toggle": "Dunkles Design umschalten",
+    "light": "Hell",
+    "dark": "Dunkel",
+    "system": "System"
+  },
+  "buttons": {
+    "viewMore": "Mehr anzeigen",
+    "viewProjects": "Zeige Projekte",
+    "submit": "Absenden",
+    "cancel": "Abbrechen",
+    "downloadCV": "Lebenslauf"
+  },
+  "mobile": {
+    "openMenu": "Menü öffnen"
+  },
+  "footer": {
+    "copyright": "© {{year}} Mein Portfolio. Alle Rechte vorbehalten.",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz"
+  },
+  "dialog": {
+    "close": "Schließen",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "ok": "OK"
+  },
+  "metadata": {
+    "baseTitle": "Mein Portfolio",
+    "baseDescription": "Mein persönliches Portfolio als Entwickler.",
+    "homeTitleSuffix": "Startseite",
+    "projectsTitleSuffix": "Projekte",
+    "projectsDescription": "Entdecken Sie meine Projekte und Arbeiten."
+  }
+}

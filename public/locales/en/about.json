@@ -1,0 +1,169 @@
+{
+  "pageTitle": "My Journey Through Technology",
+  "pageSubtitle": "From forum signatures to developing cutting-edge web applications, my journey into technology has been characterised by curiosity, play and a passion for creating digital experiences.",
+
+  "aboutSection": {
+    "title": "About Me",
+    "paragraph1": "I have been fascinated by computers and technology since I was young. My journey started with customising forum signatures and templates, which sparked my interest in web development and design.",
+    "paragraph2": "Gaming has always been a significant part of my life and has influenced my approach to problem-solving and creativity in technology. From building simple mods to developing full applications, I've brought that gaming mindset of persistence and innovation.",
+    "paragraph3": "Today, I combine my technical skills with creative thinking to build solutions that are not only functional but engaging and intuitive. This portfolio represents the culmination of my experiences and showcases the projects I'm most proud of."
+  },
+
+  "profileSection": {
+    "title": "Skills & Interests",
+    "skills": [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Node.js",
+      "Gaming",
+      "UI/UX",
+      "Web Design"
+    ]
+  },
+
+  "experience": {
+    "title": "Brief overview of my experience",
+    "velpTec": "Comprehensive course on DevOps, cloud applications & SCRUM.",
+    "spn": "Part of the Founder Dev Team of a multi-million B2B Salesplatform Startup.",
+    "cbe": "Intense Coding Bootcamp where I've learned the basics of JS Frameworks, agile development & remote Work."
+  },
+
+  "timelineSection": {
+    "title": "My Tech Timeline",
+    "items": [
+      {
+        "id": "1",
+        "year": "2001",
+        "title": "HTML for the first time!",
+        "description": "Created the first HTML file thanks to a course at school",
+        "category": "beginning",
+        "icon": "👾",
+        "details": [
+          "Learned basic HTML in a 6-week course",
+          "Color through inline CSS was a must even back then",
+          "Already recognized here - this is exactly my thing!"
+        ]
+      },
+      {
+        "id": "2",
+        "year": "2004",
+        "title": "First own steps",
+        "description": "Created my first forum signatures and discovered HTML",
+        "category": "beginning",
+        "icon": "👾",
+        "details": [
+          "Joining my first gaming community",
+          "First experiences with Macromedia Fireworks 8 (later Adobe Fireworks)",
+          "Creating my first forum signatures for myself and others"
+        ],
+        "projectLink": "/en/projects/signatures-project"
+      },
+      {
+        "id": "3",
+        "year": "2007",
+        "title": "First Job",
+        "description": "Getting Started as a Developer & MCSA",
+        "category": "career",
+        "icon": "💻",
+        "details": [
+          "Involved in the development of internal company software for scanners",
+          "Part-time work for the association - Imaging for Africa",
+          "Training for subsequent MCSA certification"
+        ]
+      },
+      {
+        "id": "4",
+        "year": "2015",
+        "title": "First Job",
+        "description": "Vocational college II - specialising in software and web development",
+        "category": "education",
+        "icon": "🎮",
+        "details": [
+          "Technical paper: Procedural generation of 3-dimensional landscapes",
+          "First programmes with Java - trial participation in the national IT competition",
+          "OOP, ER diagrams and basic design rules internalised"
+        ]
+      },
+      {
+        "id": "5",
+        "year": "2021",
+        "title": "Training at Coding Bootcamps EU",
+        "description": "Web Application Developer - Focus: HTML, CSS, JS, Vue.js, Git, Testing",
+        "category": "education",
+        "icon": "🎮",
+        "details": [
+          "Finally realising realistic projects with a modern tech stack",
+          "First points of contact with SCRUM & GIT versioning",
+          "Implementation of an AMA tool and a random pet facts app ;)"
+        ]
+      },
+      {
+        "id": "6",
+        "year": "2022",
+        "title": "Work at SparePartsNow GmbH",
+        "description": "Full-Stack Developer - Focus: NextJs, Azure, ASP.Net/C#",
+        "category": "career",
+        "icon": "⚡",
+        "details": [
+          "Software development in the backend with C#/.NET and React/TypeScript (Next.Js) in the frontend",
+          "Requirements elicitation, conceptualisation and specification in collaboration with product management",
+          "Code review of other developers‘ work",
+          "Writing automated unit/integration tests and end-to-end tests",
+          "Adjustments to the continuous integration process",
+          "Implementation and management of Google Analytics"
+        ]
+      },
+      {
+        "id": "7",
+        "year": "2024",
+        "title": "Training at velpTEC",
+        "description": "Cloud Computing Architektur - Schwerpunkt: C#, Angular, SQL, DevOps, Cloud Computing",
+        "category": "education",
+        "icon": "🎮",
+        "details": [
+          "Scrum PSM Level 1 & PSPO Level 1",
+          "Create your own game ideas and start realising them",
+          "Focus on consolidating the knowledge acquired in recent years & implementation in real projects"
+        ]
+      },
+      {
+        "id": "8",
+        "year": "2023",
+        "title": "Portfolio Project",
+        "description": "Started building a personal portfolio to showcase my journey",
+        "category": "project",
+        "icon": "🚀",
+        "details": [
+          "Designed and implemented a Next.js portfolio",
+          "Incorporated modern web technologies",
+          "Created a showcase for past projects and experiences"
+        ]
+      }
+    ]
+  },
+
+  "connectSection": {
+    "title": "Let's Connect",
+    "description": "Interested in collaborating or just want to chat about the latest in tech or gaming? Feel free to reach out through any of the channels below.",
+    "social": [
+      {
+        "name": "GitHub",
+        "icon": "github",
+        "url": "https://github.com/ChristianMLux"
+      },
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "url": "https://www.linkedin.com/in/christian-m-lux/"
+      },
+      {
+        "name": "Bluesky",
+        "icon": "bluesky",
+        "url": "https://bsky.app/profile/whistlemaker.bsky.social"
+      },
+      { "name": "Email", "icon": "mail", "url": "christian.m.lux@gmail.com" }
+    ]
+  }
+}

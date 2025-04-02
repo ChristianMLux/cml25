@@ -1,0 +1,169 @@
+{
+  "pageTitle": "Meine Reise durch die Technologie",
+  "pageSubtitle": "Von der Forensignatur bis zur Entwicklung hochmoderner Webanwendungen - mein Weg in die Technologie war geprägt von Neugier, Spielen und der Leidenschaft, digitale Erlebnisse zu schaffen.",
+
+  "aboutSection": {
+    "title": "Über Mich",
+    "paragraph1": "Seit meiner Jugend bin ich von Computern und Technologie fasziniert. Meine Reise begann mit dem Anpassen von Forensignaturen und -templates, was mein Interesse an Webentwicklung und -design weckte.",
+    "paragraph2": "Gaming war schon immer ein wichtiger Teil meines Lebens und hat meinen Ansatz zur Problemlösung und Kreativität in der Technologie beeinflusst. Vom Erstellen einfacher Mods bis hin zur Entwicklung vollständiger Anwendungen habe ich die Gaming-Denkweise von Ausdauer und Innovation eingebracht.",
+    "paragraph3": "Heute kombiniere ich meine technischen Fähigkeiten mit kreativem Denken, um Lösungen zu entwickeln, die nicht nur funktional, sondern auch ansprechend und intuitiv sind. Dieses Portfolio repräsentiert den Höhepunkt meiner Erfahrungen und zeigt die Projekte, auf die ich am meisten stolz bin."
+  },
+
+  "profileSection": {
+    "title": "Fähigkeiten & Interessen",
+    "skills": [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Node.js",
+      "Gaming",
+      "UI/UX",
+      "Webdesign"
+    ]
+  },
+
+  "experience": {
+    "title": "Erfahrungen im Überblick",
+    "velpTec": "Umfassender Kurs über DevOps, Cloud-Anwendungen und SCRUM.",
+    "spn": "Teil des Gründer-Entwicklungsteams eines millionenschweren B2B-Vertriebsplattform-Startups.",
+    "cbe": "Intensives Coding Bootcamp, in dem ich die Grundlagen von JS Frameworks, agiler Entwicklung und Remote Work gelernt habe."
+  },
+
+  "timelineSection": {
+    "title": "Meine Tech-Zeitleiste",
+    "items": [
+      {
+        "id": "1",
+        "year": "2001",
+        "title": "Das erste Mal HTML!",
+        "description": "Dank eines Kurses in der Schule die erste HTML File erstellt",
+        "category": "beginning",
+        "icon": "👾",
+        "details": [
+          "Grundlegendes HTML in einem 6-wöchigen Kurs gelernt",
+          "Farbe durch Inline CSS durfte schon damals nicht fehlen",
+          "Schon hier erkannt - das ist genau mein Ding!"
+        ]
+      },
+      {
+        "id": "2",
+        "year": "2004",
+        "title": "Erste eigene Schritte",
+        "description": "Erstellung meiner ersten Forensignaturen und Entdeckung von HTML",
+        "category": "beginning",
+        "icon": "👾",
+        "details": [
+          "Eintritt in meine erste Gaming-Community",
+          "Erste Erfahrungen mit Macromedia Fireworks 8 (später Adobe Fireworks)",
+          "Erstellung erster Forensignaturen für mich und andere"
+        ]
+      },
+      {
+        "id": "3",
+        "year": "2007",
+        "title": "Erster Job",
+        "description": "Start einer Entwicklertätigkeit & MCSA",
+        "category": "career",
+        "icon": "💻",
+        "details": [
+          "Beteiligt an Entwicklung von Firmeninterner Software für Scanner",
+          "Nebentätigkeit für Verein - Imaging for Africa",
+          "Ausbildung um anschließend MCSA Zertifizierung zu erhalten"
+        ]
+      },
+      {
+        "id": "4",
+        "year": "2015",
+        "title": "Ausbildung an it.Schule Stuttgart",
+        "description": "Berufskolleg II - Schwerpunkt Software- und Webentwicklung",
+        "category": "education",
+        "icon": "🎮",
+        "details": [
+          "Facharbeit: Prozedurale Generierung 3-dimensionaler Landschaften",
+          "Erste Programme mit Java - Probeteilnahme Bundeswettbewerb IT",
+          "OOP, ER-Diagramme und grundlegende Designregeln verinnerlicht"
+        ]
+      },
+      {
+        "id": "5",
+        "year": "2021",
+        "title": "Ausbildung bei Coding Bootcamps EU",
+        "description": "Web-Anwendungsentwickler - Schwerpunkt: HTML, CSS, JS, Vue.js, Git, Testing",
+        "category": "education",
+        "icon": "🎮",
+        "details": [
+          "Endlich realitätsnahe Projekte mit modernem Tech-Stack realisieren",
+          "Erste Berührungspunkte mit SCRUM & GIT Versionierung",
+          "Umsetzung eines AMA-Tools und einer Random Pet Facts App ;)"
+        ]
+      },
+      {
+        "id": "6",
+        "year": "2022",
+        "title": "Arbeit bei SparePartsNow GmbH",
+        "description": "Full-Stack Developer - Schwerpunkt: NextJs, Azure, ASP.Net/C#",
+        "category": "career",
+        "icon": "⚡",
+        "details": [
+          "Softwareentwicklung im Backend mit C#/.NET und React/TypeScript (Next.Js) im Frontend",
+          "Anforderungsermittlung, Konzeption und Spezifikation in Zusammenarbeit mit dem Product Management",
+          "Code-Review von Arbeiten anderer Entwickler",
+          "Schreiben automatisierter Unit/Integration Tests und End-To-End Tests",
+          "Anpassungen am Continuous Integration Prozess",
+          "Implementierung und Verwaltung von Google Analytics"
+        ]
+      },
+      {
+        "id": "7",
+        "year": "2024",
+        "title": "Fortbildung bei velpTEC",
+        "description": "Cloud Computing Architecture - Schwerpunkt: C#, Angular, SQL, DevOps, Cloud Computing",
+        "category": "education",
+        "icon": "🎮",
+        "details": [
+          "Scrum PSM Level 1 & PSPO Level 1",
+          "Erstellen eigener Spieleideen und Anfang der Umsetzung",
+          "Fokus auf festigen des aufgenommenen Wissens der letzten Jahre & Umsetzung in realen Projekten"
+        ]
+      },
+      {
+        "id": "8",
+        "year": "2025",
+        "title": "Portfolio-Projekt",
+        "description": "Beginn des Aufbaus eines persönlichen Portfolios zur Präsentation meiner Reise",
+        "category": "project",
+        "icon": "🚀",
+        "details": [
+          "Entwurf und Implementierung eines Next.js-Portfolios",
+          "Integration moderner Webtechnologien",
+          "Erstellung einer Präsentation für vergangene Projekte und Erfahrungen",
+          "Drückt gerne mal cmd+k ctrl+k ;)"
+        ]
+      }
+    ]
+  },
+
+  "connectSection": {
+    "title": "Lass uns verbinden",
+    "description": "Interesse an einer Zusammenarbeit oder einfach nur am Austausch über die neuesten Entwicklungen in Technik oder Gaming? Melde dich gerne über einen der unten stehenden Kanäle bei mir.",
+    "social": [
+      {
+        "name": "GitHub",
+        "icon": "github",
+        "url": "https://github.com/ChristianMLux"
+      },
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "url": "https://www.linkedin.com/in/christian-m-lux/"
+      },
+      {
+        "name": "Bluesky",
+        "icon": "bluesky",
+        "url": "https://bsky.app/profile/whistlemaker.bsky.social"
+      },
+      { "name": "Email", "icon": "mail", "url": "christian.m.lux@gmail.com" }
+    ]
+  }
+}

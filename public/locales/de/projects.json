@@ -1,0 +1,66 @@
+{
+  "title": "Ausgewählte Projekte",
+  "description": "Eine kleine Übersicht aktueller oder vergangener Projekte. Mehr gibt's in der Projektübersicht.",
+  "categories": {
+    "all": "All",
+    "web": "Web",
+    "mobile": "Mobile",
+    "design": "Design"
+  },
+  "projects": {
+    "spn-platform": {
+      "title": "SparePartsNow GmbH",
+      "description": "Ich war Teil des frühen Entwickler-Teams bei diesem B2B Anbieter für Ersatzteilhandel."
+    },
+    "cml25": {
+      "title": "Portfolio Update 2025",
+      "description": "Nach ein paar Jahren war es an der Zeit, das Portfolio mit aktueller Technologie und meinen gesammelten Erfahrungen zu aktualisieren und zu optimieren."
+    },
+    "signatures-project": {
+      "title": "Signatures",
+      "description": "Eine Sammlung von Signaturen, die ich im Laufe der Zeit erstellt habe"
+    },
+    "safetec-project": {
+      "title": "Safe-Tec",
+      "description": "Eine meiner ersten Websites, die ich geschrieben habe. Es war ein einfaches Update, da die alte Website 10 Jahre alt war"
+    },
+    "imaging-for-africa-project": {
+      "title": "Imaging for Africa e.V.",
+      "description": "Ich habe diese Seite für einen Verein meines ehemaligen Chefs (SafeTec) gebaut und nach einigen Jahren 'modernisiert'"
+    },
+    "4-soul-project": {
+      "title": "4 - Soul",
+      "description": "Leichtgewichtige Seite für eine Gruppe von Musikern"
+    },
+    "wooden-portfolio-design": {
+      "title": "Wooden Portfolio Design",
+      "description": "Ich habe nur ein bisschen mit Texturen und Beleuchtung in diesem frühen 'Portfolio' herumgespielt"
+    },
+    "cmd-portfolio-design": {
+      "title": "CMD - Croud Media Design",
+      "description": "Fiktives Unternehmensportfolio-Design. Ich wollte nur einige Dinge ausprobieren"
+    },
+    "cc-portfolio-design": {
+      "title": "CC - Design",
+      "description": "Fiktives Unternehmensportfolio-Design. Ich wollte nur einige neue Dinge ausprobieren"
+    },
+    "imo-fan-project": {
+      "title": "Imoriath - L2 Fan Projekt",
+      "description": "Ich habe viel Lineage 2 auf diesem Server gespielt und versucht, die Website mehrmals neu zu gestalten :D"
+    },
+    "categories": {
+      "web": "Web",
+      "design": "Design",
+      "all": "Alle"
+    },
+    "ui": {
+      "noDescription": "Keine Beschreibung verfügbar",
+      "unnamedProject": "Unbenanntes Projekt",
+      "loadError": "Projekt konnte nicht geladen werden",
+      "technologies": "Technologien",
+      "relatedProjects": "Ähnliche Projekte",
+      "visitProject": "Projekt besuchen",
+      "viewGitHub": "GitHub anzeigen"
+    }
+  }
+}
