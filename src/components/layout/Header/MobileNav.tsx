@@ -23,22 +23,32 @@ export default function MobileNav({ locale, onClose }: MobileNavProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-40 md:hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="md:hidden"
     >
-      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
+      <div
+        className="fixed inset-0 z-40 bg-black/50"
+        onClick={onClose}
+        aria-hidden="true"
+      />
 
-      <nav className="relative z-50 flex flex-col h-full py-16 px-6 w-full max-w-sm mx-auto bg-white dark:bg-gray-900 shadow-xl overflow-y-auto">
+      <motion.nav
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="fixed right-0 top-0 z-50 flex h-screen w-full max-w-xs flex-col bg-white px-6 pb-6 pt-20 shadow-xl dark:bg-gray-900 overflow-y-auto"
+      >
         <div className="flex flex-col space-y-6">
           {navItems.map(({ href, label }) => (
             <LocalizedLink
               key={href}
               href={href}
               className={cn(
-                "text-lg font-medium hover:text-primary transition-colors",
+                "text-lg font-medium transition-colors hover:text-primary",
                 pathname === href ? "text-primary" : "text-foreground/60"
               )}
               onClick={onClose}
@@ -47,12 +57,12 @@ export default function MobileNav({ locale, onClose }: MobileNavProps) {
             </LocalizedLink>
           ))}
         </div>
-
-        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 ">
-          <div className="flex flex-col space-y-4 ">
-            <div className="flex space-x-4 items-center justify-between">
+        <div className="mt-auto flex-grow" />
+        <div className="mt-8 border-t border-gray-200 pt-6 dark:border-gray-700">
+          <div className="flex flex-col space-y-4">
+            <div className="flex items-center justify-between space-x-4">
               <span className="text-sm font-medium">
-                {t("changeLanguage")}:
+                {t("mobileNav.changeLanguage", "Sprache wechseln")}:
               </span>
               <div className="flex items-center space-x-2">
                 <a
@@ -74,11 +84,13 @@ export default function MobileNav({ locale, onClose }: MobileNavProps) {
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">{t("toggleTheme")}:</span>
+              <span className="text-sm font-medium">
+                {t("mobileNav.toggleTheme", "Theme wechseln")}:
+              </span>
               <button
                 onClick={() => toggleTheme()}
-                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
-                aria-label={t("toggleTheme")}
+                className="rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+                aria-label={t("theme.toggle")}
               >
                 {theme === "dark" ? (
                   <Sun className="h-5 w-5 text-white " />
@@ -89,7 +101,7 @@ export default function MobileNav({ locale, onClose }: MobileNavProps) {
             </div>
           </div>
         </div>
-      </nav>
+      </motion.nav>
     </motion.div>
   );
 }

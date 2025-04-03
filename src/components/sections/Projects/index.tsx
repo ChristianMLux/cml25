@@ -30,8 +30,8 @@ export default function Projects({ locale }: ProjectsProps) {
   const projectsData: Project[] = [
     {
       id: "1",
-      title: t("projects.spn.title"),
-      description: t("projects.spn.description"),
+      title: t("projects.spn-platform.title"),
+      description: t("projects.spn-platform.description"),
       imageUrl: "/assets/images/projects/projects_spn_landing.jpg",
       technologies: [
         "Next.js",

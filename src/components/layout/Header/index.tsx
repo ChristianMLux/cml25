@@ -23,8 +23,21 @@ export default function Header({ locale }: HeaderProps) {
       setIsScrolled(window.scrollY > 0);
     };
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isOpen]);
 
   return (
     <header
@@ -44,7 +57,6 @@ export default function Header({ locale }: HeaderProps) {
             Christian M. Lux
           </LocalizedLink>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map(({ href, label }) => (
               <LocalizedLink
@@ -59,7 +71,6 @@ export default function Header({ locale }: HeaderProps) {
               </LocalizedLink>
             ))}
 
-            {/* Language Switcher */}
             <div className="flex items-center space-x-2">
               <a
                 href={`/de${pathname}`}
@@ -76,7 +87,6 @@ export default function Header({ locale }: HeaderProps) {
               </a>
             </div>
 
-            {/* Theme Toggle */}
             <button
               onClick={() => toggleTheme()}
               className="rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center"
@@ -90,11 +100,10 @@ export default function Header({ locale }: HeaderProps) {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label={t("openMenu")}
+            aria-label={t("mobile.openMenu", "Menü öffnen")}
           >
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
@@ -115,7 +124,6 @@ export default function Header({ locale }: HeaderProps) {
         </div>
       </nav>
 
-      {/* Mobile Navigation */}
       <AnimatePresence>
         {isOpen && (
           <MobileNav

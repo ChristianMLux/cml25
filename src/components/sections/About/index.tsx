@@ -2,10 +2,11 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Download } from "lucide-react";
+import { Download, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button/button";
 import { SkillsShowcase } from "./SkillsShowcase";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "@/lib/i18n-navigation";
 import React from "react";
 
 const skills = [
@@ -29,6 +30,7 @@ interface AboutProps {
 
 export default function About({ locale }: AboutProps) {
   const { t, i18n } = useTranslation(["common", "about"]);
+  const router = useRouter();
   const experiences = [
     {
       title: "Cloud Solution Architecture",
@@ -67,19 +69,26 @@ export default function About({ locale }: AboutProps) {
               {t("about:aboutSection.title")}
             </h2>
             <div className="mt-4 space-y-4">
-              <p className="text-[18px] text-gray-500 dark:text-gray-400">
+              <p className="text-[18px] text-gray-600 dark:text-gray-800">
                 {t("about:aboutSection.paragraph1")}
               </p>
-              <p className="text-[18px] text-gray-500 dark:text-gray-400">
+              <p className="text-[18px] text-gray-600 dark:text-gray-800">
                 {t("about:aboutSection.paragraph2")}
               </p>
               <div className="flex gap-4">
-                <Button>
-                  {t("common:buttons.downloadCV", "Download CV")}
-                  <Download className="ml-2 h-4 w-4" />
+                <Button asChild>
+                  <a href="/assets/cv/LebenslaufCML25.pdf" download>
+                    {t("common:buttons.downloadCV", "Download CV")}
+                    <Download className="ml-2 h-4 w-4" />
+                  </a>
                 </Button>
-                <Button variant="outline">
-                  {t("common:buttons.viewProjects", "View Projects")}
+
+                <Button
+                  variant="outline"
+                  onClick={() => router.push(locale + "/projects")}
+                >
+                  {t("common:buttons.viewProjects")}
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </div>
             </div>

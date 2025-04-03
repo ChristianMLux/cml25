@@ -127,19 +127,19 @@ export default function AboutPage({ params }: PageParams) {
           <h2 className="text-2xl font-bold mb-4 text-foreground">
             {t("aboutSection.title", "About Me")}
           </h2>
-          <p className="mb-4 text-muted-foreground">
+          <p className="mb-4 text-gray-600 dark:text-gray-800">
             {t(
               "aboutSection.paragraph1",
               "I have been fascinated by computers and technology since I was young. My journey started with customising forum signatures and templates, which sparked my interest in web development and design."
             )}
           </p>
-          <p className="mb-4 text-muted-foreground">
+          <p className="mb-4 text-gray-600 dark:text-gray-800">
             {t(
               "aboutSection.paragraph2",
               "Gaming has always been a significant part of my life and has influenced my approach to problem-solving and creativity in technology. From building simple mods to developing full applications, I've brought that gaming mindset of persistence and innovation."
             )}
           </p>
-          <p className="text-muted-foreground">
+          <p className="text-gray-600 dark:text-gray-800">
             {t(
               "aboutSection.paragraph3",
               "Today, I combine my technical skills with creative thinking to build solutions that are not only functional but engaging and intuitive. This portfolio represents the culmination of my experiences and showcases the projects I'm most proud of."
@@ -174,7 +174,7 @@ export default function AboutPage({ params }: PageParams) {
               {skills.map((skill) => (
                 <span
                   key={skill}
-                  className="px-3 py-1 bg-muted text-muted-foreground rounded-full text-sm"
+                  className="px-3 py-1 bg-muted text-gray-600 dark:text-gray-800 rounded-full text-sm"
                 >
                   {skill}
                 </span>
@@ -205,10 +205,10 @@ export default function AboutPage({ params }: PageParams) {
         transition={{ duration: 0.5, delay: 0.8 }}
         className="text-center mt-16"
       >
-        <h2 className="text-2xl font-bold mb-6 text-foreground">
+        <h2 className="text-2xl font-bold mb-6 text-foreground ">
           {t("connectSection.title", "Let's Connect")}
         </h2>
-        <p className="text-lg max-w-2xl mx-auto mb-8 text-muted-foreground">
+        <p className="text-lg max-w-2xl mx-auto mb-8 text-gray-600 dark:text-gray-800">
           {t(
             "connectSection.description",
             "Interested in collaborating or just want to chat about the latest in tech or gaming? Feel free to reach out through any of the channels below."
