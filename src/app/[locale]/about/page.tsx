@@ -117,7 +117,7 @@ export default function AboutPage({ params }: PageParams) {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-[8rem]">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:mb-[5rem]">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
