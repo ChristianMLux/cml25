@@ -25,6 +25,26 @@ const projectsData: Omit<Project, "title" | "description">[] = [
     images: ["/assets/images/projects/projects_spn_product_example.jpg"],
   },
   {
+    id: "cml25",
+    imageUrl: "/assets/images/projects/projects_cml25_landing.jpg",
+    liveUrl: "https://cml25.netlify.app/",
+    githubUrl: "https://github.com/ChristianMLux/cml25",
+    technologies: [
+      "nextJs",
+      "TypeSkript",
+      "Tailwind",
+      "Google Analytics",
+      "Google Firebase",
+    ],
+    blurDataUrl:
+      "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAAHAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABwAI/8QAIRAAAgEEAQUBAAAAAAAAAAAAAQIDBAUGEQAHEiExYXH/xAAVAQEBAAAAAAAAAAAAAAAAAAACA//EABkRAAMAAwAAAAAAAAAAAAAAAAABAgMRIf/aAAwDAQACEQMRAD8Ar8Zgkcl6U4jj9ZCn9JdKq3TTb+YUUgiU/dAn156U3YnSWgrJYf55kE1xeWWdGqjCFeSUkjRJA69B71rQ11s1Z4fGP//Z",
+    category: "web",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    link: "/projects/cml25",
+    images: ["/assets/images/projects/projects_cml25_about.jpg"],
+  },
+
+  {
     id: "signatures-project",
     imageUrl: "/assets/images/signatures/signatures_overview.png",
     githubUrl: "testurl",
