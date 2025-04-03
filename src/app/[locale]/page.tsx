@@ -3,16 +3,10 @@ import Projects from "@/components/sections/Projects";
 import About from "@/components/sections/About";
 import Contact from "@/components/sections/Contact";
 
-interface HomePageProps {
-  params: Promise<{
-    locale: string;
-  }>;
-}
-
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
 
@@ -28,7 +22,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function HomePage({ params }: HomePageProps) {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
 
   return (

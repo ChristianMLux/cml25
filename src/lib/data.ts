@@ -128,7 +128,6 @@ const getLocalizedProject = async (
   locale: string
 ): Promise<Project> => {
   try {
-    console.log(`Versuche Übersetzungsschlüssel: projects.${project.id}.title`);
     const t = await getServerTranslation(locale, "projects");
 
     const title = t(`projects.${project.id}.title`) || project.id;

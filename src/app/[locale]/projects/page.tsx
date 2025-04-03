@@ -1,4 +1,4 @@
-import { Suspense, use } from "react";
+import { Suspense } from "react";
 import { getServerTranslation } from "@/lib/getServerTranslation";
 import { getProjects } from "@/lib/data";
 import ProjectsGrid from "@/components/sections/Projects/ProjectsGrid";
@@ -10,10 +10,11 @@ import { Project } from "@/types";
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = params;
+  const { locale } = await params;
   const t = await getServerTranslation(locale, "common");
+
   return {
     title: `${t("metadata.baseTitle", "Portfolio")} | ${t("metadata.projectsTitleSuffix", "Projects")}`,
     description: t("metadata.projectsDescription", "Explore my projects..."),
@@ -25,8 +26,7 @@ export default async function ProjectsPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const resolvedParams = use(params);
-  const { locale } = resolvedParams;
+  const { locale } = await params;
   const projects: Project[] = await getProjects(locale);
 
   return (
