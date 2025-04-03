@@ -4,7 +4,7 @@ import {
   defaultLocale,
   isValidLocale,
   Locale,
-} from "./config/i18n-config";
+} from "../config/i18n-config";
 
 function isStaticResource(pathname: string): boolean {
   return (
@@ -53,26 +53,22 @@ export function middleware(request: NextRequest) {
 
   const preferredLocale = getPreferredLocale(request);
 
-  const newUrl = new URL(
-    `/${preferredLocale}${pathname === "/" ? "" : pathname}`,
-    request.url
-  );
+  const newPath = `/${preferredLocale}${pathname === "/" ? "" : pathname}`;
+  const newUrl = new URL(newPath, request.url);
 
   request.nextUrl.searchParams.forEach((value, key) => {
     newUrl.searchParams.set(key, value);
   });
 
   const response = NextResponse.redirect(newUrl);
-
   response.cookies.set("NEXT_LOCALE", preferredLocale, {
-    maxAge: 365 * 24 * 60 * 60,
+    maxAge: 365 * 24 * 60 * 60, // 1 Jahr
     path: "/",
   });
 
   return response;
 }
 
-export const matcher = [
-  "/((?!api|_next/static|_next/image|favicon.ico|locales).+)",
-  "/",
-];
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|locales|favicon.ico|.*\\.).*)"],
+};
