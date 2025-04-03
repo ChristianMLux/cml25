@@ -56,7 +56,7 @@ export default function Projects({ locale }: ProjectsProps) {
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
       tags: ["Frontend", "Backend"],
       category: "Web",
-      link: "https://cml-portfolio.netlify.app/",
+      link: "https://cml25.netlify.app/",
       images: [
         "/assets/images/projects/projects_cml25_landing.jpg",
         "/assets/images/projects/projects_cml25_about.jpg",
