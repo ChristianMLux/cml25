@@ -69,10 +69,10 @@ export default function About({ locale }: AboutProps) {
               {t("about:aboutSection.title")}
             </h2>
             <div className="mt-4 space-y-4">
-              <p className="text-[18px] text-gray-600 dark:text-gray-800">
+              <p className="text-[18px] text-gray-800 dark:text-gray-300">
                 {t("about:aboutSection.paragraph1")}
               </p>
-              <p className="text-[18px] text-gray-600 dark:text-gray-800">
+              <p className="text-[18px] text-gray-800 dark:text-gray-300">
                 {t("about:aboutSection.paragraph2")}
               </p>
               <div className="flex gap-4">
