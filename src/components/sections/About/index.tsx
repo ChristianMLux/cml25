@@ -100,7 +100,7 @@ export default function About({ locale }: AboutProps) {
             className="relative h-[400px] overflow-hidden rounded-lg"
           >
             <Image
-              src="/assets/images/about-image.jpg"
+              src="/assets/images/about_section_01.png"
               alt={t("imageAlt", "About Me")}
               fill
               className="object-cover"

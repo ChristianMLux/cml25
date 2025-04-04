@@ -91,3 +91,5 @@ Um das Projekt lokal zu starten:
 - [ ] Kontaktformular erweitern:
   - [ ] Bedingte Felder "Gehaltsvorstellung" (Salary) und "Arbeitsort" (Place: Remote, Office, Hybrid) hinzufügen.
   - [ ] Diese Felder nur anzeigen, wenn der Absender angibt, HR/Chef zu sein (z.B. über eine Checkbox oder Auswahl).
+- [ ] Blog Funktionen integrieren
+- [ ] CMS / Hardcoded Data in Firebase übertragen
