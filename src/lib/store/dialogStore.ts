@@ -1,6 +1,7 @@
-import { create } from "zustand";
-import { ReactNode } from "react";
-import { DialogSize } from "@/components/ui/Dialog/Dialog";
+import { ReactNode } from 'react';
+import { create } from 'zustand';
+
+import { DialogSize } from '@/components/ui/Dialog/Dialog';
 
 export interface DialogOptions {
   title?: string;
@@ -59,7 +60,7 @@ export function useDialog() {
       title,
       content,
       showFooter: true,
-      confirmText: "OK",
+      confirmText: 'OK',
       showCloseButton: true,
       closeOnEsc: true,
       closeOnBackdropClick: true,
@@ -78,8 +79,8 @@ export function useDialog() {
       content,
       onConfirm,
       showFooter: true,
-      confirmText: "OK",
-      cancelText: "Abbrechen",
+      confirmText: 'OK',
+      cancelText: 'Abbrechen',
       showCloseButton: true,
       closeOnEsc: true,
       closeOnBackdropClick: true,

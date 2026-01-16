@@ -36,48 +36,48 @@ Dies ist mein persönliches Portfolio, erstellt mit Next.js, TypeScript und Tail
 
 Um das Projekt lokal zu starten:
 
-1.  **Repository klonen:**
+1. **Repository klonen:**
 
-    ```bash
-    git clone https://github.com/ChristianMLux/cml25
-    cd cml25
-    ```
+   ```bash
+   git clone https://github.com/ChristianMLux/cml25
+   cd cml25
+   ```
 
-2.  **Abhängigkeiten installieren:**
+2. **Abhängigkeiten installieren:**
 
-    ```bash
-    npm install
-    # oder
-    yarn install
-    # oder
-    pnpm install
-    ```
+   ```bash
+   npm install
+   # oder
+   yarn install
+   # oder
+   pnpm install
+   ```
 
-3.  **Umgebungsvariablen einrichten:**
-    Erstelle eine `.env.local` Datei im Stammverzeichnis und füge die notwendigen Firebase-Konfigurationsvariablen hinzu (siehe `src/lib/firebase/firebase.ts`) sowie die Gmail-Zugangsdaten für die E-Mail-Funktion (siehe `functions/index.js`).
+3. **Umgebungsvariablen einrichten:**
+   Erstelle eine `.env.local` Datei im Stammverzeichnis und füge die notwendigen Firebase-Konfigurationsvariablen hinzu (siehe `src/lib/firebase/firebase.ts`) sowie die Gmail-Zugangsdaten für die E-Mail-Funktion (siehe `functions/index.js`).
 
-    ```env
-    NEXT_PUBLIC_FIREBASE_API_KEY=xxx
-    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=xxx
-    NEXT_PUBLIC_FIREBASE_PROJECT_ID=xxx
-    NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=xxx
-    NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=xxx
-    NEXT_PUBLIC_FIREBASE_APP_ID=xxx
-    NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=xxx
+   ```env
+   NEXT_PUBLIC_FIREBASE_API_KEY=xxx
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=xxx
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=xxx
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=xxx
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=xxx
+   NEXT_PUBLIC_FIREBASE_APP_ID=xxx
+   NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=xxx
 
-    # Für Firebase Functions (E-Mail Versand)
-    GMAIL_EMAIL=deine_email@gmail.com
-    GMAIL_PASSWORD=dein_gmail_app_passwort
-    ```
+   # Für Firebase Functions (E-Mail Versand)
+   GMAIL_EMAIL=deine_email@gmail.com
+   GMAIL_PASSWORD=dein_gmail_app_passwort
+   ```
 
-4.  **Entwicklungsserver starten:**
-    ```bash
-    npm run dev
-    # oder
-    yarn dev
-    # oder
-    pnpm dev
-    ```
+4. **Entwicklungsserver starten:**
+   ```bash
+   npm run dev
+   # oder
+   yarn dev
+   # oder
+   pnpm dev
+   ```
 
 Öffne [http://localhost:3000](http://localhost:3000) in deinem Browser, um das Ergebnis zu sehen.
 

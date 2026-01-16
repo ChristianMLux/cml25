@@ -1,26 +1,27 @@
-import { siGithub, siBluesky, siInspire, siGmail } from "simple-icons";
-import { SimpleIcon } from "@/components/ui/SimpleIcon";
-import { LocalizedLink } from "@/lib/i18n-navigation";
+import { siGithub, siBluesky, siInspire, siGmail } from 'simple-icons';
+
+import { SimpleIcon } from '@/components/ui/SimpleIcon';
+import { LocalizedLink } from '@/lib/i18n-navigation';
 
 const socialLinks = [
   {
-    name: "GitHub",
-    href: "https://github.com/ChristianMLux",
+    name: 'GitHub',
+    href: 'https://github.com/ChristianMLux',
     icon: siGithub.path,
   },
   {
-    name: "BlueSky",
-    href: "https://bsky.app/profile/whistlemaker.bsky.social",
+    name: 'BlueSky',
+    href: 'https://bsky.app/profile/whistlemaker.bsky.social',
     icon: siBluesky.path,
   },
   {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/in/christian-m-lux/",
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/christian-m-lux/',
     icon: siInspire.path,
   },
   {
-    name: "Email",
-    href: "mailto:christian.m.lux@gmail.com",
+    name: 'Email',
+    href: 'mailto:christian.m.lux@gmail.com',
     icon: siGmail.path,
   },
 ];
@@ -31,21 +32,21 @@ interface FooterProps {
 
 export default function Footer({ locale }: FooterProps) {
   const quickLinks =
-    locale === "de"
-      ? ["Projekte", "Über mich", "Kontakt"]
-      : ["Projects", "About me", "Contact"];
+    locale === 'de'
+      ? ['Projekte', 'Über mich', 'Kontakt']
+      : ['Projects', 'About me', 'Contact'];
   return (
     <footer className="mt-auto bg-background">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div>
-            <LocalizedLink href={"/" + locale} className="text-xl font-bold">
+            <LocalizedLink href={'/' + locale} className="text-xl font-bold">
               Christian M. Lux
             </LocalizedLink>
             <p className="mt-4 text-sm text-foreground/60">
-              {locale === "de"
-                ? "Entwicklung digitaler Erlebnisse mit modernen Technologien."
-                : "Building digital experiences with modern web technologies."}
+              {locale === 'de'
+                ? 'Entwicklung digitaler Erlebnisse mit modernen Technologien.'
+                : 'Building digital experiences with modern web technologies.'}
             </p>
           </div>
 

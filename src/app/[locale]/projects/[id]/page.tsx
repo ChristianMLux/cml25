@@ -1,9 +1,10 @@
-import { notFound } from "next/navigation";
-import { getProjectById, getRelatedProjects } from "@/lib/data";
-import BackButton from "@/components/ui/Button/BackButton";
-import GalleryWrapper from "@/components/ui/GalleryWrapper";
-import Image from "next/image";
-import { getServerTranslation } from "@/lib/getServerTranslation";
+import Image from 'next/image';
+import { notFound } from 'next/navigation';
+
+import BackButton from '@/components/ui/Button/BackButton';
+import GalleryWrapper from '@/components/ui/GalleryWrapper';
+import { getProjectById, getRelatedProjects } from '@/lib/data';
+import { getServerTranslation } from '@/lib/getServerTranslation';
 
 interface PageParams {
   params: Promise<{
@@ -14,14 +15,14 @@ interface PageParams {
 
 export async function generateMetadata({ params }: PageParams) {
   const { id, locale } = await params;
-  const t = await getServerTranslation(locale, "projects");
+  const t = await getServerTranslation(locale, 'projects');
 
   try {
     const project = await getProjectById(id, locale);
 
     if (!project) {
       return {
-        title: "Projekt nicht gefunden",
+        title: 'Projekt nicht gefunden',
       };
     }
 
@@ -30,9 +31,9 @@ export async function generateMetadata({ params }: PageParams) {
       description: project.description,
     };
   } catch (error) {
-    console.error("Fehler beim Laden der Metadaten:", error);
+    console.error('Fehler beim Laden der Metadaten:', error);
     return {
-      title: "Fehler",
+      title: 'Fehler',
     };
   }
 }
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: PageParams) {
 export default async function ProjectPage({ params }: PageParams) {
   try {
     const { id, locale } = await params;
-    const t = await getServerTranslation(locale, "projects");
+    const t = await getServerTranslation(locale, 'projects');
     const project = await getProjectById(id, locale);
 
     if (!project) {
@@ -142,9 +143,9 @@ export default async function ProjectPage({ params }: PageParams) {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
                 </svg>
                 Live Demo
               </a>
@@ -184,8 +185,8 @@ export default async function ProjectPage({ params }: PageParams) {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         >
-                          <path d="M5 12h14"></path>
-                          <path d="M12 5l7 7-7 7"></path>
+                          <path d="M5 12h14" />
+                          <path d="M12 5l7 7-7 7" />
                         </svg>
                       </a>
                     </div>
@@ -198,7 +199,7 @@ export default async function ProjectPage({ params }: PageParams) {
       </div>
     );
   } catch (error) {
-    console.error("Fehler beim Rendern der Projektseite:", error);
+    console.error('Fehler beim Rendern der Projektseite:', error);
     return (
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-red-600 mb-4">

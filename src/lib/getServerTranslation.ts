@@ -1,7 +1,8 @@
-import { createInstance } from "i18next";
-import { initReactI18next } from "react-i18next";
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
+
+import { createInstance } from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
 const translationCache = new Map();
 
@@ -17,12 +18,12 @@ export async function getServerTranslation(locale: string, namespace: string) {
   try {
     const filePath = path.join(
       process.cwd(),
-      "public",
-      "locales",
+      'public',
+      'locales',
       locale,
       `${namespace}.json`,
     );
-    const translations = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    const translations = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
     await i18nInstance.use(initReactI18next).init({
       lng: locale,

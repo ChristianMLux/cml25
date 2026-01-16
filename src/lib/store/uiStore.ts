@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface CommandPaletteState {
   isOpen: boolean;
@@ -25,7 +25,7 @@ export const useCommandPaletteStore = create<CommandPaletteState>()(
         })),
     }),
     {
-      name: "command-palette-storage",
+      name: 'command-palette-storage',
       partialize: (state) => ({ recentCommands: state.recentCommands }),
     },
   ),

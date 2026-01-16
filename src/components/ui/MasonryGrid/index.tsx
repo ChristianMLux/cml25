@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import React, { useEffect, useRef, useState, ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
+import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useRef, useState, ReactNode } from 'react';
+
+import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect';
 
 interface MasonryGridProps {
   children: ReactNode[];
@@ -15,7 +16,7 @@ export function MasonryGrid({
   children,
   columnCount = 3,
   gap = 24,
-  className = "",
+  className = '',
 }: MasonryGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [columns, setColumns] = useState<ReactNode[][]>([]);
@@ -32,14 +33,14 @@ export function MasonryGrid({
       setWindowWidth(window.innerWidth);
     };
 
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       setWindowWidth(window.innerWidth);
-      window.addEventListener("resize", handleResize);
+      window.addEventListener('resize', handleResize);
     }
 
     return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("resize", handleResize);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', handleResize);
       }
     };
   }, []);
@@ -87,7 +88,7 @@ export function MasonryGrid({
               transition={{
                 duration: 0.3,
                 delay: itemIndex * 0.05,
-                ease: "easeOut",
+                ease: 'easeOut',
               }}
             >
               {item}

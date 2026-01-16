@@ -1,11 +1,12 @@
-"use client";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
-import MobileNav from "@/components/layout/Header/MobileNav";
-import { cn } from "@/lib/utils";
-import { LocalizedLink } from "@/lib/i18n-navigation";
-import { useNavigation } from "@/hooks/useNavigation";
+'use client';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useState, useEffect } from 'react';
+
+import MobileNav from '@/components/layout/Header/MobileNav';
+import { useNavigation } from '@/hooks/useNavigation';
+import { LocalizedLink } from '@/lib/i18n-navigation';
+import { cn } from '@/lib/utils';
 
 interface HeaderProps {
   locale: string;
@@ -22,30 +23,30 @@ export default function Header({ locale }: HeaderProps) {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
     if (isOpen) {
-      document.body.classList.add("overflow-hidden");
+      document.body.classList.add('overflow-hidden');
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove('overflow-hidden');
     }
 
     return () => {
-      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove('overflow-hidden');
     };
   }, [isOpen]);
 
   return (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-300",
+        'fixed top-0 z-50 w-full transition-all duration-300',
         isScrolled
-          ? "bg-white/80 backdrop-blur-md dark:bg-gray-900/80"
-          : "bg-transparent",
+          ? 'bg-white/80 backdrop-blur-md dark:bg-gray-900/80'
+          : 'bg-transparent',
       )}
     >
       <nav className="container mx-auto px-6 py-4">
@@ -63,8 +64,8 @@ export default function Header({ locale }: HeaderProps) {
                 key={href}
                 href={href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
-                  pathname === href ? "text-primary" : "text-foreground/60",
+                  'text-sm font-medium transition-colors hover:text-primary',
+                  pathname === href ? 'text-primary' : 'text-foreground/60',
                 )}
               >
                 {label}
@@ -74,14 +75,14 @@ export default function Header({ locale }: HeaderProps) {
             <div className="flex items-center space-x-2">
               <a
                 href={`/de${pathname}`}
-                className={`text-sm ${locale === "de" ? "font-bold" : "opacity-70 hover:opacity-100"}`}
+                className={`text-sm ${locale === 'de' ? 'font-bold' : 'opacity-70 hover:opacity-100'}`}
               >
                 DE
               </a>
               <span className="text-gray-400">|</span>
               <a
                 href={`/en${pathname}`}
-                className={`text-sm ${locale === "en" ? "font-bold" : "opacity-70 hover:opacity-100"}`}
+                className={`text-sm ${locale === 'en' ? 'font-bold' : 'opacity-70 hover:opacity-100'}`}
               >
                 EN
               </a>
@@ -90,9 +91,9 @@ export default function Header({ locale }: HeaderProps) {
             <button
               onClick={() => toggleTheme()}
               className="rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center"
-              aria-label={t("theme.toggle")}
+              aria-label={t('theme.toggle')}
             >
-              {theme === "dark" ? (
+              {theme === 'dark' ? (
                 <Sun className="h-5 w-5 text-white" />
               ) : (
                 <Moon className="h-5 w-5 text-gray-800" />
@@ -103,11 +104,11 @@ export default function Header({ locale }: HeaderProps) {
           <button
             className="md:hidden"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label={t("mobile.openMenu", "Menü öffnen")}
+            aria-label={t('mobile.openMenu', 'Menü öffnen')}
           >
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
-                key={isOpen ? "close" : "menu"}
+                key={isOpen ? 'close' : 'menu'}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

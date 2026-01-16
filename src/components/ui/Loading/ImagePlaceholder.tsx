@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { Skeleton } from "./Skeleton";
+import { Skeleton } from './Skeleton';
 
 interface ImagePlaceholderProps {
   width?: string | number;
 
   height?: string | number;
 
-  aspectRatio?: "1:1" | "16:9" | "4:3" | "3:2";
+  aspectRatio?: '1:1' | '16:9' | '4:3' | '3:2';
 
-  rounded?: "none" | "sm" | "md" | "lg" | "xl" | "full";
+  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
   className?: string;
 
@@ -19,16 +19,16 @@ interface ImagePlaceholderProps {
 export function ImagePlaceholder({
   width,
   height,
-  aspectRatio = "16:9",
-  rounded = "md",
-  className = "",
+  aspectRatio = '16:9',
+  rounded = 'md',
+  className = '',
   showIcon = false,
 }: ImagePlaceholderProps) {
   const aspectRatioClass = {
-    "1:1": "aspect-square",
-    "16:9": "aspect-video",
-    "4:3": "aspect-4/3",
-    "3:2": "aspect-3/2",
+    '1:1': 'aspect-square',
+    '16:9': 'aspect-video',
+    '4:3': 'aspect-4/3',
+    '3:2': 'aspect-3/2',
   }[aspectRatio];
 
   return (

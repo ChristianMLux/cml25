@@ -1,13 +1,13 @@
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useInView, Variants } from "framer-motion";
-import Link from "next/link";
+import { motion, useInView, Variants } from 'framer-motion';
+import Link from 'next/link';
+import React, { useRef, useState, useEffect } from 'react';
 
 export interface TimelineItem {
   id: string;
   year: string;
   title: string;
   description: string;
-  category: "beginning" | "education" | "career" | "project" | "gaming";
+  category: 'beginning' | 'education' | 'career' | 'project' | 'gaming';
   icon: string;
   details: string[];
   projectLink?: string;
@@ -15,11 +15,11 @@ export interface TimelineItem {
 }
 
 const categoryColors: Record<string, string> = {
-  beginning: "from-blue-400 to-blue-600",
-  education: "from-purple-400 to-purple-600",
-  career: "from-emerald-400 to-emerald-600",
-  project: "from-amber-400 to-amber-600",
-  gaming: "from-pink-400 to-pink-600",
+  beginning: 'from-blue-400 to-blue-600',
+  education: 'from-purple-400 to-purple-600',
+  career: 'from-emerald-400 to-emerald-600',
+  project: 'from-amber-400 to-amber-600',
+  gaming: 'from-pink-400 to-pink-600',
 };
 
 interface TimelineProps {
@@ -64,8 +64,8 @@ const TimelineItemComponent: React.FC<{
       setScreenWidth(window.innerWidth);
     }
     handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const isMobile = screenWidth < 768;
@@ -73,11 +73,11 @@ const TimelineItemComponent: React.FC<{
 
   const getBorderClass = () => {
     if (isVeryNarrow) {
-      return "border-t-4";
+      return 'border-t-4';
     } else if (isMobile) {
-      return "border-l-4";
+      return 'border-l-4';
     } else {
-      return isEven ? "border-l-4" : "border-r-4";
+      return isEven ? 'border-l-4' : 'border-r-4';
     }
   };
 
@@ -88,8 +88,8 @@ const TimelineItemComponent: React.FC<{
       whileHover={{ scale: item.projectLink ? 1.02 : 1 }}
       className={`bg-white dark:bg-gray-800 p-6 rounded-xl shadow-step-hover ${borderClass} border-primary ${
         item.projectLink
-          ? "cursor-pointer hover:shadow-xl transition-all duration-300"
-          : ""
+          ? 'cursor-pointer hover:shadow-xl transition-all duration-300'
+          : ''
       }`}
     >
       {isVeryNarrow && (
@@ -147,13 +147,13 @@ const TimelineItemComponent: React.FC<{
       ref={itemRef}
       variants={itemVariants}
       initial="hidden"
-      animate={isInView ? "show" : "hidden"}
-      className={`relative ${isMobile ? "mt-4" : "-my-8 md:-my-16"} hover:z-20 transition-all duration-300`}
+      animate={isInView ? 'show' : 'hidden'}
+      className={`relative ${isMobile ? 'mt-4' : '-my-8 md:-my-16'} hover:z-20 transition-all duration-300`}
     >
       {!isVeryNarrow && (
         <div
           className={`absolute top-0 ${
-            isMobile ? "left-0" : "left-1/2 -ml-7"
+            isMobile ? 'left-0' : 'left-1/2 -ml-7'
           } z-20 flex items-center justify-center w-14 h-14 rounded-full border-4 bg-white dark:bg-gray-800 border-primary shadow-md`}
         >
           <span className="text-sm font-bold text-gray-800 dark:text-gray-200">
@@ -161,11 +161,11 @@ const TimelineItemComponent: React.FC<{
           </span>
           {!isMobile && (
             <div
-              className={`absolute ${isEven ? "right-[-1.12rem]" : "left-[-1.12rem]"}`}
+              className={`absolute ${isEven ? 'right-[-1.12rem]' : 'left-[-1.12rem]'}`}
             >
               <div
-                className={`w-2 h-2 rounded-full bg-primary shadow-sm ${isEven ? "mr-1" : "ml-1"}`}
-              ></div>
+                className={`w-2 h-2 rounded-full bg-primary shadow-sm ${isEven ? 'mr-1' : 'ml-1'}`}
+              />
             </div>
           )}
         </div>
@@ -174,26 +174,26 @@ const TimelineItemComponent: React.FC<{
       <div
         className={`flex flex-col md:flex-row ${
           isVeryNarrow
-            ? "pl-0"
+            ? 'pl-0'
             : isMobile
-              ? "pl-20"
+              ? 'pl-20'
               : isEven
-                ? "md:flex-row"
-                : "md:flex-row-reverse"
+                ? 'md:flex-row'
+                : 'md:flex-row-reverse'
         }`}
       >
         {!isVeryNarrow && (
           <div
-            className={`md:w-1/2 ${!isMobile && isEven ? "md:pr-8" : "md:pl-8"}`}
-          ></div>
+            className={`md:w-1/2 ${!isMobile && isEven ? 'md:pr-8' : 'md:pl-8'}`}
+          />
         )}
         <div
           className={`${
             isVeryNarrow
-              ? "w-full"
+              ? 'w-full'
               : isMobile
-                ? "w-full"
-                : `md:w-1/2 ${isEven ? "md:pl-10" : "md:pr-10"}`
+                ? 'w-full'
+                : `md:w-1/2 ${isEven ? 'md:pl-10' : 'md:pr-10'}`
           } z-10`}
         >
           {item.projectLink ? (
@@ -221,8 +221,8 @@ const Timeline: React.FC<TimelineProps> = ({ items, startLeft = true }) => {
       setScreenWidth(window.innerWidth);
     }
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   if (!isMounted || !items || items.length === 0) {
@@ -236,19 +236,19 @@ const Timeline: React.FC<TimelineProps> = ({ items, startLeft = true }) => {
       {!isVeryNarrow && (
         <div
           className={`absolute ${
-            screenWidth < 768 ? "left-7 mt-10" : "left-1/2 ml-0"
+            screenWidth < 768 ? 'left-7 mt-10' : 'left-1/2 ml-0'
           } top-0 w-1 bg-primary/70 h-8 z-0`}
-        ></div>
+        />
       )}
 
       {!isVeryNarrow && (
         <div
           className={`absolute ${
             screenWidth < 768
-              ? "left-7 mb-[10rem] bottom-[4rem]"
-              : "left-1/2 ml-0 bottom-[10rem]"
+              ? 'left-7 mb-[10rem] bottom-[4rem]'
+              : 'left-1/2 ml-0 bottom-[10rem]'
           } top-8 w-1 bg-primary/70 z-0`}
-        ></div>
+        />
       )}
 
       <motion.div

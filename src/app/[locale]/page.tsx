@@ -1,7 +1,7 @@
-import Hero from "@/components/sections/Hero";
-import Projects from "@/components/sections/Projects";
-import About from "@/components/sections/About";
-import Contact from "@/components/sections/Contact";
+import About from '@/components/sections/About';
+import Contact from '@/components/sections/Contact';
+import Hero from '@/components/sections/Hero';
+import Projects from '@/components/sections/Projects';
 
 export async function generateMetadata({
   params,
@@ -10,11 +10,11 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
 
-  const title = locale === "de" ? "Portfolio - Startseite" : "Portfolio - Home";
+  const title = locale === 'de' ? 'Portfolio - Startseite' : 'Portfolio - Home';
   const description =
-    locale === "de"
-      ? "Willkommen auf meinem Portfolio - Entdecke meine Projekte und Fähigkeiten"
-      : "Welcome to my portfolio - Explore my projects and skills";
+    locale === 'de'
+      ? 'Willkommen auf meinem Portfolio - Entdecke meine Projekte und Fähigkeiten'
+      : 'Welcome to my portfolio - Explore my projects and skills';
 
   return {
     title,
@@ -22,7 +22,7 @@ export async function generateMetadata({
   };
 }
 
-import { getProjects } from "@/lib/data";
+import { getProjects } from '@/lib/data';
 
 export default async function HomePage({
   params,

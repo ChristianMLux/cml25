@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
-import { useTheme } from "next-themes";
+import { motion, useScroll, useSpring } from 'framer-motion';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 interface ScrollProgressProps {
   alwaysVisible?: boolean;
@@ -19,12 +19,12 @@ interface ScrollProgressProps {
 export default function ScrollProgress({
   alwaysVisible = false,
   height = 4,
-  className = "",
+  className = '',
   showSections = false,
   zIndex = 60,
   colors = {
-    light: "bg-primary",
-    dark: "bg-primary",
+    light: 'bg-primary',
+    dark: 'bg-primary',
   },
 }: ScrollProgressProps) {
   const { scrollYProgress } = useScroll();
@@ -46,20 +46,20 @@ export default function ScrollProgress({
       setIsVisible(window.scrollY > 100);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     handleScroll();
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [alwaysVisible]);
 
   useEffect(() => {
     if (!showSections) return;
 
-    const sections = document.querySelectorAll("section[id]");
+    const sections = document.querySelectorAll('section[id]');
     if (sections.length === 0) return;
 
     const observerOptions = {
-      rootMargin: "-20% 0px -70% 0px",
+      rootMargin: '-20% 0px -70% 0px',
       threshold: 0,
     };
 
@@ -78,7 +78,7 @@ export default function ScrollProgress({
 
   if (!isVisible) return null;
 
-  const colorClass = theme === "dark" ? colors.dark : colors.light;
+  const colorClass = theme === 'dark' ? colors.dark : colors.light;
 
   return (
     <div
@@ -95,7 +95,7 @@ export default function ScrollProgress({
 
       {showSections && activeSection && (
         <div className="absolute right-4 top-4 bg-white dark:bg-gray-800 px-2 py-1 text-xs rounded-md shadow-sm">
-          {activeSection.replaceAll("-", " ")}
+          {activeSection.replaceAll('-', ' ')}
         </div>
       )}
     </div>

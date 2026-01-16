@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import React, { createContext, useContext, useState, useCallback } from "react";
-import { LoadingOverlay } from "./LoadingOverlay";
+import React, { createContext, useContext, useState, useCallback } from 'react';
+
+import { LoadingOverlay } from './LoadingOverlay';
 
 type LoadingContextType = {
   showLoading: (id?: string) => void;
@@ -14,7 +15,7 @@ const LoadingContext = createContext<LoadingContextType | undefined>(undefined);
 export function useLoadingContext() {
   const context = useContext(LoadingContext);
   if (!context) {
-    throw new Error("useLoadingContext must be used within a LoadingProvider");
+    throw new Error('useLoadingContext must be used within a LoadingProvider');
   }
   return context;
 }
@@ -28,16 +29,16 @@ export function LoadingProvider({ children }: LoadingProviderProps) {
     global: false,
   });
 
-  const showLoading = useCallback((id = "global") => {
+  const showLoading = useCallback((id = 'global') => {
     setLoadingStates((prev) => ({ ...prev, [id]: true }));
   }, []);
 
-  const hideLoading = useCallback((id = "global") => {
+  const hideLoading = useCallback((id = 'global') => {
     setLoadingStates((prev) => ({ ...prev, [id]: false }));
   }, []);
 
   const isLoading = useCallback(
-    (id = "global") => loadingStates[id] || false,
+    (id = 'global') => loadingStates[id] || false,
     [loadingStates],
   );
 

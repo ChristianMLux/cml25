@@ -1,6 +1,14 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+  onAuthStateChanged,
+  User,
+} from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 import {
   Github,
   Save,
@@ -17,25 +25,19 @@ import {
   Star,
   LayoutGrid,
   List,
-} from "lucide-react";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signOut,
-  onAuthStateChanged,
-  User,
-} from "firebase/auth";
-import { app, db } from "@/lib/firebase/firebase";
-import { Project } from "@/types";
-import { projectsData } from "@/lib/static-data";
-import { doc, setDoc } from "firebase/firestore";
+} from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+
+import { app, db } from '@/lib/firebase/firebase';
+import { projectsData } from '@/lib/static-data';
+import { Project } from '@/types';
+
 
 // Extends Project type for local state management (handling statuses)
 interface AdminProject extends Partial<Project> {
   id: string; // ID is required
   name: string; // Repo name or display name
-  status: "new" | "published" | "hidden" | "error";
+  status: 'new' | 'published' | 'hidden' | 'error';
   isFeatured?: boolean;
   isVisible?: boolean;
 }
@@ -48,7 +50,7 @@ export default function AdminDashboard() {
   const [editForm, setEditForm] = useState<Partial<AdminProject>>({});
   const [authLoading, setAuthLoading] = useState(true);
   const [migrationLoading, setMigrationLoading] = useState(false);
-  const [viewMode, setViewMode] = useState<"list" | "grid">("list");
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
 
   // Auth Init
   useEffect(() => {
@@ -69,7 +71,7 @@ export default function AdminDashboard() {
     try {
       await signInWithPopup(auth, provider);
     } catch (e) {
-      console.error("Login failed", e);
+      console.error('Login failed', e);
     }
   };
 
@@ -82,32 +84,32 @@ export default function AdminDashboard() {
   // API Interactions
   const fetchProjects = async () => {
     try {
-      const res = await fetch("/api/admin/projects");
+      const res = await fetch('/api/admin/projects');
       const data = await res.json();
       if (data.projects) {
         const formatted = data.projects.map((p: any) => ({
           ...p,
           name: p.title || p.id,
-          status: "published",
+          status: 'published',
         }));
         // Merge with current state if needed, or just set
         // For simplicity, we just set loaded projects.
         // If we want to keep "new" syncs, we should be careful.
         // Logic: existing "published" projects + newly synced "new" projects.
         setProjects((prev) => {
-          const newProjects = prev.filter((p) => p.status === "new");
+          const newProjects = prev.filter((p) => p.status === 'new');
           return [...formatted, ...newProjects];
         });
       }
     } catch (e) {
-      console.error("Failed to fetch projects", e);
+      console.error('Failed to fetch projects', e);
     }
   };
 
   const syncProjects = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/admin/sync", { method: "POST" });
+      const res = await fetch('/api/admin/sync', { method: 'POST' });
       const data = await res.json();
 
       if (data.projects) {
@@ -121,8 +123,8 @@ export default function AdminDashboard() {
         });
       }
     } catch (e) {
-      console.error("Sync failed", e);
-      alert("Sync failed. Check console and API Keys.");
+      console.error('Sync failed', e);
+      alert('Sync failed. Check console and API Keys.');
     } finally {
       setLoading(false);
     }
@@ -135,7 +137,7 @@ export default function AdminDashboard() {
     if (!items) return;
 
     for (const item of items) {
-      if (item.type.indexOf("image") !== -1) {
+      if (item.type.indexOf('image') !== -1) {
         e.preventDefault();
         setIsUploading(true);
         try {
@@ -143,20 +145,20 @@ export default function AdminDashboard() {
           if (!file) return;
 
           const formData = new FormData();
-          formData.append("file", file);
+          formData.append('file', file);
 
-          const res = await fetch("/api/admin/upload", {
-            method: "POST",
+          const res = await fetch('/api/admin/upload', {
+            method: 'POST',
             body: formData,
           });
 
-          if (!res.ok) throw new Error("Upload failed");
+          if (!res.ok) throw new Error('Upload failed');
 
           const data = await res.json();
           setEditForm((prev) => ({ ...prev, imageUrl: data.url }));
         } catch (error) {
-          console.error("Upload failed", error);
-          alert("Upload failed. Check console.");
+          console.error('Upload failed', error);
+          alert('Upload failed. Check console.');
         } finally {
           setIsUploading(false);
         }
@@ -187,17 +189,17 @@ export default function AdminDashboard() {
       const payload: Partial<Project> = {
         title: data.title || data.name,
         description: data.description,
-        imageUrl: data.imageUrl || "/assets/images/placeholder.jpg",
+        imageUrl: data.imageUrl || '/assets/images/placeholder.jpg',
         images: data.images || [],
         technologies: data.technologies || [],
-        category: data.category || "web",
+        category: data.category || 'web',
         tags: data.tags || [],
         githubUrl: data.githubUrl,
         liveUrl: data.liveUrl,
         isFeatured: data.isFeatured ?? false,
         isVisible: data.isVisible ?? true,
         isPrivate: data.isPrivate ?? false,
-        source: "firestore",
+        source: 'firestore',
       };
 
       // Remove undefined values
@@ -207,14 +209,14 @@ export default function AdminDashboard() {
           delete payload[key as keyof typeof payload],
       );
 
-      await setDoc(doc(db, "projects", id), payload, { merge: true });
+      await setDoc(doc(db, 'projects', id), payload, { merge: true });
 
       setProjects((prev) =>
-        prev.map((p) => (p.id === id ? { ...p, status: "published" } : p)),
+        prev.map((p) => (p.id === id ? { ...p, status: 'published' } : p)),
       );
     } catch (e) {
-      console.error("Publish error", e);
-      alert("Failed to publish: " + (e as any).message);
+      console.error('Publish error', e);
+      alert('Failed to publish: ' + (e as any).message);
     }
   };
 
@@ -228,7 +230,7 @@ export default function AdminDashboard() {
   const migrateLegacyProjects = async () => {
     if (
       !confirm(
-        "This will migrate all legacy (hardcoded) projects to Firestore. Continue?",
+        'This will migrate all legacy (hardcoded) projects to Firestore. Continue?',
       )
     )
       return;
@@ -240,11 +242,11 @@ export default function AdminDashboard() {
         // Prepare data matching Project interface
         const payload: Partial<Project> = {
           title: project.id,
-          description: "Imported from Legacy Data",
-          imageUrl: project.imageUrl || "/assets/images/placeholder.jpg",
+          description: 'Imported from Legacy Data',
+          imageUrl: project.imageUrl || '/assets/images/placeholder.jpg',
           images: project.images || [],
           technologies: project.technologies || [],
-          category: project.category || "web",
+          category: project.category || 'web',
           tags: project.tags || [],
           link: project.link,
           githubUrl: project.githubUrl,
@@ -252,7 +254,7 @@ export default function AdminDashboard() {
           // Legacy projects are usually visible
           isFeatured: true,
           isVisible: true,
-          source: "firestore",
+          source: 'firestore',
         };
 
         // Remove undefined
@@ -262,15 +264,15 @@ export default function AdminDashboard() {
             delete payload[key as keyof typeof payload],
         );
 
-        await setDoc(doc(db, "projects", project.id), payload, { merge: true });
+        await setDoc(doc(db, 'projects', project.id), payload, { merge: true });
         count++;
       }
 
       alert(`Successfully migrated ${count} projects. Refreshing...`);
       fetchProjects();
     } catch (e) {
-      console.error("Migration failed", e);
-      alert("Migration failed: " + (e as any).message);
+      console.error('Migration failed', e);
+      alert('Migration failed: ' + (e as any).message);
     } finally {
       setMigrationLoading(false);
     }
@@ -309,7 +311,7 @@ export default function AdminDashboard() {
           <div>
             <h1 className="text-xl font-bold">Content Manager</h1>
             <div className="flex items-center gap-2 text-xs text-slate-500">
-              <span className="w-2 h-2 rounded-full bg-green-500"></span>
+              <span className="w-2 h-2 rounded-full bg-green-500" />
               Firestore Connected
             </div>
           </div>
@@ -344,15 +346,15 @@ export default function AdminDashboard() {
             {/* View Toggle */}
             <div className="flex bg-slate-900 rounded-lg p-1 border border-slate-800 mr-2">
               <button
-                onClick={() => setViewMode("list")}
-                className={`p-1.5 rounded ${viewMode === "list" ? "bg-slate-700 text-white" : "text-slate-500 hover:text-slate-300"}`}
+                onClick={() => setViewMode('list')}
+                className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-slate-700 text-white' : 'text-slate-500 hover:text-slate-300'}`}
                 title="List View"
               >
                 <List size={16} />
               </button>
               <button
-                onClick={() => setViewMode("grid")}
-                className={`p-1.5 rounded ${viewMode === "grid" ? "bg-slate-700 text-white" : "text-slate-500 hover:text-slate-300"}`}
+                onClick={() => setViewMode('grid')}
+                className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-slate-700 text-white' : 'text-slate-500 hover:text-slate-300'}`}
                 title="Grid View"
               >
                 <LayoutGrid size={16} />
@@ -369,7 +371,7 @@ export default function AdminDashboard() {
               ) : (
                 <Database size={18} />
               )}
-              {migrationLoading ? "Migrating..." : "Migrate Legacy"}
+              {migrationLoading ? 'Migrating...' : 'Migrate Legacy'}
             </button>
 
             <button
@@ -377,8 +379,8 @@ export default function AdminDashboard() {
               disabled={loading}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm transition-all ${
                 loading
-                  ? "bg-slate-800 text-slate-500 cursor-not-allowed"
-                  : "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-900/20"
+                  ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                  : 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-900/20'
               }`}
             >
               {loading ? (
@@ -386,14 +388,14 @@ export default function AdminDashboard() {
               ) : (
                 <Github size={18} />
               )}
-              {loading ? "AI is analyzing..." : "Sync & Generate AI Content"}
+              {loading ? 'AI is analyzing...' : 'Sync & Generate AI Content'}
             </button>
           </div>
         </div>
 
         {/* Project List */}
         <div
-          className={`grid gap-6 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"}`}
+          className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}
         >
           {projects.length === 0 && !loading && (
             <div className="text-center py-20 border-2 border-dashed border-slate-800 rounded-xl col-span-full">
@@ -407,9 +409,9 @@ export default function AdminDashboard() {
             <div
               key={project.id}
               className={`bg-slate-900 border rounded-xl overflow-hidden transition-all flex flex-col ${
-                project.status === "published"
-                  ? "border-green-900/50 shadow-none opacity-90"
-                  : "border-slate-800 shadow-xl"
+                project.status === 'published'
+                  ? 'border-green-900/50 shadow-none opacity-90'
+                  : 'border-slate-800 shadow-xl'
               }`}
             >
               {editingId === project.id ? (
@@ -433,7 +435,7 @@ export default function AdminDashboard() {
                       </label>
                       <input
                         className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm text-slate-200"
-                        value={editForm.title || ""}
+                        value={editForm.title || ''}
                         onChange={(e) =>
                           setEditForm({ ...editForm, title: e.target.value })
                         }
@@ -445,7 +447,7 @@ export default function AdminDashboard() {
                       </label>
                       <textarea
                         className="w-full bg-slate-950 border border-slate-700 rounded p-3 text-sm text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none min-h-[100px]"
-                        value={editForm.description || ""}
+                        value={editForm.description || ''}
                         onChange={(e) =>
                           setEditForm({
                             ...editForm,
@@ -461,13 +463,13 @@ export default function AdminDashboard() {
                         <span>Image URL (Screenshot)</span>
                         <span className="text-indigo-400 font-normal">
                           {isUploading
-                            ? "Uploading..."
-                            : "Paste (Ctrl+V) enabled"}
+                            ? 'Uploading...'
+                            : 'Paste (Ctrl+V) enabled'}
                         </span>
                       </label>
                       <input
-                        className={`w-full bg-slate-950 border rounded p-2 text-sm text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-colors ${isUploading ? "border-indigo-500 animate-pulse" : "border-slate-700"}`}
-                        value={editForm.imageUrl || ""}
+                        className={`w-full bg-slate-950 border rounded p-2 text-sm text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-colors ${isUploading ? 'border-indigo-500 animate-pulse' : 'border-slate-700'}`}
+                        value={editForm.imageUrl || ''}
                         onPaste={handlePaste}
                         onChange={(e) =>
                           setEditForm({
@@ -477,8 +479,8 @@ export default function AdminDashboard() {
                         }
                         placeholder={
                           isUploading
-                            ? "Uploading image..."
-                            : "Paste screenshot here or enter URL"
+                            ? 'Uploading image...'
+                            : 'Paste screenshot here or enter URL'
                         }
                         disabled={isUploading}
                       />
@@ -490,12 +492,12 @@ export default function AdminDashboard() {
                       </label>
                       <input
                         className="w-full bg-slate-950 border border-slate-700 rounded p-3 text-sm text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none"
-                        value={editForm.technologies?.join(", ") || ""}
+                        value={editForm.technologies?.join(', ') || ''}
                         onChange={(e) =>
                           setEditForm({
                             ...editForm,
                             technologies: e.target.value
-                              .split(",")
+                              .split(',')
                               .map((s) => s.trim()),
                           })
                         }
@@ -519,8 +521,8 @@ export default function AdminDashboard() {
                           size={16}
                           className={
                             editForm.isVisible !== false
-                              ? "text-indigo-400"
-                              : "text-slate-600"
+                              ? 'text-indigo-400'
+                              : 'text-slate-600'
                           }
                         />
                         <span>Visible</span>
@@ -542,8 +544,8 @@ export default function AdminDashboard() {
                           size={16}
                           className={
                             editForm.isFeatured
-                              ? "fill-amber-500 text-amber-500"
-                              : "text-slate-600"
+                              ? 'fill-amber-500 text-amber-500'
+                              : 'text-slate-600'
                           }
                         />
                         <span>Featured</span>
@@ -563,7 +565,7 @@ export default function AdminDashboard() {
               ) : (
                 // --- View Mode ---
                 <div
-                  className={`p-6 flex gap-6 ${viewMode === "list" ? "flex-col sm:flex-row" : "flex-col h-full"}`}
+                  className={`p-6 flex gap-6 ${viewMode === 'list' ? 'flex-col sm:flex-row' : 'flex-col h-full'}`}
                 >
                   <div className="flex-1 flex flex-col">
                     <div className="flex items-center gap-3 mb-2 flex-wrap">
@@ -580,12 +582,12 @@ export default function AdminDashboard() {
                             Private
                           </span>
                         )}
-                        {project.status === "new" && (
+                        {project.status === 'new' && (
                           <span className="px-2 py-0.5 bg-blue-900/50 text-blue-300 text-[10px] uppercase font-bold rounded border border-blue-800">
                             New
                           </span>
                         )}
-                        {project.status === "published" && (
+                        {project.status === 'published' && (
                           <span className="px-2 py-0.5 bg-green-900/50 text-green-300 text-[10px] uppercase font-bold rounded border border-green-800">
                             Published
                           </span>
@@ -595,7 +597,7 @@ export default function AdminDashboard() {
                             <Star
                               size={10}
                               className="inline fill-amber-400 mb-0.5"
-                            />{" "}
+                            />{' '}
                             Featured
                           </span>
                         )}
@@ -603,14 +605,14 @@ export default function AdminDashboard() {
                     </div>
 
                     <p
-                      className={`text-slate-400 text-sm leading-relaxed mb-4 ${viewMode === "grid" ? "line-clamp-3" : ""}`}
+                      className={`text-slate-400 text-sm leading-relaxed mb-4 ${viewMode === 'grid' ? 'line-clamp-3' : ''}`}
                     >
                       {project.description}
                     </p>
 
                     <div className="flex flex-wrap gap-2 mt-auto">
                       {project.technologies
-                        ?.slice(0, viewMode === "grid" ? 4 : 10)
+                        ?.slice(0, viewMode === 'grid' ? 4 : 10)
                         .map((tech) => (
                           <span
                             key={tech}
@@ -619,21 +621,21 @@ export default function AdminDashboard() {
                             {tech}
                           </span>
                         ))}
-                      {viewMode === "grid" &&
+                      {viewMode === 'grid' &&
                         (project.technologies?.length || 0) > 4 && (
-                          <span className="px-2 py-1 bg-slate-800 text-slate-500 text-xs rounded-md">
+                        <span className="px-2 py-1 bg-slate-800 text-slate-500 text-xs rounded-md">
                             +{project.technologies!.length - 4}
-                          </span>
-                        )}
+                        </span>
+                      )}
                     </div>
                   </div>
 
                   {/* Actions Column */}
                   <div
                     className={`flex gap-2 justify-center min-w-[140px] ${
-                      viewMode === "list"
-                        ? "sm:flex-col sm:border-l sm:border-slate-800 sm:pl-6"
-                        : "pt-4 border-t border-slate-800 mt-4"
+                      viewMode === 'list'
+                        ? 'sm:flex-col sm:border-l sm:border-slate-800 sm:pl-6'
+                        : 'pt-4 border-t border-slate-800 mt-4'
                     }`}
                   >
                     <button
@@ -645,20 +647,20 @@ export default function AdminDashboard() {
 
                     <button
                       onClick={() => publishProject(project)}
-                      className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 py-2 text-white text-xs rounded transition-colors ${project.status === "published" ? "bg-slate-700 hover:bg-slate-600" : "bg-indigo-600 hover:bg-indigo-500"}`}
+                      className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 py-2 text-white text-xs rounded transition-colors ${project.status === 'published' ? 'bg-slate-700 hover:bg-slate-600' : 'bg-indigo-600 hover:bg-indigo-500'}`}
                     >
-                      {project.status === "published" ? (
+                      {project.status === 'published' ? (
                         <RefreshCw size={14} />
                       ) : (
                         <Database size={14} />
                       )}
-                      {project.status === "published"
-                        ? "Update DB"
-                        : "Publish DB"}
+                      {project.status === 'published'
+                        ? 'Update DB'
+                        : 'Publish DB'}
                     </button>
 
                     <div
-                      className={`flex items-center justify-center gap-2 pt-2 text-[10px] text-slate-500 ${viewMode === "grid" ? "hidden" : ""}`}
+                      className={`flex items-center justify-center gap-2 pt-2 text-[10px] text-slate-500 ${viewMode === 'grid' ? 'hidden' : ''}`}
                     >
                       <Cpu size={12} />
                       <span>AI Generated</span>

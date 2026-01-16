@@ -1,9 +1,12 @@
-"use client";
+'use client';
 
-import { useDialogStore } from "@/lib/store/dialogStore";
-import { Dialog } from "./Dialog";
-import { Button } from "../Button/button";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
+
+import { useDialogStore } from '@/lib/store/dialogStore';
+
+import { Button } from '../Button/button';
+
+import { Dialog } from './Dialog';
 
 export function DialogProvider() {
   const { isOpen, options, close, confirm, cancel } = useDialogStore();
@@ -15,7 +18,7 @@ export function DialogProvider() {
       onClose={close}
       title={options.title}
       description={options.description}
-      size={options.size || "md"}
+      size={options.size || 'md'}
       showCloseButton={options.showCloseButton}
       closeOnEsc={options.closeOnEsc}
       closeOnBackdropClick={options.closeOnBackdropClick}
@@ -26,12 +29,12 @@ export function DialogProvider() {
         <div className="mt-6 flex justify-end space-x-3">
           {options.cancelText && (
             <Button variant="secondary" onClick={cancel}>
-              {options.cancelText || t("common:dialog.cancel")}
+              {options.cancelText || t('common:dialog.cancel')}
             </Button>
           )}
           {options.confirmText && (
             <Button variant="default" onClick={confirm}>
-              {options.confirmText || t("common:dialog.confirm")}
+              {options.confirmText || t('common:dialog.confirm')}
             </Button>
           )}
         </div>

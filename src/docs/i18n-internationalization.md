@@ -21,20 +21,20 @@ Dieses Dokument beschreibt die Best Practices für die Verwendung der Internatio
 
 ## Setup & Konzepte
 
-1.  **Konfiguration (`i18n.ts`):** Definiert unterstützte Sprachen (`supportedLngs`), Fallback-Sprache (`fallbackLng`), Namespaces (`ns`), Backend-Einstellungen (zum Laden der JSON-Dateien) und Spracherkennung (`detection`).
-2.  **Locale-Routing (`middleware.ts`):**
-    - Die Middleware prüft eingehende Anfragen.
-    - Wenn kein Locale-Präfix (`/de` oder `/en`) vorhanden ist, ermittelt sie die bevorzugte Sprache (aus Cookie oder `accept-language` Header).
-    - Leitet den Benutzer zur entsprechenden Locale-Version der URL weiter (z.B. `/projekte` -> `/de/projekte`).
-    - Setzt ein `NEXT_LOCALE` Cookie zur Speicherung der bevorzugten Sprache.
-3.  **Provider (`I18nProvider.tsx`):** Wird im Root-Layout (`layout.tsx`) verwendet, um den `i18next`-Kontext für Client Components bereitzustellen und die Sprache basierend auf dem URL-Parameter zu initialisieren.
-4.  **Übersetzungsdateien:** Für jede Sprache (`de`, `en`) gibt es einen Ordner unter `public/locales`. Darin befinden sich JSON-Dateien für jeden Namespace (`common`, `projects`, etc.), die Schlüssel-Wert-Paare für die Übersetzungen enthalten.
-5.  **Navigation (`i18n-navigation.tsx`):**
-    - `LocalizedLink`: Eine Wrapper-Komponente um `next/link`, die automatisch das aktuelle Locale-Präfix zur `href` hinzufügt.
-    - `useRouter` / `usePathname`: Angepasste Versionen der Next.js Hooks, die das Locale-Präfix berücksichtigen bzw. entfernen.
-6.  **Übersetzungen verwenden:**
-    - **Server Components:** `getServerTranslation(locale, namespace)` verwenden, um die `t`-Funktion zu erhalten.
-    - **Client Components:** Den `useTranslation(namespace)` Hook verwenden, um die `t`-Funktion und die `i18n`-Instanz zu erhalten.
+1. **Konfiguration (`i18n.ts`):** Definiert unterstützte Sprachen (`supportedLngs`), Fallback-Sprache (`fallbackLng`), Namespaces (`ns`), Backend-Einstellungen (zum Laden der JSON-Dateien) und Spracherkennung (`detection`).
+2. **Locale-Routing (`middleware.ts`):**
+   - Die Middleware prüft eingehende Anfragen.
+   - Wenn kein Locale-Präfix (`/de` oder `/en`) vorhanden ist, ermittelt sie die bevorzugte Sprache (aus Cookie oder `accept-language` Header).
+   - Leitet den Benutzer zur entsprechenden Locale-Version der URL weiter (z.B. `/projekte` -> `/de/projekte`).
+   - Setzt ein `NEXT_LOCALE` Cookie zur Speicherung der bevorzugten Sprache.
+3. **Provider (`I18nProvider.tsx`):** Wird im Root-Layout (`layout.tsx`) verwendet, um den `i18next`-Kontext für Client Components bereitzustellen und die Sprache basierend auf dem URL-Parameter zu initialisieren.
+4. **Übersetzungsdateien:** Für jede Sprache (`de`, `en`) gibt es einen Ordner unter `public/locales`. Darin befinden sich JSON-Dateien für jeden Namespace (`common`, `projects`, etc.), die Schlüssel-Wert-Paare für die Übersetzungen enthalten.
+5. **Navigation (`i18n-navigation.tsx`):**
+   - `LocalizedLink`: Eine Wrapper-Komponente um `next/link`, die automatisch das aktuelle Locale-Präfix zur `href` hinzufügt.
+   - `useRouter` / `usePathname`: Angepasste Versionen der Next.js Hooks, die das Locale-Präfix berücksichtigen bzw. entfernen.
+6. **Übersetzungen verwenden:**
+   - **Server Components:** `getServerTranslation(locale, namespace)` verwenden, um die `t`-Funktion zu erhalten.
+   - **Client Components:** Den `useTranslation(namespace)` Hook verwenden, um die `t`-Funktion und die `i18n`-Instanz zu erhalten.
 
 ## Best Practices & Verwendung
 

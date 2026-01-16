@@ -1,4 +1,4 @@
-@import "./command-palette.css";
+@import './command-palette.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -57,8 +57,8 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings:
-      "rlig" 1,
-      "calt" 1;
+      'rlig' 1,
+      'calt' 1;
   }
   .aspect-square {
     aspect-ratio: 1 / 1;
@@ -80,8 +80,8 @@ kbd {
   display: inline-block;
   padding: 0.1em 0.4em;
   font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
   font-size: 0.75em;
   line-height: 1.4;
   color: #6b7280;

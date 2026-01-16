@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import { LocalizedLink } from "@/lib/i18n-navigation";
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
+
+import { LocalizedLink } from '@/lib/i18n-navigation';
 
 interface BackButtonProps {
   href: string;

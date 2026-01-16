@@ -1,11 +1,12 @@
-"use client";
+'use client';
+import Link from 'next/link';
 import {
   useRouter as useNextRouter,
   usePathname as useNextPathname,
-} from "next/navigation";
-import Link from "next/link";
-import { useTranslation } from "react-i18next";
-import { locales, defaultLocale } from "../../config/i18n-config";
+} from 'next/navigation';
+import { useTranslation } from 'react-i18next';
+
+import { locales, defaultLocale } from '../../config/i18n-config';
 
 export function LocalizedLink({
   href,
@@ -15,8 +16,8 @@ export function LocalizedLink({
   const { i18n } = useTranslation();
   const currentLocale = i18n.language || defaultLocale;
 
-  const localizedHref = href.toString().startsWith("/")
-    ? `/${currentLocale}${href === "/" ? "" : href}`
+  const localizedHref = href.toString().startsWith('/')
+    ? `/${currentLocale}${href === '/' ? '' : href}`
     : href;
 
   return (
@@ -34,15 +35,15 @@ export function useRouter() {
   return {
     ...nextRouter,
     push: (href: string) => {
-      if (href.startsWith("/") && !href.startsWith(`/${currentLocale}`)) {
-        nextRouter.push(`/${currentLocale}${href === "/" ? "" : href}`);
+      if (href.startsWith('/') && !href.startsWith(`/${currentLocale}`)) {
+        nextRouter.push(`/${currentLocale}${href === '/' ? '' : href}`);
       } else {
         nextRouter.push(href);
       }
     },
     replace: (href: string) => {
-      if (href.startsWith("/") && !href.startsWith(`/${currentLocale}`)) {
-        nextRouter.replace(`/${currentLocale}${href === "/" ? "" : href}`);
+      if (href.startsWith('/') && !href.startsWith(`/${currentLocale}`)) {
+        nextRouter.replace(`/${currentLocale}${href === '/' ? '' : href}`);
       } else {
         nextRouter.replace(href);
       }
@@ -55,7 +56,7 @@ export function usePathname() {
 
   for (const locale of locales) {
     if (pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)) {
-      return pathname.replace(`/${locale}`, "") || "/";
+      return pathname.replace(`/${locale}`, '') || '/';
     }
   }
 
@@ -66,10 +67,10 @@ export function redirect(path: string, locale?: string) {
   const currentLocale = locale || defaultLocale;
 
   if (
-    path.startsWith("/") &&
+    path.startsWith('/') &&
     !locales.some((loc) => path.startsWith(`/${loc}`))
   ) {
-    return `/${currentLocale}${path === "/" ? "" : path}`;
+    return `/${currentLocale}${path === '/' ? '' : path}`;
   }
 
   return path;

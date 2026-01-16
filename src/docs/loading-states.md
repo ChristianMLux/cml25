@@ -37,11 +37,11 @@ Suspense ist ein React-Feature, das das "Suspendieren" des Renderings ermöglich
 
 ```tsx
 const ProjectGallery = dynamic(
-  () => import("@/components/sections/Projects/ProjectGallery"),
+  () => import('@/components/sections/Projects/ProjectGallery'),
   {
     ssr: false,
     loading: () => <ProjectGallerySkeleton />,
-  },
+  }
 );
 ```
 
@@ -116,9 +116,9 @@ useEffect(() => {
 const { showLoading, hideLoading } = useLoadingContext();
 
 const handleSubmit = async () => {
-  showLoading("form");
+  showLoading('form');
   await submitForm();
-  hideLoading("form");
+  hideLoading('form');
 };
 ```
 

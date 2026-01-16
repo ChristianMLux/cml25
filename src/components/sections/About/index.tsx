@@ -1,26 +1,29 @@
-"use client";
-import { useEffect } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { Download, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button/button";
-import { SkillsShowcase } from "./SkillsShowcase";
-import { useTranslation } from "react-i18next";
-import { useRouter } from "@/lib/i18n-navigation";
-import React from "react";
+'use client';
+import { motion } from 'framer-motion';
+import { Download, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import { useEffect } from 'react';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { Button } from '@/components/ui/Button/button';
+import { useRouter } from '@/lib/i18n-navigation';
+
+import { SkillsShowcase } from './SkillsShowcase';
+
 
 const skills = [
   {
-    category: "Frontend",
-    items: ["React", "Next.js", "Vue", "Angular", "TypeScript", "Tailwind CSS"],
+    category: 'Frontend',
+    items: ['React', 'Next.js', 'Vue', 'Angular', 'TypeScript', 'Tailwind CSS'],
   },
   {
-    category: "Backend",
-    items: ["Node.js", "ASP.Net", "PostgreSQL", "MongoDB/MariaDB", "Python"],
+    category: 'Backend',
+    items: ['Node.js', 'ASP.Net', 'PostgreSQL', 'MongoDB/MariaDB', 'Python'],
   },
   {
-    category: "Tools",
-    items: ["Git", "Docker", "Azure", "Kubernetes", "Claude, GPT (GenAI)"],
+    category: 'Tools',
+    items: ['Git', 'Docker', 'Azure', 'Kubernetes', 'Claude, GPT (GenAI)'],
   },
 ];
 
@@ -29,26 +32,26 @@ interface AboutProps {
 }
 
 export default function About({ locale }: AboutProps) {
-  const { t, i18n } = useTranslation(["common", "about"]);
+  const { t, i18n } = useTranslation(['common', 'about']);
   const router = useRouter();
   const experiences = [
     {
-      title: "Cloud Solution Architecture",
-      company: "VelpTec GmbH",
-      period: "2024 - 2025",
-      description: t("about:experience.velpTec"),
+      title: 'Cloud Solution Architecture',
+      company: 'VelpTec GmbH',
+      period: '2024 - 2025',
+      description: t('about:experience.velpTec'),
     },
     {
-      title: "Full-Stack Developer",
-      company: "SparePartsNow GmbH",
-      period: "2021 - 2024",
-      description: t("about:experience.spn"),
+      title: 'Full-Stack Developer',
+      company: 'SparePartsNow GmbH',
+      period: '2021 - 2024',
+      description: t('about:experience.spn'),
     },
     {
-      title: "Frontend Developer",
-      company: "Coding Bootcamps Europe",
-      period: "2021",
-      description: t("about:experience.cbe"),
+      title: 'Frontend Developer',
+      company: 'Coding Bootcamps Europe',
+      period: '2021',
+      description: t('about:experience.cbe'),
     },
   ];
   useEffect(() => {
@@ -66,28 +69,28 @@ export default function About({ locale }: AboutProps) {
             transition={{ duration: 0.5 }}
           >
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-              {t("about:aboutSection.title")}
+              {t('about:aboutSection.title')}
             </h2>
             <div className="mt-4 space-y-4">
               <p className="text-[18px] text-gray-800 dark:text-gray-300">
-                {t("about:aboutSection.paragraph1")}
+                {t('about:aboutSection.paragraph1')}
               </p>
               <p className="text-[18px] text-gray-800 dark:text-gray-300">
-                {t("about:aboutSection.paragraph2")}
+                {t('about:aboutSection.paragraph2')}
               </p>
               <div className="flex gap-4">
                 <Button asChild>
                   <a href="/assets/cv/LebenslaufCML25.pdf" download>
-                    {t("common:buttons.downloadCV", "Download CV")}
+                    {t('common:buttons.downloadCV', 'Download CV')}
                     <Download className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
 
                 <Button
                   variant="outline"
-                  onClick={() => router.push(locale + "/projects")}
+                  onClick={() => router.push(locale + '/projects')}
                 >
-                  {t("common:buttons.viewProjects")}
+                  {t('common:buttons.viewProjects')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </div>
@@ -101,7 +104,7 @@ export default function About({ locale }: AboutProps) {
           >
             <Image
               src="/assets/images/about_section_01.png"
-              alt={t("imageAlt", "About Me")}
+              alt={t('imageAlt', 'About Me')}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -116,7 +119,7 @@ export default function About({ locale }: AboutProps) {
           className="mt-16"
         >
           <h3 className="text-2xl font-bold tracking-tighter">
-            {t("about:experience.title", "Experience")}
+            {t('about:experience.title', 'Experience')}
           </h3>
           <div className="mt-8 grid gap-8 md:grid-cols-2">
             {experiences.map((exp, index) => (

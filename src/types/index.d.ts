@@ -1,4 +1,4 @@
-type Category = "web" | "mobile" | "design" | string;
+type Category = 'web' | 'mobile' | 'design' | string;
 export interface Project {
   id: string;
   title: string;
@@ -17,10 +17,10 @@ export interface Project {
   isFeatured?: boolean; // Show on Main Page Showcase
   isVisible?: boolean; // Show on /projects page
   isPrivate?: boolean; // If true, hide code links
-  source?: "local" | "firestore"; // Origin
+  source?: 'local' | 'firestore'; // Origin
 }
 
-export type Theme = "light" | "dark" | "system";
+export type Theme = 'light' | 'dark' | 'system';
 
 export interface ThemeState {
   theme: Theme;

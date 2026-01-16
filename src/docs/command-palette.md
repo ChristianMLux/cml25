@@ -21,23 +21,23 @@ Dieses Dokument beschreibt die Funktionsweise und Verwendung der Command Palette
 
 ## Setup & Konzepte
 
-1.  **Zustand Store (`useCommandPaletteStore`):**
-    - Verwaltet den `isOpen`-Zustand der Palette.
-    - Speichert eine Liste der `recentCommands` (IDs der zuletzt ausgeführten Befehle) persistent im Local Storage (`command-palette-storage`). Die Liste ist auf die letzten 5 Befehle begrenzt.
-    - Bietet Aktionen `open`, `close` und `addRecentCommand`.
-2.  **Command Palette Komponente (`CommandPalette/index.tsx`):**
-    - Verwendet den `useCommandPaletteStore`, um den offenen/geschlossenen Zustand zu steuern.
-    - Definiert eine Liste aller verfügbaren `allCommands` (Navigation, Aktionen wie Theme-Wechsel, Sprachwechsel). Die Labels werden dynamisch mittels `useTranslation('command')` übersetzt.
-    - Implementiert die Suchlogik: Filtert `allCommands` basierend auf der Eingabe im Suchfeld (case-insensitive).
-    - Zeigt zuerst die `recentCommands` an (aus dem Store geladen und mit `allCommands` abgeglichen), wenn die Suche leer ist.
-    - Gruppiert die gefilterten Befehle nach Kategorien (`navigation`, `action`, `settings`).
-    - Verwaltet den `activeIndex` zur Tastaturnavigation (Pfeiltasten Hoch/Runter) innerhalb der sichtbaren Befehlsliste.
-    - Implementiert die Tastatur-Handler (`handleKeyDown`) für Pfeiltasten, Enter (führt den aktiven Befehl aus) und Escape (schließt die Palette). Sorgt dafür, dass der aktive Eintrag sichtbar bleibt (`scrollIntoView`).
-    - Verwendet `CommandItem` zur Darstellung jedes Befehls, inklusive Icon und optionalem Shortcut-Hinweis.
-    - Registriert einen globalen Event Listener, um die Palette mit ⌘K / Strg+K zu öffnen.
-    - Fokussiert automatisch das Suchfeld beim Öffnen.
-3.  **Befehlsdefinition (`Command` Interface):** Jeder Befehl hat eine `id`, ein `label` (aus `t()` geholt), ein `icon` (React-Komponente), eine `category`, eine optionale `shortcut`-Anzeige und eine `action`-Funktion, die beim Auswählen ausgeführt wird.
-4.  **Aktionen:** Die `action`-Funktionen der Befehle führen die entsprechende Logik aus (z.B. Navigation mittels `window.location.href`, Theme-Änderung über `setTheme`, Sprachwechsel). Nach der Ausführung wird oft `close()` aufgerufen und der Befehl über `handleCommandSelect(id)` (was `addRecentCommand` aufruft) zu den Favoriten hinzugefügt.
+1. **Zustand Store (`useCommandPaletteStore`):**
+   - Verwaltet den `isOpen`-Zustand der Palette.
+   - Speichert eine Liste der `recentCommands` (IDs der zuletzt ausgeführten Befehle) persistent im Local Storage (`command-palette-storage`). Die Liste ist auf die letzten 5 Befehle begrenzt.
+   - Bietet Aktionen `open`, `close` und `addRecentCommand`.
+2. **Command Palette Komponente (`CommandPalette/index.tsx`):**
+   - Verwendet den `useCommandPaletteStore`, um den offenen/geschlossenen Zustand zu steuern.
+   - Definiert eine Liste aller verfügbaren `allCommands` (Navigation, Aktionen wie Theme-Wechsel, Sprachwechsel). Die Labels werden dynamisch mittels `useTranslation('command')` übersetzt.
+   - Implementiert die Suchlogik: Filtert `allCommands` basierend auf der Eingabe im Suchfeld (case-insensitive).
+   - Zeigt zuerst die `recentCommands` an (aus dem Store geladen und mit `allCommands` abgeglichen), wenn die Suche leer ist.
+   - Gruppiert die gefilterten Befehle nach Kategorien (`navigation`, `action`, `settings`).
+   - Verwaltet den `activeIndex` zur Tastaturnavigation (Pfeiltasten Hoch/Runter) innerhalb der sichtbaren Befehlsliste.
+   - Implementiert die Tastatur-Handler (`handleKeyDown`) für Pfeiltasten, Enter (führt den aktiven Befehl aus) und Escape (schließt die Palette). Sorgt dafür, dass der aktive Eintrag sichtbar bleibt (`scrollIntoView`).
+   - Verwendet `CommandItem` zur Darstellung jedes Befehls, inklusive Icon und optionalem Shortcut-Hinweis.
+   - Registriert einen globalen Event Listener, um die Palette mit ⌘K / Strg+K zu öffnen.
+   - Fokussiert automatisch das Suchfeld beim Öffnen.
+3. **Befehlsdefinition (`Command` Interface):** Jeder Befehl hat eine `id`, ein `label` (aus `t()` geholt), ein `icon` (React-Komponente), eine `category`, eine optionale `shortcut`-Anzeige und eine `action`-Funktion, die beim Auswählen ausgeführt wird.
+4. **Aktionen:** Die `action`-Funktionen der Befehle führen die entsprechende Logik aus (z.B. Navigation mittels `window.location.href`, Theme-Änderung über `setTheme`, Sprachwechsel). Nach der Ausführung wird oft `close()` aufgerufen und der Befehl über `handleCommandSelect(id)` (was `addRecentCommand` aufruft) zu den Favoriten hinzugefügt.
 
 ## Best Practices & Verwendung
 

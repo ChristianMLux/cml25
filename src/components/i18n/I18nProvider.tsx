@@ -1,7 +1,8 @@
-"use client";
-import { useEffect, useState } from "react";
-import { I18nextProvider } from "react-i18next";
-import i18n from "@/lib/i18n";
+'use client';
+import { useEffect, useState } from 'react';
+import { I18nextProvider } from 'react-i18next';
+
+import i18n from '@/lib/i18n';
 
 interface I18nProviderProps {
   children: React.ReactNode;
@@ -13,7 +14,7 @@ export default function I18nProvider({ children, locale }: I18nProviderProps) {
   useEffect(() => {
     if (i18n.language !== locale) {
       i18n.changeLanguage(locale).catch((error) => {
-        console.error("Fehler beim Ändern der Sprache:", error);
+        console.error('Fehler beim Ändern der Sprache:', error);
       });
     }
 

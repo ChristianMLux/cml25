@@ -1,11 +1,12 @@
-import { Suspense } from "react";
-import { getServerTranslation } from "@/lib/getServerTranslation";
-import { getProjects } from "@/lib/data";
-import ProjectsGrid from "@/components/sections/Projects/ProjectsGrid";
-import ProjectsFilter from "@/components/sections/Projects/ProjectsFilter";
-import { ProjectsGridSkeleton } from "@/components/ui/Loading";
-import { LoadingProvider } from "@/components/ui/Loading";
-import { Project } from "@/types";
+import { Suspense } from 'react';
+
+import ProjectsFilter from '@/components/sections/Projects/ProjectsFilter';
+import ProjectsGrid from '@/components/sections/Projects/ProjectsGrid';
+import { ProjectsGridSkeleton } from '@/components/ui/Loading';
+import { LoadingProvider } from '@/components/ui/Loading';
+import { getProjects } from '@/lib/data';
+import { getServerTranslation } from '@/lib/getServerTranslation';
+import { Project } from '@/types';
 
 export async function generateMetadata({
   params,
@@ -13,11 +14,11 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getServerTranslation(locale, "common");
+  const t = await getServerTranslation(locale, 'common');
 
   return {
-    title: `${t("metadata.baseTitle", "Portfolio")} | ${t("metadata.projectsTitleSuffix", "Projects")}`,
-    description: t("metadata.projectsDescription", "Explore my projects..."),
+    title: `${t('metadata.baseTitle', 'Portfolio')} | ${t('metadata.projectsTitleSuffix', 'Projects')}`,
+    description: t('metadata.projectsDescription', 'Explore my projects...'),
   };
 }
 

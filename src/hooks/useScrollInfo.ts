@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 interface ScrollInfo {
   scrollY: number;
   scrollYProgress: number;
-  direction: "up" | "down" | null;
+  direction: 'up' | 'down' | null;
   isAtTop: boolean;
   isAtBottom: boolean;
   scrollHeight: number;
@@ -39,7 +39,7 @@ export function useScrollInfo(): ScrollInfo {
       setScrollInfo({
         scrollY,
         scrollYProgress,
-        direction: scrollY > lastScrollY ? "down" : "up",
+        direction: scrollY > lastScrollY ? 'down' : 'up',
         isAtTop: scrollY <= 0,
         isAtBottom: Math.ceil(scrollY + viewportHeight) >= scrollHeight,
         scrollHeight,
@@ -51,12 +51,12 @@ export function useScrollInfo(): ScrollInfo {
 
     updateScrollInfo();
 
-    window.addEventListener("scroll", updateScrollInfo, { passive: true });
-    window.addEventListener("resize", updateScrollInfo, { passive: true });
+    window.addEventListener('scroll', updateScrollInfo, { passive: true });
+    window.addEventListener('resize', updateScrollInfo, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", updateScrollInfo);
-      window.removeEventListener("resize", updateScrollInfo);
+      window.removeEventListener('scroll', updateScrollInfo);
+      window.removeEventListener('resize', updateScrollInfo);
     };
   }, []);
 

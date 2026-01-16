@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { Skeleton } from "./Skeleton";
+import { motion } from 'framer-motion';
+
+import { Skeleton } from './Skeleton';
 
 interface ProjectGallerySkeletonProps {
   dotsCount?: number;

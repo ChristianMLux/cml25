@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import { forwardRef } from "react";
-import { Command } from "./index";
+import { forwardRef } from 'react';
+
+import { Command } from './index';
 
 interface CommandItemProps {
   command: Command;
@@ -20,17 +21,17 @@ export const CommandItem = forwardRef<HTMLLIElement, CommandItemProps>(
         className={`
           flex items-center px-3 py-2 rounded-md cursor-pointer transition-colors
           ${
-            isActive
-              ? "bg-blue-500 text-white"
-              : "hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100"
-          }
+      isActive
+        ? 'bg-blue-500 text-white'
+        : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100'
+      }
         `}
         aria-selected={isActive}
         role="option"
       >
         <div className="flex items-center flex-1">
           <span
-            className={`mr-3 ${isActive ? "text-white" : "text-gray-500 dark:text-gray-400"}`}
+            className={`mr-3 ${isActive ? 'text-white' : 'text-gray-500 dark:text-gray-400'}`}
           >
             <Icon className="h-5 w-5" />
           </span>
@@ -42,8 +43,8 @@ export const CommandItem = forwardRef<HTMLLIElement, CommandItemProps>(
             <kbd
               className={`px-1.5 py-0.5 rounded ${
                 isActive
-                  ? "bg-blue-600 text-blue-100"
-                  : "bg-gray-200 dark:bg-gray-600 text-gray-500 dark:text-gray-400"
+                  ? 'bg-blue-600 text-blue-100'
+                  : 'bg-gray-200 dark:bg-gray-600 text-gray-500 dark:text-gray-400'
               }`}
             >
               {command.shortcut}
@@ -55,4 +56,4 @@ export const CommandItem = forwardRef<HTMLLIElement, CommandItemProps>(
   },
 );
 
-CommandItem.displayName = "CommandItem";
+CommandItem.displayName = 'CommandItem';

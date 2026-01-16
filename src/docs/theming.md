@@ -18,18 +18,18 @@ Dieses Dokument beschreibt die Best Practices für das Theming-System (Hell-/Dun
 
 ## Setup & Konzepte
 
-1.  **Tailwind Konfiguration:** `darkMode: 'class'` in `tailwind.config.ts` weist Tailwind an, Dark-Mode-Stile anzuwenden, wenn das `<html>`-Element die Klasse `dark` hat.
-2.  **CSS Variablen:** In `globals.css` werden Farbvariablen für `:root` (Light Mode Standard) und `.dark` definiert. Diese Variablen werden von Tailwind-Komponenten (wie Button, Card etc.) und benutzerdefinierten Stilen verwendet. Beispiel: `--background`, `--foreground`, `--primary`, `--border`.
-3.  **Zustand Store (`themeStore.ts`):**
-    - Speichert den aktuellen Theme-Zustand (`theme`: 'light', 'dark' oder 'system').
-    - Verwendet `zustand/middleware/persist`, um die Auswahl des Benutzers im Local Storage zu speichern (`theme-storage`).
-    - Bietet eine `setTheme`-Aktion zum Ändern des Themes.
-4.  **Theme Provider (`ThemeProvider.tsx`):**
-    - Liest den Theme-Zustand aus dem `themeStore`.
-    - Fügt die Klasse `dark` oder `light` zum `<html>`-Element hinzu oder entfernt sie, basierend auf dem ausgewählten Theme und der Systempräferenz (wenn `theme === 'system'`).
-    - Fügt einen Event Listener hinzu, um auf Änderungen des System-Themes (`prefers-color-scheme: dark`) zu reagieren und die Klasse entsprechend anzupassen, wenn `theme === 'system'`.
-    - Stellt den Theme-Zustand und die `setTheme`-Funktion über den `useTheme`-Hook bereit.
-5.  **Theme Umschaltung:** Komponenten wie der Header verwenden den `useTheme`-Hook (indirekt über `useNavigation`), um das aktuelle Theme zu lesen und die `setTheme`-Funktion aufzurufen, um es zu ändern.
+1. **Tailwind Konfiguration:** `darkMode: 'class'` in `tailwind.config.ts` weist Tailwind an, Dark-Mode-Stile anzuwenden, wenn das `<html>`-Element die Klasse `dark` hat.
+2. **CSS Variablen:** In `globals.css` werden Farbvariablen für `:root` (Light Mode Standard) und `.dark` definiert. Diese Variablen werden von Tailwind-Komponenten (wie Button, Card etc.) und benutzerdefinierten Stilen verwendet. Beispiel: `--background`, `--foreground`, `--primary`, `--border`.
+3. **Zustand Store (`themeStore.ts`):**
+   - Speichert den aktuellen Theme-Zustand (`theme`: 'light', 'dark' oder 'system').
+   - Verwendet `zustand/middleware/persist`, um die Auswahl des Benutzers im Local Storage zu speichern (`theme-storage`).
+   - Bietet eine `setTheme`-Aktion zum Ändern des Themes.
+4. **Theme Provider (`ThemeProvider.tsx`):**
+   - Liest den Theme-Zustand aus dem `themeStore`.
+   - Fügt die Klasse `dark` oder `light` zum `<html>`-Element hinzu oder entfernt sie, basierend auf dem ausgewählten Theme und der Systempräferenz (wenn `theme === 'system'`).
+   - Fügt einen Event Listener hinzu, um auf Änderungen des System-Themes (`prefers-color-scheme: dark`) zu reagieren und die Klasse entsprechend anzupassen, wenn `theme === 'system'`.
+   - Stellt den Theme-Zustand und die `setTheme`-Funktion über den `useTheme`-Hook bereit.
+5. **Theme Umschaltung:** Komponenten wie der Header verwenden den `useTheme`-Hook (indirekt über `useNavigation`), um das aktuelle Theme zu lesen und die `setTheme`-Funktion aufzurufen, um es zu ändern.
 
 ## Best Practices & Verwendung
 

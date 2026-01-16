@@ -1,43 +1,44 @@
-"use client";
+'use client';
 
-import { HTMLAttributes } from "react";
-import { cn } from "@/lib/utils";
+import { HTMLAttributes } from 'react';
+
+import { cn } from '@/lib/utils';
 
 export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
   width?: string;
   height?: string;
-  rounded?: "none" | "sm" | "md" | "lg" | "xl" | "full";
-  animation?: "pulse" | "shimmer" | "none";
+  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  animation?: 'pulse' | 'shimmer' | 'none';
   isLoading?: boolean;
   children?: React.ReactNode;
 }
 
 const roundedClasses = {
-  none: "",
-  sm: "rounded-sm",
-  md: "rounded-md",
-  lg: "rounded-lg",
-  xl: "rounded-xl",
-  full: "rounded-full",
+  none: '',
+  sm: 'rounded-sm',
+  md: 'rounded-md',
+  lg: 'rounded-lg',
+  xl: 'rounded-xl',
+  full: 'rounded-full',
 };
 
 export function Skeleton({
   className,
   width,
   height,
-  rounded = "md",
-  animation = "pulse",
+  rounded = 'md',
+  animation = 'pulse',
   isLoading = true,
   children,
   style,
   ...props
 }: SkeletonProps) {
   const animationClass =
-    animation === "pulse"
-      ? "animate-pulse"
-      : animation === "shimmer"
-        ? "animate-shimmer"
-        : "";
+    animation === 'pulse'
+      ? 'animate-pulse'
+      : animation === 'shimmer'
+        ? 'animate-shimmer'
+        : '';
 
   if (!isLoading) {
     return <>{children}</>;
@@ -46,7 +47,7 @@ export function Skeleton({
   return (
     <div
       className={cn(
-        "bg-gray-200 dark:bg-gray-700",
+        'bg-gray-200 dark:bg-gray-700',
         roundedClasses[rounded],
         animationClass,
         className,
@@ -62,8 +63,8 @@ export function Skeleton({
   );
 }
 
-if (typeof window !== "undefined") {
-  const style = document.createElement("style");
+if (typeof window !== 'undefined') {
+  const style = document.createElement('style');
   style.textContent = `
     @keyframes shimmer {
       0% {
