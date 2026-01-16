@@ -18,8 +18,7 @@ const badgeVariants = cva(
           "border-transparent bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-700 dark:text-green-100 dark:hover:bg-green-600",
         warning:
           "border-transparent bg-yellow-100 text-yellow-800 hover:bg-yellow-200 dark:bg-yellow-700 dark:text-yellow-100 dark:hover:bg-yellow-600",
-        info:
-          "border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-700 dark:text-blue-100 dark:hover:bg-blue-600",
+        info: "border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-700 dark:text-blue-100 dark:hover:bg-blue-600",
       },
       size: {
         default: "px-2.5 py-0.5 text-xs",
@@ -35,7 +34,7 @@ const badgeVariants = cva(
       size: "default",
       removable: false,
     },
-  }
+  },
 );
 
 export interface BadgeProps
@@ -44,17 +43,20 @@ export interface BadgeProps
   onRemove?: () => void;
 }
 
-function Badge({ 
-  className, 
-  variant, 
-  size, 
+function Badge({
+  className,
+  variant,
+  size,
   removable,
   onRemove,
   children,
-  ...props 
+  ...props
 }: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant, size, removable }), className)} {...props}>
+    <div
+      className={cn(badgeVariants({ variant, size, removable }), className)}
+      {...props}
+    >
       {children}
       {removable && onRemove && (
         <button

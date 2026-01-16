@@ -48,7 +48,7 @@ export default function OptimizedImage({
       className={cn(
         aspectRatioClass[aspectRatio],
         "relative overflow-hidden",
-        className
+        className,
       )}
     >
       <Image
@@ -65,7 +65,7 @@ export default function OptimizedImage({
           objectFit === "cover" && "object-cover",
           objectFit === "contain" && "object-contain",
           objectFit === "fill" && "object-fill",
-          isLoading ? "opacity-0" : "opacity-100"
+          isLoading ? "opacity-0" : "opacity-100",
         )}
         onLoadingComplete={() => setIsLoading(false)}
         onError={() => {

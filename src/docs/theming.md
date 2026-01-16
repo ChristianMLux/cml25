@@ -71,6 +71,7 @@ export default function Header({ locale }: HeaderProps) {
 const { theme, toggleTheme, t } = useNavigation();
 
 return (
+
 <header>
 {/_ ... _/}
 <Button
@@ -91,6 +92,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
 const { locale } = await params;
 return (
 // suppressHydrationWarning ist wichtig bei Verwendung von next-themes
+
 <html lang={locale} suppressHydrationWarning>
 <body className="min-h-screen bg-white dark:bg-gray-900 ...">
 <ThemeProvider> {/_ Hier einbinden _/}

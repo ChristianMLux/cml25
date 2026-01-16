@@ -34,7 +34,7 @@ export function useLanguageSwitch() {
         console.error("Fehler beim Sprachwechsel:", error);
       }
     },
-    [i18n.language, router]
+    [i18n.language, router],
   );
 
   return {

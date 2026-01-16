@@ -40,7 +40,7 @@ export async function generateMetadata({
     title: t("common:metadata.baseTitle", "Portfolio"),
     description: t(
       "common:metadata.baseDescription",
-      "My personal portfolio as a developer."
+      "My personal portfolio as a developer.",
     ),
   };
 }

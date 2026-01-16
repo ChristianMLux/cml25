@@ -64,5 +64,5 @@ exports.sendContactNotification = functions.firestore.onDocumentCreated(
       console.error("Fehler beim Senden der E-Mail:", error);
       return null;
     }
-  }
+  },
 );

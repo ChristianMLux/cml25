@@ -38,7 +38,7 @@ export function LoadingProvider({ children }: LoadingProviderProps) {
 
   const isLoading = useCallback(
     (id = "global") => loadingStates[id] || false,
-    [loadingStates]
+    [loadingStates],
   );
 
   const isAnyLoading = Object.values(loadingStates).some(Boolean);

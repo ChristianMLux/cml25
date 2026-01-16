@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Projects: Public Read, Auth Write
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create, update, delete: if isAuthenticated();
+    }
+
+    // Keep existing rules for contacts if any (User provided snippet had this)
+    match /contacts/{document=**} {
+      allow create: if true;
+      allow read, update, delete: if false; 
+    }
+  }
+}

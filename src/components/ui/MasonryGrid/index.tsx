@@ -51,7 +51,7 @@ export function MasonryGrid({
 
     const newColumns: ReactNode[][] = Array.from(
       { length: responsiveColumnCount },
-      () => []
+      () => [],
     );
 
     children.forEach((child, index) => {

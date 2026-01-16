@@ -41,7 +41,7 @@ const ProjectGallery = dynamic(
   {
     ssr: false,
     loading: () => <ProjectGallerySkeleton />,
-  }
+  },
 );
 ```
 

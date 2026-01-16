@@ -112,7 +112,7 @@ export default function AboutPage({ params }: PageParams) {
         <p className="text-lg md:text-xl max-w-3xl mx-auto text-muted-foreground">
           {t(
             "pageSubtitle",
-            "From forum signatures to developing cutting-edge web applications, my journey into technology has been characterised by curiosity, play and a passion for creating digital experiences."
+            "From forum signatures to developing cutting-edge web applications, my journey into technology has been characterised by curiosity, play and a passion for creating digital experiences.",
           )}
         </p>
       </motion.div>
@@ -130,19 +130,19 @@ export default function AboutPage({ params }: PageParams) {
           <p className="mb-4 text-gray-800 dark:text-gray-300">
             {t(
               "aboutSection.paragraph1",
-              "I have been fascinated by computers and technology since I was young. My journey started with customising forum signatures and templates, which sparked my interest in web development and design."
+              "I have been fascinated by computers and technology since I was young. My journey started with customising forum signatures and templates, which sparked my interest in web development and design.",
             )}
           </p>
           <p className="mb-4 text-gray-800 dark:text-gray-300">
             {t(
               "aboutSection.paragraph2",
-              "Gaming has always been a significant part of my life and has influenced my approach to problem-solving and creativity in technology. From building simple mods to developing full applications, I've brought that gaming mindset of persistence and innovation."
+              "Gaming has always been a significant part of my life and has influenced my approach to problem-solving and creativity in technology. From building simple mods to developing full applications, I've brought that gaming mindset of persistence and innovation.",
             )}
           </p>
           <p className="text-gray-800 dark:text-gray-300">
             {t(
               "aboutSection.paragraph3",
-              "Today, I combine my technical skills with creative thinking to build solutions that are not only functional but engaging and intuitive. This portfolio represents the culmination of my experiences and showcases the projects I'm most proud of."
+              "Today, I combine my technical skills with creative thinking to build solutions that are not only functional but engaging and intuitive. This portfolio represents the culmination of my experiences and showcases the projects I'm most proud of.",
             )}
           </p>
         </motion.div>
@@ -211,7 +211,7 @@ export default function AboutPage({ params }: PageParams) {
         <p className="text-lg max-w-2xl mx-auto mb-8 text-muted-foreground">
           {t(
             "connectSection.description",
-            "Interested in collaborating or just want to chat about the latest in tech or gaming? Feel free to reach out through any of the channels below."
+            "Interested in collaborating or just want to chat about the latest in tech or gaming? Feel free to reach out through any of the channels below.",
           )}
         </p>
         <div className="flex justify-center space-x-6">

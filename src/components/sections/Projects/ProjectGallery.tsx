@@ -27,7 +27,7 @@ export default function ProjectGallery({
     setMounted(true);
     setLoading();
     const filteredImages = images.filter(
-      (img) => img && typeof img === "string"
+      (img) => img && typeof img === "string",
     );
     if (filteredImages.length === 0) {
       setValidImages(["/placeholder-project.jpg"]);
@@ -42,7 +42,7 @@ export default function ProjectGallery({
           img.onerror = () => resolve("/placeholder-project.jpg");
           img.src = src;
         });
-      })
+      }),
     ).then(() => {
       setSuccess();
     });
@@ -68,7 +68,7 @@ export default function ProjectGallery({
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? validImages.length - 1 : prevIndex - 1
+      prevIndex === 0 ? validImages.length - 1 : prevIndex - 1,
     );
   };
 

@@ -20,7 +20,7 @@ export async function getServerTranslation(locale: string, namespace: string) {
       "public",
       "locales",
       locale,
-      `${namespace}.json`
+      `${namespace}.json`,
     );
     const translations = JSON.parse(fs.readFileSync(filePath, "utf8"));
 
@@ -45,7 +45,7 @@ export async function getServerTranslation(locale: string, namespace: string) {
   } catch (error) {
     console.error(
       `Fehler beim Laden der Übersetzungen für ${locale}/${namespace}:`,
-      error
+      error,
     );
     return (key: string) => key;
   }

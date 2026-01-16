@@ -49,7 +49,7 @@ export function Skeleton({
         "bg-gray-200 dark:bg-gray-700",
         roundedClasses[rounded],
         animationClass,
-        className
+        className,
       )}
       style={{
         width,

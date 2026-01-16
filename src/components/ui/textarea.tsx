@@ -18,13 +18,13 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           resize === "vertical" && "resize-y",
           resize === "horizontal" && "resize-x",
           resize === "both" && "resize",
-          className
+          className,
         )}
         ref={ref}
         {...props}
       />
     );
-  }
+  },
 );
 Textarea.displayName = "Textarea";
 

@@ -13,6 +13,11 @@ export interface Project {
   category: Category;
   tags: string[];
   link: string | undefined;
+  // Auto-Sync Features
+  isFeatured?: boolean; // Show on Main Page Showcase
+  isVisible?: boolean; // Show on /projects page
+  isPrivate?: boolean; // If true, hide code links
+  source?: "local" | "firestore"; // Origin
 }
 
 export type Theme = "light" | "dark" | "system";

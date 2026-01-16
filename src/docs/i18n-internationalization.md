@@ -67,6 +67,7 @@ export default function Header({ locale }: { locale: string }) {
 const { t } = useTranslation("common");
 
 return (
+
 <nav>
 <LocalizedLink href="/projects">{t('navigation.projects')}</LocalizedLink>
 <LocalizedLink href="/about">{t('navigation.about')}</LocalizedLink>

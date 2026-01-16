@@ -49,7 +49,7 @@ export default function MobileNav({ locale, onClose }: MobileNavProps) {
               href={href}
               className={cn(
                 "text-lg font-medium transition-colors hover:text-primary",
-                pathname === href ? "text-primary" : "text-foreground/60"
+                pathname === href ? "text-primary" : "text-foreground/60",
               )}
               onClick={onClose}
             >

@@ -28,7 +28,8 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
     const timer = setTimeout(() => {
       if (category && category !== "all") {
         const filtered = initialProjects.filter(
-          (project) => project.category.toLowerCase() === category.toLowerCase()
+          (project) =>
+            project.category.toLowerCase() === category.toLowerCase(),
         );
         setProjects(filtered);
       } else {

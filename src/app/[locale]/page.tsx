@@ -22,18 +22,22 @@ export async function generateMetadata({
   };
 }
 
+import { getProjects } from "@/lib/data";
+
 export default async function HomePage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const projects = await getProjects(locale);
+  const featuredProjects = projects.filter((p) => p.isFeatured);
 
   return (
     <>
       <Hero locale={locale} />
       <About locale={locale} />
-      <Projects locale={locale} />
+      <Projects locale={locale} projects={featuredProjects} />
       <Contact locale={locale} />
     </>
   );

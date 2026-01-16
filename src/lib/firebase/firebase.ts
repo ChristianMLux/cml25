@@ -29,6 +29,8 @@ if (typeof window !== "undefined") {
     });
 }
 
+import { getStorage } from "firebase/storage";
+
 const db = getFirestore(app);
 
 export { app, analytics, db };

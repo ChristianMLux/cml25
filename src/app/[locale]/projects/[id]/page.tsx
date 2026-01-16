@@ -50,11 +50,11 @@ export default async function ProjectPage({ params }: PageParams) {
     const relatedProjects = await getRelatedProjects(
       project.category,
       project.id,
-      locale
+      locale,
     );
 
     const projectImages = [project.imageUrl, ...(project.images || [])].filter(
-      Boolean
+      Boolean,
     );
 
     return (

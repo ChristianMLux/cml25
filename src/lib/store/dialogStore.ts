@@ -53,7 +53,7 @@ export function useDialog() {
   const alert = (
     title: string,
     content: ReactNode,
-    options?: Partial<DialogOptions>
+    options?: Partial<DialogOptions>,
   ) => {
     open({
       title,
@@ -71,7 +71,7 @@ export function useDialog() {
     title: string,
     content: ReactNode,
     onConfirm: () => void,
-    options?: Partial<DialogOptions>
+    options?: Partial<DialogOptions>,
   ) => {
     open({
       title,

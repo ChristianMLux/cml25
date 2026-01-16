@@ -45,7 +45,7 @@ export default function Header({ locale }: HeaderProps) {
         "fixed top-0 z-50 w-full transition-all duration-300",
         isScrolled
           ? "bg-white/80 backdrop-blur-md dark:bg-gray-900/80"
-          : "bg-transparent"
+          : "bg-transparent",
       )}
     >
       <nav className="container mx-auto px-6 py-4">
@@ -64,7 +64,7 @@ export default function Header({ locale }: HeaderProps) {
                 href={href}
                 className={cn(
                   "text-sm font-medium transition-colors hover:text-primary",
-                  pathname === href ? "text-primary" : "text-foreground/60"
+                  pathname === href ? "text-primary" : "text-foreground/60",
                 )}
               >
                 {label}

@@ -28,12 +28,12 @@ export default function ContactForm({ locale }: ContactFormProps) {
       .string()
       .min(
         2,
-        t("validation.nameMin", "Name muss mindestens 2 Zeichen lang sein")
+        t("validation.nameMin", "Name muss mindestens 2 Zeichen lang sein"),
       ),
     email: z
       .string()
       .email(
-        t("validation.emailInvalid", "Gültige E-Mail-Adresse erforderlich")
+        t("validation.emailInvalid", "Gültige E-Mail-Adresse erforderlich"),
       ),
     subject: z
       .string()
@@ -41,8 +41,8 @@ export default function ContactForm({ locale }: ContactFormProps) {
         3,
         t(
           "validation.subjectMin",
-          "Betreff muss mindestens 3 Zeichen lang sein"
-        )
+          "Betreff muss mindestens 3 Zeichen lang sein",
+        ),
       ),
     message: z
       .string()
@@ -50,15 +50,15 @@ export default function ContactForm({ locale }: ContactFormProps) {
         10,
         t(
           "validation.messageMin",
-          "Nachricht muss mindestens 10 Zeichen lang sein"
-        )
+          "Nachricht muss mindestens 10 Zeichen lang sein",
+        ),
       )
       .max(
         500,
         t(
           "validation.messageMax",
-          "Nachricht darf maximal 500 Zeichen lang sein"
-        )
+          "Nachricht darf maximal 500 Zeichen lang sein",
+        ),
       ),
   });
 
@@ -90,13 +90,13 @@ export default function ContactForm({ locale }: ContactFormProps) {
         <p className="py-4">
           {t(
             "success.message",
-            "Danke für deine Nachricht! Ich werde mich so schnell wie möglich bei dir melden."
+            "Danke für deine Nachricht! Ich werde mich so schnell wie möglich bei dir melden.",
           )}
         </p>,
         {
           size: "md",
           confirmText: t("success.button", "OK"),
-        }
+        },
       );
 
       reset();
@@ -109,7 +109,7 @@ export default function ContactForm({ locale }: ContactFormProps) {
           <p>
             {t(
               "error.message",
-              "Leider konnte deine Nachricht nicht gesendet werden. Bitte versuche es später noch einmal."
+              "Leider konnte deine Nachricht nicht gesendet werden. Bitte versuche es später noch einmal.",
             )}
           </p>
           <p className="text-sm text-red-600 dark:text-red-400 mt-2">
@@ -121,7 +121,7 @@ export default function ContactForm({ locale }: ContactFormProps) {
         {
           size: "md",
           confirmText: t("error.button", "Verstanden"),
-        }
+        },
       );
     } finally {
       setIsSubmitting(false);
@@ -213,7 +213,7 @@ export default function ContactForm({ locale }: ContactFormProps) {
             } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
             placeholder={t(
               "placeholders.message",
-              "Beschreibe dein Projekt..."
+              "Beschreibe dein Projekt...",
             )}
             {...register("message")}
           />

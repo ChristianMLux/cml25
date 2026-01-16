@@ -22,7 +22,7 @@ export default function ProjectsFilter() {
       params.set(name, value);
       return params.toString();
     },
-    [searchParams]
+    [searchParams],
   );
 
   const handleCategoryChange = (category: string) => {

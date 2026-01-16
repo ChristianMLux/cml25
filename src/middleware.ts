@@ -17,7 +17,7 @@ function isStaticResource(pathname: string): boolean {
 
 function hasLocalePrefix(pathname: string): boolean {
   return locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
 }
 

@@ -8,9 +8,10 @@ import { Project } from "@/types";
 
 interface ProjectsProps {
   locale: string;
+  projects: Project[];
 }
 
-export default function Projects({ locale }: ProjectsProps) {
+export default function Projects({ locale, projects }: ProjectsProps) {
   const { t, i18n } = useTranslation("projects");
   useEffect(() => {
     if (i18n.language !== locale) {
@@ -27,45 +28,10 @@ export default function Projects({ locale }: ProjectsProps) {
 
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const projectsData: Project[] = [
-    {
-      id: "1",
-      title: t("projects.spn-platform.title"),
-      description: t("projects.spn-platform.description"),
-      imageUrl: "/assets/images/projects/projects_spn_landing.jpg",
-      technologies: [
-        "Next.js",
-        "TypeScript",
-        "Tailwind CSS",
-        ".NET/C#",
-        "Azure",
-      ],
-      tags: ["Frontend", "Backend", "DevOps"],
-      category: "Web",
-      link: "https://www.sparepartsnow.de/",
-      images: [
-        "/assets/images/projects/projects_spn_landing.jpg",
-        "/assets/images/projects/projects_spn_product_example.jpg",
-      ],
-    },
-    {
-      id: "2",
-      title: t("projects.cml25.title"),
-      description: t("projects.cml25.description"),
-      imageUrl: "/assets/images/projects/projects_cml25_landing.jpg",
-      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
-      tags: ["Frontend", "Backend"],
-      category: "Web",
-      link: "https://cml25.netlify.app/",
-      images: [
-        "/assets/images/projects/projects_cml25_landing.jpg",
-        "/assets/images/projects/projects_cml25_about.jpg",
-      ],
-    },
-  ];
-
-  const filteredProjects = projectsData.filter((project) =>
-    activeCategory === "All" ? true : project.category === activeCategory
+  const filteredProjects = projects.filter((project) =>
+    activeCategory === "All"
+      ? true
+      : project.category.toLowerCase() === activeCategory.toLowerCase(),
   );
 
   return (

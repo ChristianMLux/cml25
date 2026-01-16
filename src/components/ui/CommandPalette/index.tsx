@@ -150,7 +150,7 @@ export default function CommandPalette() {
   ];
 
   const filteredCommands = allCommands.filter((command) =>
-    command.label.toLowerCase().includes(search.toLowerCase())
+    command.label.toLowerCase().includes(search.toLowerCase()),
   );
 
   const recentCommandObjects = recentCommands
@@ -177,7 +177,7 @@ export default function CommandPalette() {
   const isCommandActive = (
     command: Command,
     categoryIndex: number,
-    section: "recent" | "filtered"
+    section: "recent" | "filtered",
   ) => {
     if (navigableCommands.length === 0) return false;
 
@@ -201,13 +201,13 @@ export default function CommandPalette() {
       case "ArrowDown":
         e.preventDefault();
         setActiveIndex((prev) =>
-          prev < navigableCommands.length - 1 ? prev++ : 0
+          prev < navigableCommands.length - 1 ? prev++ : 0,
         );
         break;
       case "ArrowUp":
         e.preventDefault();
         setActiveIndex((prev) =>
-          prev > 0 ? prev - 1 : navigableCommands.length - 1
+          prev > 0 ? prev - 1 : navigableCommands.length - 1,
         );
         break;
       case "Enter":
@@ -231,11 +231,11 @@ export default function CommandPalette() {
         e.preventDefault();
         if (e.key === "ArrowDown") {
           setActiveIndex((prev) =>
-            prev < navigableCommands.length - 1 ? prev + 1 : 0
+            prev < navigableCommands.length - 1 ? prev + 1 : 0,
           );
         } else {
           setActiveIndex((prev) =>
-            prev > 0 ? prev - 1 : navigableCommands.length - 1
+            prev > 0 ? prev - 1 : navigableCommands.length - 1,
           );
         }
       } else if (e.key === "Enter") {
@@ -295,7 +295,7 @@ export default function CommandPalette() {
 
   useEffect(() => {
     const activeElement = document.querySelector(
-      '.command-palette [aria-selected="true"]'
+      '.command-palette [aria-selected="true"]',
     ) as HTMLElement;
     if (activeElement) {
       activeElement.scrollIntoView({ block: "nearest" });
@@ -311,7 +311,7 @@ export default function CommandPalette() {
       acc[category].push(command);
       return acc;
     },
-    {}
+    {},
   );
 
   return (
@@ -388,7 +388,7 @@ export default function CommandPalette() {
                       isActive={isCommandActive(
                         command,
                         filteredCommands.indexOf(command),
-                        "filtered"
+                        "filtered",
                       )}
                       onClick={() => command.action()}
                     />

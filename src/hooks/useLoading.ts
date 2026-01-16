@@ -85,7 +85,7 @@ export function useLoading({
           });
       });
     },
-    [minDisplayTime]
+    [minDisplayTime],
   );
 
   const setLoading = useCallback(() => setState("loading"), []);

@@ -1,15 +1,15 @@
 {
-    "hero": {
-      "title": "Creative Developer & Designer",
-      "subtitle": "Ich entwickle schöne, funktionale und benutzerfreundliche digitale Erlebnisse mit modernen Technologien.",
-      "cta": {
-        "projects": "Projekte ansehen",
-        "contact": "Kontakt aufnehmen"
-      },
-      "imageAlt": "Portrait des Entwicklers"
+  "hero": {
+    "title": "Creative Developer & Designer",
+    "subtitle": "Ich entwickle schöne, funktionale und benutzerfreundliche digitale Erlebnisse mit modernen Technologien.",
+    "cta": {
+      "projects": "Projekte ansehen",
+      "contact": "Kontakt aufnehmen"
     },
-    "intro": {
-      "title": "Willkommen auf meiner Portfolio-Seite",
-      "subtitle": "Entdecke meine Projekte und Fähigkeiten"
-    }
+    "imageAlt": "Portrait des Entwicklers"
+  },
+  "intro": {
+    "title": "Willkommen auf meiner Portfolio-Seite",
+    "subtitle": "Entdecke meine Projekte und Fähigkeiten"
   }
+}
