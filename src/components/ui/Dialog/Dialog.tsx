@@ -6,7 +6,7 @@
  * @maintenance-pledge Uses HeadlessUI for accessibility; visuals are purely additive.
  */
 
-'use client';
+"use client";
 
 import {
   DialogTitle,
@@ -15,12 +15,12 @@ import {
   Description,
   TransitionChild,
   DialogPanel,
-} from '@headlessui/react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
-import { Fragment, ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
+} from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { Fragment, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
-export type DialogSize = 'sm' | 'md' | 'lg';
+export type DialogSize = "sm" | "md" | "lg";
 
 export interface DialogProps {
   isOpen: boolean;
@@ -36,9 +36,9 @@ export interface DialogProps {
 }
 
 const sizes: Record<DialogSize, string> = {
-  sm: 'max-w-md',
-  md: 'max-w-xl',
-  lg: 'max-w-2xl',
+  sm: "max-w-md",
+  md: "max-w-xl",
+  lg: "max-w-2xl",
 };
 
 export function Dialog({
@@ -47,11 +47,11 @@ export function Dialog({
   title,
   description,
   children,
-  size = 'md',
+  size = "md",
   showCloseButton = true,
   closeOnEsc = true,
   closeOnBackdropClick = true,
-  className = '',
+  className = "",
 }: DialogProps) {
   const { t } = useTranslation();
 
@@ -101,7 +101,7 @@ export function Dialog({
                     type="button"
                     className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyber-neon rounded-md p-1"
                     onClick={onClose}
-                    aria-label={t('common:dialog.close')}
+                    aria-label={t("common:dialog.close")}
                   >
                     <XMarkIcon className="h-6 w-6" />
                   </button>
@@ -122,7 +122,7 @@ export function Dialog({
                   </Description>
                 )}
 
-                <div className={`${title || description ? 'mt-4' : ''}`}>
+                <div className={`${title || description ? "mt-4" : ""}`}>
                   {children}
                 </div>
               </DialogPanel>

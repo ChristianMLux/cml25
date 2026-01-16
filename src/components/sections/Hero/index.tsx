@@ -6,13 +6,13 @@
  * @maintenance-pledge Semantic structure, accessible call-to-actions.
  */
 
-'use client';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+"use client";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-import { Button } from '@/components/ui/Button/button';
-import { useRouter } from '@/lib/i18n-navigation';
+import { Button } from "@/components/ui/Button/button";
+import { useRouter } from "@/lib/i18n-navigation";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -25,7 +25,7 @@ interface Props {
 }
 
 export default function Hero({ locale }: Props) {
-  const { t } = useTranslation(['common', 'hero']);
+  const { t } = useTranslation(["common", "hero"]);
   const router = useRouter();
 
   return (
@@ -41,7 +41,7 @@ export default function Hero({ locale }: Props) {
           >
             <span className="inline-flex items-center rounded-full bg-cyber-neon/10 border border-cyber-neon/30 px-4 py-1.5 text-sm font-medium text-cyber-neon">
               <span className="mr-2 h-2 w-2 rounded-full bg-cyber-neon animate-pulse" />
-              {t('hero:availableForWork')}
+              {t("hero:availableForWork")}
             </span>
           </motion.div>
 
@@ -53,13 +53,13 @@ export default function Hero({ locale }: Props) {
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
             <span className="text-foreground">
-              {t('hero:paragraph1_beforeHighlighted')}{' '}
+              {t("hero:paragraph1_beforeHighlighted")}{" "}
             </span>
             <span className="text-cyber-neon">
-              {t('hero:paragraph1_highlighted')}
-            </span>{' '}
+              {t("hero:paragraph1_highlighted")}
+            </span>{" "}
             <span className="text-foreground">
-              {t('hero:paragraph1_afterHighlighted')}{' '}
+              {t("hero:paragraph1_afterHighlighted")}{" "}
             </span>
           </motion.h1>
 
@@ -70,7 +70,7 @@ export default function Hero({ locale }: Props) {
             animate={fadeInUp.animate}
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
           >
-            <span>{t('hero:paragraph2')}</span>
+            <span>{t("hero:paragraph2")}</span>
           </motion.p>
 
           {/* CTA Buttons */}
@@ -84,9 +84,9 @@ export default function Hero({ locale }: Props) {
               variant="cyber"
               size="lg"
               className="px-7 py-4 w-[10rem] h-auto text-base"
-              onClick={() => router.push(locale + '/projects')}
+              onClick={() => router.push(locale + "/projects")}
             >
-              {t('hero:btn_projects')}
+              {t("hero:btn_projects")}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
 
@@ -94,9 +94,9 @@ export default function Hero({ locale }: Props) {
               variant="outline"
               size="lg"
               className="px-7 w-[10rem] h-auto text-base"
-              onClick={() => router.push(locale + '/contact')}
+              onClick={() => router.push(locale + "/contact")}
             >
-              {t('hero:btn_contact')}
+              {t("hero:btn_contact")}
             </Button>
           </motion.div>
         </div>

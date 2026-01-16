@@ -5,12 +5,12 @@
  * @maintenance-pledge Accessible, animated hover state.
  */
 
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
+import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
 
-import { LocalizedLink } from '@/lib/i18n-navigation';
+import { LocalizedLink } from "@/lib/i18n-navigation";
 
 interface BackButtonProps {
   href: string;

@@ -1,6 +1,6 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from "react";
 
-import { useCommandPaletteStore } from '@/lib/store/uiStore';
+import { useCommandPaletteStore } from "@/lib/store/uiStore";
 
 interface UseCommandPaletteOptions {
   enableGlobalShortcut?: boolean;
@@ -44,14 +44,14 @@ export function useCommandPalette(options: UseCommandPaletteOptions = {}) {
     if (!enableGlobalShortcut) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey)) {
+      if ((e.key === "k" || e.key === "K") && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         openCommandPalette();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [enableGlobalShortcut, openCommandPalette]);
 
   return {

@@ -1,24 +1,24 @@
-import { Inter, Outfit } from 'next/font/google';
-import { Suspense } from 'react';
-import { ReactNode } from 'react';
+import { Inter, Outfit } from "next/font/google";
+import { Suspense } from "react";
+import { ReactNode } from "react";
 
-import I18nProvider from '@/components/i18n/I18nProvider';
-import Footer from '@/components/layout/Footer';
-import Header from '@/components/layout/Header';
-import AnimatedBackground from '@/components/ui/AnimatedBackground/animated-background';
-import CommandPalette from '@/components/ui/CommandPalette';
-import { DialogProvider } from '@/components/ui/Dialog';
-import FooterSkeleton from '@/components/ui/Loading/Skeleton/FooterSkeleton';
-import HeaderSkeleton from '@/components/ui/Loading/Skeleton/HeaderSkeleton';
-import ScrollProgress from '@/components/ui/ScrollProgress/scroll-progress';
-import { ThemeProvider } from '@/components/ui/Theme/ThemeProvider';
-import { getServerTranslation } from '@/lib/getServerTranslation';
+import I18nProvider from "@/components/i18n/I18nProvider";
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import AnimatedBackground from "@/components/ui/AnimatedBackground/animated-background";
+import CommandPalette from "@/components/ui/CommandPalette";
+import { DialogProvider } from "@/components/ui/Dialog";
+import FooterSkeleton from "@/components/ui/Loading/Skeleton/FooterSkeleton";
+import HeaderSkeleton from "@/components/ui/Loading/Skeleton/HeaderSkeleton";
+import ScrollProgress from "@/components/ui/ScrollProgress/scroll-progress";
+import { ThemeProvider } from "@/components/ui/Theme/ThemeProvider";
+import { getServerTranslation } from "@/lib/getServerTranslation";
 
-import { locales } from '../../../config/i18n-config';
-import '../../styles/globals.css';
+import { locales } from "../../../config/i18n-config";
+import "../../styles/globals.css";
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -37,13 +37,13 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getServerTranslation(locale, 'common');
+  const t = await getServerTranslation(locale, "common");
 
   return {
-    title: t('common:metadata.baseTitle', 'Portfolio'),
+    title: t("common:metadata.baseTitle", "Portfolio"),
     description: t(
-      'common:metadata.baseDescription',
-      'My personal portfolio as a developer.',
+      "common:metadata.baseDescription",
+      "My personal portfolio as a developer.",
     ),
   };
 }
@@ -69,8 +69,8 @@ export default async function RootLayout({
               alwaysVisible={true}
               height={3}
               colors={{
-                light: 'bg-cyber-neon',
-                dark: 'bg-cyber-neon',
+                light: "bg-cyber-neon",
+                dark: "bg-cyber-neon",
               }}
               zIndex={60}
             />

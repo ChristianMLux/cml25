@@ -6,16 +6,16 @@
  * @maintenance-pledge Accessible, animated reveal, glassmorphic cards.
  */
 
-import { motion, useInView, Variants } from 'framer-motion';
-import Link from 'next/link';
-import React, { useRef, useState, useEffect } from 'react';
+import { motion, useInView, Variants } from "framer-motion";
+import Link from "next/link";
+import React, { useRef, useState, useEffect } from "react";
 
 export interface TimelineItem {
   id: string;
   year: string;
   title: string;
   description: string;
-  category: 'beginning' | 'education' | 'career' | 'project' | 'gaming';
+  category: "beginning" | "education" | "career" | "project" | "gaming";
   icon: string;
   details: string[];
   projectLink?: string;
@@ -24,11 +24,11 @@ export interface TimelineItem {
 
 // Cyber-noir category colors
 const categoryColors: Record<string, string> = {
-  beginning: 'bg-cyber-neon text-black',
-  education: 'bg-cyber-cyan text-black',
-  career: 'bg-cyber-pink text-black',
-  project: 'bg-cyber-warning text-black',
-  gaming: 'bg-[#a855f7] text-black', // Cyber purple for gaming
+  beginning: "bg-cyber-neon text-black",
+  education: "bg-cyber-cyan text-black",
+  career: "bg-cyber-pink text-black",
+  project: "bg-cyber-warning text-black",
+  gaming: "bg-[#a855f7] text-black", // Cyber purple for gaming
 };
 
 interface TimelineProps {
@@ -73,8 +73,8 @@ const TimelineItemComponent: React.FC<{
       setScreenWidth(window.innerWidth);
     }
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const isMobile = screenWidth < 768;
@@ -82,11 +82,11 @@ const TimelineItemComponent: React.FC<{
 
   const getBorderClass = () => {
     if (isVeryNarrow) {
-      return 'border-t-2';
+      return "border-t-2";
     } else if (isMobile) {
-      return 'border-l-2';
+      return "border-l-2";
     } else {
-      return isEven ? 'border-l-2' : 'border-r-2';
+      return isEven ? "border-l-2" : "border-r-2";
     }
   };
 
@@ -97,8 +97,8 @@ const TimelineItemComponent: React.FC<{
       whileHover={{ scale: item.projectLink ? 1.02 : 1 }}
       className={`bg-glass-low backdrop-blur-md p-6 rounded-xl ${borderClass} border-cyber-neon/50 transition-all duration-300 ease-spring ${
         item.projectLink
-          ? 'cursor-pointer hover:border-cyber-pink/70 hover:shadow-lg'
-          : 'hover:border-cyber-neon/70'
+          ? "cursor-pointer hover:border-cyber-pink/70 hover:shadow-lg"
+          : "hover:border-cyber-neon/70"
       }`}
     >
       {isVeryNarrow && (
@@ -150,22 +150,22 @@ const TimelineItemComponent: React.FC<{
       ref={itemRef}
       variants={itemVariants}
       initial="hidden"
-      animate={isInView ? 'show' : 'hidden'}
-      className={`relative ${isMobile ? 'mt-4' : '-my-8 md:-my-16'} hover:z-20 transition-all duration-300`}
+      animate={isInView ? "show" : "hidden"}
+      className={`relative ${isMobile ? "mt-4" : "-my-8 md:-my-16"} hover:z-20 transition-all duration-300`}
     >
       {!isVeryNarrow && (
         <div
           className={`absolute top-0 ${
-            isMobile ? 'left-0' : 'left-1/2 -ml-7'
+            isMobile ? "left-0" : "left-1/2 -ml-7"
           } z-20 flex items-center justify-center w-14 h-14 rounded-full border-2 bg-background border-cyber-neon shadow-lg shadow-cyber-neon/20`}
         >
           <span className="text-sm font-bold text-cyber-neon">{item.year}</span>
           {!isMobile && (
             <div
-              className={`absolute ${isEven ? 'right-[-1.12rem]' : 'left-[-1.12rem]'}`}
+              className={`absolute ${isEven ? "right-[-1.12rem]" : "left-[-1.12rem]"}`}
             >
               <div
-                className={`w-2 h-2 rounded-full bg-cyber-neon shadow-sm shadow-cyber-neon/50 ${isEven ? 'mr-1' : 'ml-1'}`}
+                className={`w-2 h-2 rounded-full bg-cyber-neon shadow-sm shadow-cyber-neon/50 ${isEven ? "mr-1" : "ml-1"}`}
               />
             </div>
           )}
@@ -175,26 +175,26 @@ const TimelineItemComponent: React.FC<{
       <div
         className={`flex flex-col md:flex-row ${
           isVeryNarrow
-            ? 'pl-0'
+            ? "pl-0"
             : isMobile
-              ? 'pl-20'
+              ? "pl-20"
               : isEven
-                ? 'md:flex-row'
-                : 'md:flex-row-reverse'
+                ? "md:flex-row"
+                : "md:flex-row-reverse"
         }`}
       >
         {!isVeryNarrow && (
           <div
-            className={`md:w-1/2 ${!isMobile && isEven ? 'md:pr-8' : 'md:pl-8'}`}
+            className={`md:w-1/2 ${!isMobile && isEven ? "md:pr-8" : "md:pl-8"}`}
           />
         )}
         <div
           className={`${
             isVeryNarrow
-              ? 'w-full'
+              ? "w-full"
               : isMobile
-                ? 'w-full'
-                : `md:w-1/2 ${isEven ? 'md:pl-10' : 'md:pr-10'}`
+                ? "w-full"
+                : `md:w-1/2 ${isEven ? "md:pl-10" : "md:pr-10"}`
           } z-10`}
         >
           {item.projectLink ? (
@@ -222,8 +222,8 @@ const Timeline: React.FC<TimelineProps> = ({ items, startLeft = true }) => {
       setScreenWidth(window.innerWidth);
     }
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   if (!isMounted || !items || items.length === 0) {
@@ -242,7 +242,7 @@ const Timeline: React.FC<TimelineProps> = ({ items, startLeft = true }) => {
       {!isVeryNarrow && (
         <div
           className={`absolute ${
-            screenWidth < 768 ? 'left-7 mt-10' : 'left-1/2 ml-0'
+            screenWidth < 768 ? "left-7 mt-10" : "left-1/2 ml-0"
           } top-0 w-0.5 bg-gradient-to-b from-transparent via-cyber-neon/50 to-cyber-neon/50 h-8 z-0`}
         />
       )}
@@ -252,8 +252,8 @@ const Timeline: React.FC<TimelineProps> = ({ items, startLeft = true }) => {
         <div
           className={`absolute ${
             screenWidth < 768
-              ? 'left-7 mb-[10rem] bottom-[4rem]'
-              : 'left-1/2 ml-0 bottom-[10rem]'
+              ? "left-7 mb-[10rem] bottom-[4rem]"
+              : "left-1/2 ml-0 bottom-[10rem]"
           } top-8 w-0.5 bg-cyber-neon/30 z-0`}
         />
       )}

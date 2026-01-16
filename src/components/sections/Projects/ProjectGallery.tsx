@@ -1,10 +1,10 @@
-'use client';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
+"use client";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 
-import { ProjectGallerySkeleton } from '@/components/ui/Loading';
-import { useLoading } from '@/hooks/useLoading';
+import { ProjectGallerySkeleton } from "@/components/ui/Loading";
+import { useLoading } from "@/hooks/useLoading";
 
 interface ProjectGalleryProps {
   images: string[];
@@ -15,7 +15,7 @@ interface ProjectGalleryProps {
 export default function ProjectGallery({
   images = [],
   maxHeight = 800,
-  aspectRatio = '16/9',
+  aspectRatio = "16/9",
 }: ProjectGalleryProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
@@ -28,19 +28,19 @@ export default function ProjectGallery({
     setMounted(true);
     setLoading();
     const filteredImages = images.filter(
-      (img) => img && typeof img === 'string',
+      (img) => img && typeof img === "string",
     );
     if (filteredImages.length === 0) {
-      setValidImages(['/placeholder-project.jpg']);
+      setValidImages(["/placeholder-project.jpg"]);
     } else {
       setValidImages(filteredImages);
     }
     Promise.all(
       filteredImages.map((src) => {
         return new Promise((resolve) => {
-          const img = document.createElement('img');
+          const img = document.createElement("img");
           img.onload = () => resolve(src);
-          img.onerror = () => resolve('/placeholder-project.jpg');
+          img.onerror = () => resolve("/placeholder-project.jpg");
           img.src = src;
         });
       }),
@@ -101,7 +101,7 @@ export default function ProjectGallery({
                 style={{ maxHeight: `${maxHeight}px` }}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.src = '/placeholder-project.jpg';
+                  target.src = "/placeholder-project.jpg";
                 }}
               />
             </div>
@@ -156,8 +156,8 @@ export default function ProjectGallery({
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-colors ${
                   currentIndex === index
-                    ? 'bg-blue-600'
-                    : 'bg-gray-300 dark:bg-gray-600'
+                    ? "bg-blue-600"
+                    : "bg-gray-300 dark:bg-gray-600"
                 }`}
                 aria-label={`Zu Bild ${index + 1} gehen`}
               />

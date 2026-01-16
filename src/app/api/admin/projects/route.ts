@@ -1,7 +1,7 @@
-import { doc, setDoc, getDocs, collection } from 'firebase/firestore';
-import { NextResponse } from 'next/server';
+import { doc, setDoc, getDocs, collection } from "firebase/firestore";
+import { NextResponse } from "next/server";
 
-import { db } from '@/lib/firebase/firebase';
+import { db } from "@/lib/firebase/firebase";
 
 export async function POST(req: Request) {
   try {
@@ -10,7 +10,7 @@ export async function POST(req: Request) {
 
     if (!id) {
       return NextResponse.json(
-        { error: 'Missing Project ID' },
+        { error: "Missing Project ID" },
         { status: 400 },
       );
     }
@@ -18,13 +18,13 @@ export async function POST(req: Request) {
     // Save to Firestore
     // We use setDoc with merge: true to allow partial updates (e.g. just toggling visibility)
     // or overwrite if it's a fresh publish.
-    await setDoc(doc(db, 'projects', id), data, { merge: true });
+    await setDoc(doc(db, "projects", id), data, { merge: true });
 
     return NextResponse.json({ success: true, id });
   } catch (error) {
-    console.error('Firestore Save Error:', error);
+    console.error("Firestore Save Error:", error);
     return NextResponse.json(
-      { error: 'Failed to save project' },
+      { error: "Failed to save project" },
       { status: 500 },
     );
   }
@@ -32,13 +32,13 @@ export async function POST(req: Request) {
 
 export async function GET() {
   try {
-    const snapshot = await getDocs(collection(db, 'projects'));
+    const snapshot = await getDocs(collection(db, "projects"));
     const projects = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
     return NextResponse.json({ projects });
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 });
+    return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });
   }
 }

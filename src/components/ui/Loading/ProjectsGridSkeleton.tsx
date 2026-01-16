@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-import { ProjectCardSkeleton } from './ProjectCardSkeleton';
+import { ProjectCardSkeleton } from "./ProjectCardSkeleton";
 
 interface ProjectsGridSkeletonProps {
   count?: number;

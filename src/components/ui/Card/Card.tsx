@@ -6,13 +6,13 @@
  * @maintenance-pledge Native responsiveness, semantic structure.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
 export interface CardProps extends React.HTMLAttributes<HTMLElement> {
   /** Render as article (default), section, or div */
-  as?: 'article' | 'section' | 'div';
+  as?: "article" | "section" | "div";
   /** Enable neon glow effect on hover */
   glow?: boolean;
 }
@@ -24,7 +24,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLElement> {
 function CardComponent(
   {
     className,
-    as: Component = 'article',
+    as: Component = "article",
     glow = false,
     children,
     ...props
@@ -37,13 +37,13 @@ function CardComponent(
       ref={ref as any}
       className={cn(
         // Base: Glassmorphism with subtle border
-        'bg-glass-low backdrop-blur-xl border border-glass-border rounded-xl p-6',
+        "bg-glass-low backdrop-blur-xl border border-glass-border rounded-xl p-6",
         // Transition for smooth hover effects
-        'transition-all duration-300 ease-spring',
+        "transition-all duration-300 ease-spring",
         // Hover: Neon border accent
-        'hover:border-cyber-pink/50',
+        "hover:border-cyber-pink/50",
         // Optional glow effect
-        glow && 'hover:shadow-neon-glow',
+        glow && "hover:shadow-neon-glow",
         className,
       )}
       {...props}
@@ -56,7 +56,7 @@ function CardComponent(
 const Card = React.forwardRef(CardComponent) as React.ForwardRefExoticComponent<
   CardProps & React.RefAttributes<HTMLElement>
 >;
-Card.displayName = 'Card';
+Card.displayName = "Card";
 
 export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -64,12 +64,12 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('flex flex-col space-y-1.5 pb-4', className)}
+      className={cn("flex flex-col space-y-1.5 pb-4", className)}
       {...props}
     />
   ),
 );
-CardHeader.displayName = 'CardHeader';
+CardHeader.displayName = "CardHeader";
 
 export interface CardTitleProps
   extends React.HTMLAttributes<HTMLHeadingElement> {}
@@ -79,14 +79,14 @@ const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
     <h3
       ref={ref}
       className={cn(
-        'text-xl font-semibold leading-none tracking-tight text-foreground',
+        "text-xl font-semibold leading-none tracking-tight text-foreground",
         className,
       )}
       {...props}
     />
   ),
 );
-CardTitle.displayName = 'CardTitle';
+CardTitle.displayName = "CardTitle";
 
 export interface CardDescriptionProps
   extends React.HTMLAttributes<HTMLParagraphElement> {}
@@ -97,21 +97,21 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn('text-sm text-muted-foreground', className)}
+    className={cn("text-sm text-muted-foreground", className)}
     {...props}
   />
 ));
-CardDescription.displayName = 'CardDescription';
+CardDescription.displayName = "CardDescription";
 
 export interface CardContentProps
   extends React.HTMLAttributes<HTMLDivElement> {}
 
 const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('py-2', className)} {...props} />
+    <div ref={ref} className={cn("py-2", className)} {...props} />
   ),
 );
-CardContent.displayName = 'CardContent';
+CardContent.displayName = "CardContent";
 
 export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -119,12 +119,12 @@ const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('flex items-center pt-4', className)}
+      className={cn("flex items-center pt-4", className)}
       {...props}
     />
   ),
 );
-CardFooter.displayName = 'CardFooter';
+CardFooter.displayName = "CardFooter";
 
 export {
   Card,

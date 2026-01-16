@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
-import { ProjectGallerySkeleton } from '@/components/ui/Loading';
+import { ProjectGallerySkeleton } from "@/components/ui/Loading";
 
 const ProjectGallery = dynamic(
-  () => import('@/components/sections/Projects/ProjectGallery'),
+  () => import("@/components/sections/Projects/ProjectGallery"),
   {
     ssr: false,
     loading: () => <ProjectGallerySkeleton />,

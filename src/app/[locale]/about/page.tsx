@@ -6,16 +6,16 @@
  * @maintenance-pledge Semantic structure, glassmorphic panels, animated timeline.
  */
 
-'use client';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { useEffect, use } from 'react';
-import { useTranslation } from 'react-i18next';
-import { siGithub, siInspire, siBluesky, siGmail } from 'simple-icons';
+"use client";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useEffect, use } from "react";
+import { useTranslation } from "react-i18next";
+import { siGithub, siInspire, siBluesky, siGmail } from "simple-icons";
 
-import Timeline from '@/components/sections/About/Timeline/Timeline';
-import { TimelineItem } from '@/components/sections/About/Timeline/Timeline';
-import { SimpleIcon } from '@/components/ui/SimpleIcon';
+import Timeline from "@/components/sections/About/Timeline/Timeline";
+import { TimelineItem } from "@/components/sections/About/Timeline/Timeline";
+import { SimpleIcon } from "@/components/ui/SimpleIcon";
 
 const SOCIAL_ICONS: Record<string, string> = {
   github: siGithub.path,
@@ -33,7 +33,7 @@ interface PageParams {
 export default function AboutPage({ params }: PageParams) {
   const resolvedParams = use(params);
   const { locale } = resolvedParams;
-  const { t, i18n } = useTranslation('about');
+  const { t, i18n } = useTranslation("about");
 
   useEffect(() => {
     if (i18n.language !== locale) {
@@ -43,46 +43,46 @@ export default function AboutPage({ params }: PageParams) {
 
   const defaultTimelineItems: TimelineItem[] = [
     {
-      id: '1',
-      year: '2005',
-      title: 'First Steps',
-      description: 'Created my first forum signatures and discovered HTML',
-      category: 'beginning',
-      icon: '👾',
+      id: "1",
+      year: "2005",
+      title: "First Steps",
+      description: "Created my first forum signatures and discovered HTML",
+      category: "beginning",
+      icon: "👾",
       details: [
-        'Learned basic HTML by customizing forum profiles',
-        'Started modifying MySpace layouts',
-        'First exposure to Photoshop',
+        "Learned basic HTML by customizing forum profiles",
+        "Started modifying MySpace layouts",
+        "First exposure to Photoshop",
       ],
     },
   ];
 
-  const defaultSkills = ['JavaScript', 'TypeScript', 'React', 'Next.js'];
+  const defaultSkills = ["JavaScript", "TypeScript", "React", "Next.js"];
   const defaultSocialLinks = [
-    { name: 'GitHub', icon: 'github', url: '' },
-    { name: 'LinkedIn', icon: 'linkedin', url: '' },
+    { name: "GitHub", icon: "github", url: "" },
+    { name: "LinkedIn", icon: "linkedin", url: "" },
   ];
 
   const getTimelineItems = (): TimelineItem[] => {
     try {
-      const items = i18n.getResource(locale, 'about', 'timelineSection.items');
+      const items = i18n.getResource(locale, "about", "timelineSection.items");
       if (items && Array.isArray(items)) {
         return items as TimelineItem[];
       }
     } catch (e) {
-      console.error('Error loading timeline items:', e);
+      console.error("Error loading timeline items:", e);
     }
     return defaultTimelineItems;
   };
 
   const getSkills = (): string[] => {
     try {
-      const skills = i18n.getResource(locale, 'about', 'profileSection.skills');
+      const skills = i18n.getResource(locale, "about", "profileSection.skills");
       if (skills && Array.isArray(skills)) {
         return skills as string[];
       }
     } catch (e) {
-      console.error('Error loading skills:', e);
+      console.error("Error loading skills:", e);
     }
     return defaultSkills;
   };
@@ -93,12 +93,12 @@ export default function AboutPage({ params }: PageParams) {
     url: string;
   }> => {
     try {
-      const links = i18n.getResource(locale, 'about', 'connectSection.social');
+      const links = i18n.getResource(locale, "about", "connectSection.social");
       if (links && Array.isArray(links)) {
         return links as Array<{ name: string; icon: string; url: string }>;
       }
     } catch (e) {
-      console.error('Error loading social links:', e);
+      console.error("Error loading social links:", e);
     }
     return defaultSocialLinks;
   };
@@ -117,12 +117,12 @@ export default function AboutPage({ params }: PageParams) {
         className="mb-16 text-center"
       >
         <h1 className="mt-10 p-1 text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyber-neon to-cyber-pink">
-          {t('pageTitle', 'My Journey Through Technology')}
+          {t("pageTitle", "My Journey Through Technology")}
         </h1>
         <p className="text-lg md:text-xl max-w-3xl mx-auto text-muted-foreground">
           {t(
-            'pageSubtitle',
-            'From forum signatures to developing cutting-edge web applications, my journey into technology has been characterised by curiosity, play and a passion for creating digital experiences.',
+            "pageSubtitle",
+            "From forum signatures to developing cutting-edge web applications, my journey into technology has been characterised by curiosity, play and a passion for creating digital experiences.",
           )}
         </p>
       </motion.div>
@@ -137,23 +137,23 @@ export default function AboutPage({ params }: PageParams) {
           className="lg:col-span-2 bg-glass-low backdrop-blur-md border border-glass-border rounded-xl p-6 transition-all duration-300 ease-spring hover:border-cyber-neon/50"
         >
           <h2 className="text-2xl font-bold mb-4 text-foreground">
-            {t('aboutSection.title', 'About Me')}
+            {t("aboutSection.title", "About Me")}
           </h2>
           <p className="mb-4 text-muted-foreground">
             {t(
-              'aboutSection.paragraph1',
-              'I have been fascinated by computers and technology since I was young. My journey started with customising forum signatures and templates, which sparked my interest in web development and design.',
+              "aboutSection.paragraph1",
+              "I have been fascinated by computers and technology since I was young. My journey started with customising forum signatures and templates, which sparked my interest in web development and design.",
             )}
           </p>
           <p className="mb-4 text-muted-foreground">
             {t(
-              'aboutSection.paragraph2',
+              "aboutSection.paragraph2",
               "Gaming has always been a significant part of my life and has influenced my approach to problem-solving and creativity in technology. From building simple mods to developing full applications, I've brought that gaming mindset of persistence and innovation.",
             )}
           </p>
           <p className="text-muted-foreground">
             {t(
-              'aboutSection.paragraph3',
+              "aboutSection.paragraph3",
               "Today, I combine my technical skills with creative thinking to build solutions that are not only functional but engaging and intuitive. This portfolio represents the culmination of my experiences and showcases the projects I'm most proud of.",
             )}
           </p>
@@ -173,15 +173,15 @@ export default function AboutPage({ params }: PageParams) {
               fill
               className="object-cover"
               style={{
-                objectPosition: '80% 50%',
-                transform: 'scale(-1, 1)',
+                objectPosition: "80% 50%",
+                transform: "scale(-1, 1)",
               }}
               priority
             />
           </div>
           <div className="text-center">
             <h3 className="text-xl font-bold text-foreground">
-              {t('profileSection.title', 'Skills & Interests')}
+              {t("profileSection.title", "Skills & Interests")}
             </h3>
             <div className="flex flex-wrap justify-center gap-2 mt-4">
               {skills.map((skill) => (
@@ -221,12 +221,12 @@ export default function AboutPage({ params }: PageParams) {
         className="text-center mt-16"
       >
         <h2 className="text-2xl font-bold mb-6 text-foreground">
-          {t('connectSection.title', "Let's Connect")}
+          {t("connectSection.title", "Let's Connect")}
         </h2>
         <p className="text-lg max-w-2xl mx-auto mb-8 text-muted-foreground">
           {t(
-            'connectSection.description',
-            'Interested in collaborating or just want to chat about the latest in tech or gaming? Feel free to reach out through any of the channels below.',
+            "connectSection.description",
+            "Interested in collaborating or just want to chat about the latest in tech or gaming? Feel free to reach out through any of the channels below.",
           )}
         </p>
         <div className="flex justify-center space-x-4">
@@ -234,7 +234,7 @@ export default function AboutPage({ params }: PageParams) {
             <a
               key={social.name}
               href={
-                social.url.includes('@') ? 'mailto:' + social.url : social.url
+                social.url.includes("@") ? "mailto:" + social.url : social.url
               }
               className="group"
               aria-label={social.name}

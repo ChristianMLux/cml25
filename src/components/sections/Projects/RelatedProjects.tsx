@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-import { Project } from '@/types';
+import { Project } from "@/types";
 
-import { ProjectCard } from './ProjectCard';
+import { ProjectCard } from "./ProjectCard";
 
 interface RelatedProjectsProps {
   projects: Project[];

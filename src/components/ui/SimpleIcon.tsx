@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface SimpleIconProps {
   path: string;
@@ -10,7 +10,7 @@ export function SimpleIcon({
   path,
   size = 24,
   title,
-  className = '',
+  className = "",
 }: SimpleIconProps) {
   return (
     <svg

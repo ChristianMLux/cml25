@@ -1,35 +1,35 @@
-import i18n from 'i18next';
-import { InitOptions } from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import Backend from 'i18next-http-backend';
-import { initReactI18next } from 'react-i18next';
+import i18n from "i18next";
+import { InitOptions } from "i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+import Backend from "i18next-http-backend";
+import { initReactI18next } from "react-i18next";
 
 const i18nConfig: InitOptions = {
-  fallbackLng: 'de',
-  supportedLngs: ['de', 'en'],
-  debug: process.env.NODE_ENV === 'development',
+  fallbackLng: "de",
+  supportedLngs: ["de", "en"],
+  debug: process.env.NODE_ENV === "development",
   interpolation: {
     escapeValue: false,
   },
-  ns: ['common', 'home', 'projects', 'about', 'contact', 'hero', 'command'],
-  defaultNS: 'common',
+  ns: ["common", "home", "projects", "about", "contact", "hero", "command"],
+  defaultNS: "common",
   backend: {
-    loadPath: '/locales/{{lng}}/{{ns}}.json',
+    loadPath: "/locales/{{lng}}/{{ns}}.json",
   },
   detection: {
-    order: ['path', 'cookie', 'navigator'],
+    order: ["path", "cookie", "navigator"],
     lookupFromPathIndex: 0,
-    caches: ['cookie'],
+    caches: ["cookie"],
   },
   react: {
     useSuspense: false,
-    transWrapTextNodes: '',
+    transWrapTextNodes: "",
     transSupportBasicHtmlNodes: false,
     transKeepBasicHtmlNodesFor: [],
   },
 };
 
-const isBrowser = typeof window !== 'undefined';
+const isBrowser = typeof window !== "undefined";
 
 if (isBrowser && !i18n.isInitialized) {
   i18n
@@ -38,7 +38,7 @@ if (isBrowser && !i18n.isInitialized) {
     .use(initReactI18next)
     .init(i18nConfig)
     .catch((error) => {
-      console.error('i18next initialization error:', error);
+      console.error("i18next initialization error:", error);
     });
 }
 

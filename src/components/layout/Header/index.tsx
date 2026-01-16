@@ -6,15 +6,15 @@
  * @maintenance-pledge Accessible navigation, spring transitions.
  */
 
-'use client';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon } from 'lucide-react';
-import { useState, useEffect } from 'react';
+"use client";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useState, useEffect } from "react";
 
-import MobileNav from '@/components/layout/Header/MobileNav';
-import { useNavigation } from '@/hooks/useNavigation';
-import { LocalizedLink } from '@/lib/i18n-navigation';
-import { cn } from '@/lib/utils';
+import MobileNav from "@/components/layout/Header/MobileNav";
+import { useNavigation } from "@/hooks/useNavigation";
+import { LocalizedLink } from "@/lib/i18n-navigation";
+import { cn } from "@/lib/utils";
 
 interface HeaderProps {
   locale: string;
@@ -31,20 +31,20 @@ export default function Header({ locale }: HeaderProps) {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     if (isOpen) {
-      document.body.classList.add('overflow-hidden');
+      document.body.classList.add("overflow-hidden");
     } else {
-      document.body.classList.remove('overflow-hidden');
+      document.body.classList.remove("overflow-hidden");
     }
 
     return () => {
-      document.body.classList.remove('overflow-hidden');
+      document.body.classList.remove("overflow-hidden");
     };
   }, [isOpen]);
 
@@ -60,10 +60,10 @@ export default function Header({ locale }: HeaderProps) {
       <header
         role="banner"
         className={cn(
-          'fixed top-0 z-50 w-full transition-all duration-300 ease-spring',
+          "fixed top-0 z-50 w-full transition-all duration-300 ease-spring",
           isScrolled
-            ? 'bg-background/80 backdrop-blur-xl border-b border-glass-border shadow-lg'
-            : 'bg-transparent',
+            ? "bg-background/80 backdrop-blur-xl border-b border-glass-border shadow-lg"
+            : "bg-transparent",
         )}
       >
         <nav
@@ -86,10 +86,10 @@ export default function Header({ locale }: HeaderProps) {
                   key={href}
                   href={href}
                   className={cn(
-                    'text-sm font-medium transition-all duration-200 ease-spring relative focus-visible:outline-none focus-visible:text-cyber-neon',
+                    "text-sm font-medium transition-all duration-200 ease-spring relative focus-visible:outline-none focus-visible:text-cyber-neon",
                     pathname === href
-                      ? 'text-cyber-neon'
-                      : 'text-muted-foreground hover:text-foreground',
+                      ? "text-cyber-neon"
+                      : "text-muted-foreground hover:text-foreground",
                   )}
                 >
                   {label}
@@ -99,7 +99,7 @@ export default function Header({ locale }: HeaderProps) {
                       layoutId="activeNav"
                       className="absolute -bottom-1 left-0 right-0 h-0.5 bg-cyber-neon rounded-full"
                       transition={{
-                        type: 'spring',
+                        type: "spring",
                         stiffness: 380,
                         damping: 30,
                       }}
@@ -113,10 +113,10 @@ export default function Header({ locale }: HeaderProps) {
                 <a
                   href={`/de${pathname}`}
                   className={cn(
-                    'text-sm transition-colors duration-200',
-                    locale === 'de'
-                      ? 'text-cyber-neon font-bold'
-                      : 'text-muted-foreground hover:text-foreground',
+                    "text-sm transition-colors duration-200",
+                    locale === "de"
+                      ? "text-cyber-neon font-bold"
+                      : "text-muted-foreground hover:text-foreground",
                   )}
                 >
                   DE
@@ -125,10 +125,10 @@ export default function Header({ locale }: HeaderProps) {
                 <a
                   href={`/en${pathname}`}
                   className={cn(
-                    'text-sm transition-colors duration-200',
-                    locale === 'en'
-                      ? 'text-cyber-neon font-bold'
-                      : 'text-muted-foreground hover:text-foreground',
+                    "text-sm transition-colors duration-200",
+                    locale === "en"
+                      ? "text-cyber-neon font-bold"
+                      : "text-muted-foreground hover:text-foreground",
                   )}
                 >
                   EN
@@ -139,9 +139,9 @@ export default function Header({ locale }: HeaderProps) {
               <button
                 onClick={() => toggleTheme()}
                 className="rounded-full p-2 bg-glass-low border border-glass-border hover:border-cyber-neon/50 transition-all duration-200 ease-spring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyber-neon"
-                aria-label={t('theme.toggle')}
+                aria-label={t("theme.toggle")}
               >
-                {theme === 'dark' ? (
+                {theme === "dark" ? (
                   <Sun className="h-5 w-5 text-cyber-warning" />
                 ) : (
                   <Moon className="h-5 w-5 text-foreground" />
@@ -153,11 +153,11 @@ export default function Header({ locale }: HeaderProps) {
             <button
               className="md:hidden p-2 rounded-full bg-glass-low border border-glass-border hover:border-cyber-neon/50 transition-all duration-200"
               onClick={() => setIsOpen(!isOpen)}
-              aria-label={t('mobile.openMenu', 'Menü öffnen')}
+              aria-label={t("mobile.openMenu", "Menü öffnen")}
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
-                  key={isOpen ? 'close' : 'menu'}
+                  key={isOpen ? "close" : "menu"}
                   initial={{ opacity: 0, rotate: -90 }}
                   animate={{ opacity: 1, rotate: 0 }}
                   exit={{ opacity: 0, rotate: 90 }}

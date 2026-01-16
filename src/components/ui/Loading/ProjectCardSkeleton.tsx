@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-import { Skeleton } from './Skeleton';
+import { Skeleton } from "./Skeleton";
 
 interface ProjectCardSkeletonProps {
   tagsCount?: number;

@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
-export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
+export type LoadingState = "idle" | "loading" | "success" | "error";
 
 interface UseLoadingOptions {
   /**
@@ -29,7 +29,7 @@ interface UseLoadingOptions {
  * to prevent flickering UI.
  */
 export function useLoading({
-  initialState = 'idle',
+  initialState = "idle",
   loadingDelay = 200,
   minDisplayTime = 300,
 }: UseLoadingOptions = {}) {
@@ -40,7 +40,7 @@ export function useLoading({
   useEffect(() => {
     let timeoutId: NodeJS.Timeout | null = null;
 
-    if (state === 'loading') {
+    if (state === "loading") {
       if (!loadingStartTime) {
         setLoadingStartTime(Date.now());
       }
@@ -60,7 +60,7 @@ export function useLoading({
 
   const wrapAsync = useCallback(
     <T>(asyncFn: () => Promise<T>): Promise<T> => {
-      setState('loading');
+      setState("loading");
       const startTime = Date.now();
 
       return new Promise<T>((resolve, reject) => {
@@ -70,7 +70,7 @@ export function useLoading({
             const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
 
             setTimeout(() => {
-              setState('success');
+              setState("success");
               resolve(result);
             }, remainingTime);
           })
@@ -79,7 +79,7 @@ export function useLoading({
             const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
 
             setTimeout(() => {
-              setState('error');
+              setState("error");
               reject(error);
             }, remainingTime);
           });
@@ -88,16 +88,16 @@ export function useLoading({
     [minDisplayTime],
   );
 
-  const setLoading = useCallback(() => setState('loading'), []);
-  const setSuccess = useCallback(() => setState('success'), []);
-  const setError = useCallback(() => setState('error'), []);
-  const reset = useCallback(() => setState('idle'), []);
+  const setLoading = useCallback(() => setState("loading"), []);
+  const setSuccess = useCallback(() => setState("success"), []);
+  const setError = useCallback(() => setState("error"), []);
+  const reset = useCallback(() => setState("idle"), []);
 
   return {
-    isIdle: state === 'idle',
-    isLoading: state === 'loading',
-    isSuccess: state === 'success',
-    isError: state === 'error',
+    isIdle: state === "idle",
+    isLoading: state === "loading",
+    isSuccess: state === "success",
+    isError: state === "error",
     showLoading,
     state,
     setLoading,

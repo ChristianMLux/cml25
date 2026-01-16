@@ -1,18 +1,18 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
-import { adminStorage } from '@/lib/firebase/admin';
+import { adminStorage } from "@/lib/firebase/admin";
 
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
-    const file = formData.get('file') as File;
+    const file = formData.get("file") as File;
 
     if (!file) {
-      return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
+      return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    const filename = `projects/uploads/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '')}`;
+    const filename = `projects/uploads/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "")}`;
     const bucket = adminStorage.bucket();
     const fileRef = bucket.file(filename);
 
@@ -28,9 +28,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ url: publicUrl });
   } catch (error: any) {
-    console.error('Upload error:', error);
+    console.error("Upload error:", error);
     return NextResponse.json(
-      { error: 'Upload failed', details: error.message },
+      { error: "Upload failed", details: error.message },
       { status: 500 },
     );
   }

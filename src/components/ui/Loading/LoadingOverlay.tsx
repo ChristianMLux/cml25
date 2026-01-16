@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 interface LoadingOverlayProps {
   fullPage?: boolean;
@@ -24,8 +24,8 @@ export function LoadingOverlay({
     <motion.div
       className={`${
         fullPage
-          ? 'fixed inset-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm'
-          : 'absolute inset-0 z-20 bg-white/60 dark:bg-gray-900/60 backdrop-blur-[2px]'
+          ? "fixed inset-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm"
+          : "absolute inset-0 z-20 bg-white/60 dark:bg-gray-900/60 backdrop-blur-[2px]"
       } flex items-center justify-center`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

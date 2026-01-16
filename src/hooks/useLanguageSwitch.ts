@@ -1,6 +1,6 @@
-import { useRouter } from 'next/navigation';
-import { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 export function useLanguageSwitch() {
   const router = useRouter();
@@ -13,7 +13,7 @@ export function useLanguageSwitch() {
   const switchLanguage = useCallback(
     (targetLang?: string) => {
       const currentLang = i18n.language;
-      const newLang = targetLang || (currentLang === 'de' ? 'en' : 'de');
+      const newLang = targetLang || (currentLang === "de" ? "en" : "de");
 
       if (currentLang === newLang) return;
 
@@ -21,7 +21,7 @@ export function useLanguageSwitch() {
         const currentPath = window.location.pathname;
 
         const pathMatch = currentPath.match(/^\/[^\/]+(.*)$/);
-        const pathWithoutLang = pathMatch ? pathMatch[1] : '';
+        const pathWithoutLang = pathMatch ? pathMatch[1] : "";
 
         const newPath = `/${newLang}${pathWithoutLang}`;
 
@@ -31,7 +31,7 @@ export function useLanguageSwitch() {
           }, 0);
         }
       } catch (error) {
-        console.error('Fehler beim Sprachwechsel:', error);
+        console.error("Fehler beim Sprachwechsel:", error);
       }
     },
     [i18n.language, router],
@@ -40,7 +40,7 @@ export function useLanguageSwitch() {
   return {
     currentLanguage: i18n.language,
     switchLanguage,
-    isGerman: i18n.language === 'de',
-    isEnglish: i18n.language === 'en',
+    isGerman: i18n.language === "de",
+    isEnglish: i18n.language === "en",
   };
 }

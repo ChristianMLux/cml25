@@ -1,5 +1,5 @@
-'use client';
+"use client";
 
-import CommandPalette from '../CommandPalette';
+import CommandPalette from "../CommandPalette";
 
 export default CommandPalette;

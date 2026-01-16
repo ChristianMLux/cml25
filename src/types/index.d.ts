@@ -1,4 +1,4 @@
-type Category = 'web' | 'mobile' | 'design' | string;
+type Category = "web" | "mobile" | "design" | string;
 export interface Project {
   id: string;
   title: string;
@@ -17,10 +17,10 @@ export interface Project {
   isFeatured?: boolean; // Show on Main Page Showcase
   isVisible?: boolean; // Show on /projects page
   isPrivate?: boolean; // If true, hide code links
-  source?: 'local' | 'firestore'; // Origin
+  source?: "local" | "firestore"; // Origin
 }
 
-export type Theme = 'light' | 'dark' | 'system';
+export type Theme = "light" | "dark" | "system";
 
 export interface ThemeState {
   theme: Theme;
@@ -46,4 +46,16 @@ export interface NavItem {
   href: string;
   active?: boolean;
   external?: boolean;
+}
+
+export type UserRole = "admin" | "user";
+
+export interface UserProfile {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  photoURL: string | null;
+  role: UserRole;
+  createdAt: string;
+  lastLoginAt: string;
 }

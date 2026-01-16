@@ -5,18 +5,18 @@
  * @maintenance-pledge Skeleton loading, smooth transitions.
  */
 
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { motion } from "framer-motion";
+import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 
-import { ProjectCardSkeleton } from '@/components/ui/Loading';
-import { MasonryGrid } from '@/components/ui/MasonryGrid';
-import { useLoading } from '@/hooks/useLoading';
-import { Project } from '@/types';
+import { ProjectCardSkeleton } from "@/components/ui/Loading";
+import { MasonryGrid } from "@/components/ui/MasonryGrid";
+import { useLoading } from "@/hooks/useLoading";
+import { Project } from "@/types";
 
-import { ProjectCard } from './ProjectCard';
+import { ProjectCard } from "./ProjectCard";
 
 interface ProjectsGridProps {
   initialProjects: Project[];
@@ -25,9 +25,9 @@ interface ProjectsGridProps {
 export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
   const [projects, setProjects] = useState<Project[]>(initialProjects);
   const searchParams = useSearchParams();
-  const category = searchParams.get('category');
+  const category = searchParams.get("category");
   const { isLoading, setLoading, setSuccess } = useLoading({
-    initialState: 'loading',
+    initialState: "loading",
     minDisplayTime: 500,
   });
 
@@ -35,7 +35,7 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
     setLoading();
 
     const timer = setTimeout(() => {
-      if (category && category !== 'all') {
+      if (category && category !== "all") {
         const filtered = initialProjects.filter(
           (project) =>
             project.category.toLowerCase() === category.toLowerCase(),

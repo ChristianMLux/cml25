@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-import { useTheme } from '@/components/ui/Theme/ThemeProvider';
+import { useTheme } from "@/components/ui/Theme/ThemeProvider";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   return (
@@ -16,9 +16,9 @@ export default function ThemeToggle() {
       onClick={toggleTheme}
       className="rounded-full p-2 bg-gray-200 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
       whileTap={{ scale: 0.9 }}
-      aria-label={`Change to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      aria-label={`Change to ${theme === "dark" ? "light" : "dark"} mode`}
     >
-      {theme === 'dark' ? (
+      {theme === "dark" ? (
         <motion.svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
