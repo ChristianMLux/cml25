@@ -1,3 +1,11 @@
+/**
+ * @component Projects
+ * @description Projects showcase section with category filtering.
+ * Implements the Neo-Victorian Software Standard's "Structural Integrity" principle.
+ * @author Christian M. Lux
+ * @maintenance-pledge Semantic structure, animated grid transitions.
+ */
+
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -40,18 +48,18 @@ export default function Projects({ locale, projects }: ProjectsProps) {
     <section className="py-20">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-foreground">
             {t('title')}
           </h2>
-          <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+          <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             {t('description')}
           </p>
         </div>
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
           {categories.map((category) => (
             <Button
               key={category.id}
-              variant={activeCategory === category.id ? 'default' : 'outline'}
+              variant={activeCategory === category.id ? 'cyber' : 'outline'}
               onClick={() => setActiveCategory(category.id)}
               className="transition-all"
             >

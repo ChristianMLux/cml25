@@ -1,3 +1,11 @@
+/**
+ * @component Timeline
+ * @description An interactive career timeline with cyber-noir styling.
+ * Implements the Neo-Victorian Software Standard's "Structural Integrity" principle.
+ * @author Christian M. Lux
+ * @maintenance-pledge Accessible, animated reveal, glassmorphic cards.
+ */
+
 import { motion, useInView, Variants } from 'framer-motion';
 import Link from 'next/link';
 import React, { useRef, useState, useEffect } from 'react';
@@ -14,12 +22,13 @@ export interface TimelineItem {
   projectLinkLabel?: string;
 }
 
+// Cyber-noir category colors
 const categoryColors: Record<string, string> = {
-  beginning: 'from-blue-400 to-blue-600',
-  education: 'from-purple-400 to-purple-600',
-  career: 'from-emerald-400 to-emerald-600',
-  project: 'from-amber-400 to-amber-600',
-  gaming: 'from-pink-400 to-pink-600',
+  beginning: 'bg-cyber-neon text-black',
+  education: 'bg-cyber-cyan text-black',
+  career: 'bg-cyber-pink text-black',
+  project: 'bg-cyber-warning text-black',
+  gaming: 'bg-[#a855f7] text-black', // Cyber purple for gaming
 };
 
 interface TimelineProps {
@@ -73,11 +82,11 @@ const TimelineItemComponent: React.FC<{
 
   const getBorderClass = () => {
     if (isVeryNarrow) {
-      return 'border-t-4';
+      return 'border-t-2';
     } else if (isMobile) {
-      return 'border-l-4';
+      return 'border-l-2';
     } else {
-      return isEven ? 'border-l-4' : 'border-r-4';
+      return isEven ? 'border-l-2' : 'border-r-2';
     }
   };
 
@@ -86,29 +95,27 @@ const TimelineItemComponent: React.FC<{
   const timelineContent = (
     <motion.div
       whileHover={{ scale: item.projectLink ? 1.02 : 1 }}
-      className={`bg-white dark:bg-gray-800 p-6 rounded-xl shadow-step-hover ${borderClass} border-primary ${
+      className={`bg-glass-low backdrop-blur-md p-6 rounded-xl ${borderClass} border-cyber-neon/50 transition-all duration-300 ease-spring ${
         item.projectLink
-          ? 'cursor-pointer hover:shadow-xl transition-all duration-300'
-          : ''
+          ? 'cursor-pointer hover:border-cyber-pink/70 hover:shadow-lg'
+          : 'hover:border-cyber-neon/70'
       }`}
     >
       {isVeryNarrow && (
-        <div className="mb-3 inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-bold">
+        <div className="mb-3 inline-block px-3 py-1 bg-cyber-neon/10 text-cyber-neon border border-cyber-neon/30 rounded-full text-sm font-bold">
           {item.year}
         </div>
       )}
 
       <div className="flex items-center mb-3">
         <span
-          className={`inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r ${categoryColors[item.category]} text-white mr-3`}
+          className={`inline-flex items-center justify-center w-10 h-10 rounded-lg ${categoryColors[item.category]} mr-3 shadow-md`}
         >
           {item.icon}
         </span>
-        <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">
-          {item.title}
-        </h3>
+        <h3 className="text-xl font-bold text-foreground">{item.title}</h3>
         {item.projectLink && (
-          <span className="ml-2 text-primary text-sm">
+          <span className="ml-2 text-cyber-neon text-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4 inline"
@@ -126,16 +133,12 @@ const TimelineItemComponent: React.FC<{
           </span>
         )}
       </div>
-      <p className="text-gray-600 dark:text-gray-300 mb-4">
-        {item.description}
-      </p>
+      <p className="text-muted-foreground mb-4">{item.description}</p>
       <ul className="space-y-2">
         {item.details.map((detail, i) => (
           <li key={i} className="flex items-start">
-            <span className="text-primary mr-2">•</span>
-            <span className="text-gray-600 dark:text-gray-300 text-sm">
-              {detail}
-            </span>
+            <span className="text-cyber-neon mr-2">•</span>
+            <span className="text-muted-foreground text-sm">{detail}</span>
           </li>
         ))}
       </ul>
@@ -154,17 +157,15 @@ const TimelineItemComponent: React.FC<{
         <div
           className={`absolute top-0 ${
             isMobile ? 'left-0' : 'left-1/2 -ml-7'
-          } z-20 flex items-center justify-center w-14 h-14 rounded-full border-4 bg-white dark:bg-gray-800 border-primary shadow-md`}
+          } z-20 flex items-center justify-center w-14 h-14 rounded-full border-2 bg-background border-cyber-neon shadow-lg shadow-cyber-neon/20`}
         >
-          <span className="text-sm font-bold text-gray-800 dark:text-gray-200">
-            {item.year}
-          </span>
+          <span className="text-sm font-bold text-cyber-neon">{item.year}</span>
           {!isMobile && (
             <div
               className={`absolute ${isEven ? 'right-[-1.12rem]' : 'left-[-1.12rem]'}`}
             >
               <div
-                className={`w-2 h-2 rounded-full bg-primary shadow-sm ${isEven ? 'mr-1' : 'ml-1'}`}
+                className={`w-2 h-2 rounded-full bg-cyber-neon shadow-sm shadow-cyber-neon/50 ${isEven ? 'mr-1' : 'ml-1'}`}
               />
             </div>
           )}
@@ -226,28 +227,34 @@ const Timeline: React.FC<TimelineProps> = ({ items, startLeft = true }) => {
   }, []);
 
   if (!isMounted || !items || items.length === 0) {
-    return <div className="text-center p-8">Loading timeline...</div>;
+    return (
+      <div className="text-center p-8 text-muted-foreground">
+        Loading timeline...
+      </div>
+    );
   }
 
   const isVeryNarrow = screenWidth < 450;
 
   return (
     <div className="relative py-4">
+      {/* Timeline line - top segment */}
       {!isVeryNarrow && (
         <div
           className={`absolute ${
             screenWidth < 768 ? 'left-7 mt-10' : 'left-1/2 ml-0'
-          } top-0 w-1 bg-primary/70 h-8 z-0`}
+          } top-0 w-0.5 bg-gradient-to-b from-transparent via-cyber-neon/50 to-cyber-neon/50 h-8 z-0`}
         />
       )}
 
+      {/* Timeline line - main segment */}
       {!isVeryNarrow && (
         <div
           className={`absolute ${
             screenWidth < 768
               ? 'left-7 mb-[10rem] bottom-[4rem]'
               : 'left-1/2 ml-0 bottom-[10rem]'
-          } top-8 w-1 bg-primary/70 z-0`}
+          } top-8 w-0.5 bg-cyber-neon/30 z-0`}
         />
       )}
 

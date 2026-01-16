@@ -1,3 +1,11 @@
+/**
+ * @component ProjectCard
+ * @description A glassmorphic project card with cyber-noir styling.
+ * Implements the Neo-Victorian Software Standard's "Tactile Maximalism" principle.
+ * @author Christian M. Lux
+ * @maintenance-pledge Accessible links, 3D hover effects, semantic structure.
+ */
+
 'use client';
 
 import { motion } from 'framer-motion';
@@ -27,9 +35,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
   if (!project) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md p-4">
-        <p>{t('projects.ui.loadError')}</p>
-      </div>
+      <article className="bg-glass-low backdrop-blur-md border border-glass-border rounded-xl overflow-hidden p-4">
+        <p className="text-muted-foreground">{t('projects.ui.loadError')}</p>
+      </article>
     );
   }
 
@@ -66,36 +74,39 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const tags = Array.isArray(project.tags) ? project.tags : [];
 
   return (
-    <motion.div
-      className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+    <motion.article
+      className="bg-glass-low backdrop-blur-md border border-glass-border rounded-xl overflow-hidden transition-all duration-300 ease-spring hover:border-cyber-pink/50 hover:shadow-lg group"
       whileHover={{ y: -5 }}
       transition={{ type: 'spring', stiffness: 400, damping: 17 }}
     >
       <LocalizedLink href={`/projects/${project.id}`}>
-        <div className={`relative ${getImageHeight()}`}>
+        <div className={`relative ${getImageHeight()} overflow-hidden`}>
           {project.imageUrl && (
             <Image
               src={project.imageUrl}
               alt={project.title || t('projects.ui.unnamedProject')}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-500 ease-spring group-hover:scale-105"
               placeholder={project.blurDataUrl ? 'blur' : 'empty'}
               blurDataURL={project.blurDataUrl}
             />
           )}
+          {/* Gradient overlay for better text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
           {project.category && (
-            <div className="absolute top-4 right-4 bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
+            <div className="absolute top-4 right-4 bg-cyber-neon/90 text-black text-xs font-bold px-3 py-1 rounded-full shadow-lg">
               {t(`projects.categories.${project.category}`)}
             </div>
           )}
         </div>
 
-        <div className="p-4">
-          <h3 className="text-lg font-semibold mb-2">
+        <div className="p-5">
+          <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-cyber-neon transition-colors duration-200">
             {project.title || t('projects.ui.unnamedProject')}
           </h3>
-          <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
+          <p className="text-muted-foreground text-sm mb-3 line-clamp-3">
             {getDescription()}
           </p>
 
@@ -106,7 +117,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 .map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-2 py-1 rounded-full"
+                    className="text-xs bg-glass-medium border border-glass-border text-muted-foreground px-2 py-1 rounded-full transition-colors duration-200 hover:text-cyber-cyan hover:border-cyber-cyan/50"
                   >
                     {tag}
                   </span>
@@ -115,6 +126,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
           )}
         </div>
       </LocalizedLink>
-    </motion.div>
+    </motion.article>
   );
 }

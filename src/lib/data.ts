@@ -1,13 +1,7 @@
 import { collection, getDocs } from 'firebase/firestore';
 import { cache } from 'react';
-
 import { db } from '@/lib/firebase/firebase';
 import { Project } from '@/types';
-// import { getServerTranslation } from "@/lib/getServerTranslation";
-
-
-// import { projectsData } from "@/lib/static-data";
-// export { projectsData };
 
 export const getProjects = cache(async (locale: string): Promise<Project[]> => {
   try {
@@ -45,7 +39,6 @@ export const getProjects = cache(async (locale: string): Promise<Project[]> => {
 export const getProjectById = cache(
   async (id: string, locale: string): Promise<Project | undefined> => {
     try {
-      // Try Firestore
       const { doc, getDoc } = await import('firebase/firestore');
       const docRef = doc(db, 'projects', id);
       const docSnap = await getDoc(docRef);
@@ -64,7 +57,7 @@ export const getProjectById = cache(
           link: data.link || `/projects/${docSnap.id}`,
           githubUrl: data.githubUrl,
           liveUrl: data.liveUrl,
-          content: data.content, // HTML content from Markdown
+          content: data.content,
           isFeatured: data.isFeatured ?? false,
           isVisible: data.isVisible ?? true,
           source: 'firestore',
@@ -87,12 +80,12 @@ export const getRelatedProjects = cache(
     locale: string,
   ): Promise<Project[]> => {
     try {
-      // Use getProjects to get both local and firestore projects
       const allProjects = await getProjects(locale);
 
       const relatedProjects = allProjects
         .filter(
-          (project) => project.category === category && project.id !== excludeId,
+          (project) =>
+            project.category === category && project.id !== excludeId,
         )
         .slice(0, 3);
 

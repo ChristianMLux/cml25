@@ -1,3 +1,10 @@
+/**
+ * @component ProjectsGrid
+ * @description Masonry grid for displaying project cards with filtering.
+ * @author Christian M. Lux
+ * @maintenance-pledge Skeleton loading, smooth transitions.
+ */
+
 'use client';
 
 import { motion } from 'framer-motion';
@@ -30,7 +37,8 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
     const timer = setTimeout(() => {
       if (category && category !== 'all') {
         const filtered = initialProjects.filter(
-          (project) => project.category.toLowerCase() === category.toLowerCase(),
+          (project) =>
+            project.category.toLowerCase() === category.toLowerCase(),
         );
         setProjects(filtered);
       } else {
@@ -60,12 +68,12 @@ export default function ProjectsGrid({ initialProjects }: ProjectsGridProps) {
         </MasonryGrid>
       ) : (
         <motion.div
-          className="text-center py-8"
+          className="text-center py-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           layout
         >
-          <p className="text-gray-500 dark:text-gray-400">
+          <p className="text-muted-foreground">
             Keine Projekte in dieser Kategorie gefunden.
           </p>
         </motion.div>

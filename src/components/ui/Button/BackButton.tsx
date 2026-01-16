@@ -1,6 +1,14 @@
+/**
+ * @component BackButton
+ * @description A cyber-noir styled back navigation link.
+ * @author Christian M. Lux
+ * @maintenance-pledge Accessible, animated hover state.
+ */
+
 'use client';
 
 import { motion } from 'framer-motion';
+import { ArrowLeft } from 'lucide-react';
 
 import { LocalizedLink } from '@/lib/i18n-navigation';
 
@@ -11,26 +19,13 @@ interface BackButtonProps {
 
 export default function BackButton({ href, label }: BackButtonProps) {
   return (
-    <LocalizedLink href={href} className="inline-block">
+    <LocalizedLink href={href} className="inline-block group">
       <motion.span
-        className="flex items-center text-sm text-blue-600 dark:text-blue-400 hover:underline"
+        className="inline-flex items-center px-4 py-2 text-sm font-medium text-cyber-cyan bg-glass-low backdrop-blur-md border border-glass-border rounded-full transition-all duration-200 ease-spring hover:border-cyber-cyan/50 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyber-neon"
         whileHover={{ x: -3 }}
         transition={{ duration: 0.2 }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="mr-1"
-        >
-          <path d="M19 12H5M12 19l-7-7 7-7" />
-        </svg>
+        <ArrowLeft className="w-4 h-4 mr-2" />
         {label}
       </motion.span>
     </LocalizedLink>

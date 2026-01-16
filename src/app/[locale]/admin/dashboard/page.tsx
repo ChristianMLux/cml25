@@ -25,13 +25,23 @@ import {
   Star,
   LayoutGrid,
   List,
+  AlertCircle,
+  CheckCircle,
+  Info,
 } from 'lucide-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
+import { Dialog } from '@/components/ui/Dialog';
 import { app, db } from '@/lib/firebase/firebase';
 import { projectsData } from '@/lib/static-data';
 import { Project } from '@/types';
 
+// Toast notification type
+interface Toast {
+  id: string;
+  message: string;
+  type: 'success' | 'error' | 'info';
+}
 
 // Extends Project type for local state management (handling statuses)
 interface AdminProject extends Partial<Project> {
@@ -51,6 +61,34 @@ export default function AdminDashboard() {
   const [authLoading, setAuthLoading] = useState(true);
   const [migrationLoading, setMigrationLoading] = useState(false);
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+
+  // Toast notifications state
+  const [toasts, setToasts] = useState<Toast[]>([]);
+
+  // Confirmation dialog state
+  const [confirmDialog, setConfirmDialog] = useState<{
+    isOpen: boolean;
+    title: string;
+    message: string;
+    onConfirm: () => void;
+  }>({ isOpen: false, title: '', message: '', onConfirm: () => {} });
+
+  // Toast helper functions
+  const showToast = useCallback(
+    (message: string, type: 'success' | 'error' | 'info' = 'info') => {
+      const id = Date.now().toString();
+      setToasts((prev) => [...prev, { id, message, type }]);
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => {
+        setToasts((prev) => prev.filter((t) => t.id !== id));
+      }, 5000);
+    },
+    [],
+  );
+
+  const dismissToast = useCallback((id: string) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
 
   // Auth Init
   useEffect(() => {
@@ -124,7 +162,7 @@ export default function AdminDashboard() {
       }
     } catch (e) {
       console.error('Sync failed', e);
-      alert('Sync failed. Check console and API Keys.');
+      showToast('Sync failed. Check console and API Keys.', 'error');
     } finally {
       setLoading(false);
     }
@@ -158,7 +196,7 @@ export default function AdminDashboard() {
           setEditForm((prev) => ({ ...prev, imageUrl: data.url }));
         } catch (error) {
           console.error('Upload failed', error);
-          alert('Upload failed. Check console.');
+          showToast('Upload failed. Check console.', 'error');
         } finally {
           setIsUploading(false);
         }
@@ -216,25 +254,18 @@ export default function AdminDashboard() {
       );
     } catch (e) {
       console.error('Publish error', e);
-      alert('Failed to publish: ' + (e as any).message);
+      showToast('Failed to publish: ' + (e as any).message, 'error');
     }
   };
 
   if (authLoading)
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-500">
+      <div className="min-h-screen bg-background flex items-center justify-center text-muted-foreground">
         Loading Auth...
       </div>
     );
 
-  const migrateLegacyProjects = async () => {
-    if (
-      !confirm(
-        'This will migrate all legacy (hardcoded) projects to Firestore. Continue?',
-      )
-    )
-      return;
-
+  const executeMigration = async () => {
     setMigrationLoading(true);
     try {
       let count = 0;
@@ -268,30 +299,45 @@ export default function AdminDashboard() {
         count++;
       }
 
-      alert(`Successfully migrated ${count} projects. Refreshing...`);
+      showToast(`Successfully migrated ${count} projects. Refreshing...`, 'success');
       fetchProjects();
     } catch (e) {
       console.error('Migration failed', e);
-      alert('Migration failed: ' + (e as any).message);
+      showToast('Migration failed: ' + (e as any).message, 'error');
     } finally {
       setMigrationLoading(false);
     }
   };
 
+  const migrateLegacyProjects = () => {
+    setConfirmDialog({
+      isOpen: true,
+      title: 'Migrate Legacy Projects',
+      message:
+        'This will migrate all legacy (hardcoded) projects to Firestore. Continue?',
+      onConfirm: () => {
+        setConfirmDialog((prev) => ({ ...prev, isOpen: false }));
+        executeMigration();
+      },
+    });
+  };
+
   if (!user) {
     return (
-      <div className="flex items-center justify-center h-screen bg-slate-900 text-slate-100 font-sans">
-        <div className="p-8 bg-slate-800 rounded-lg shadow-xl border border-slate-700 w-96 text-center">
-          <div className="mb-6 bg-blue-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto text-blue-400">
+      <div className="flex items-center justify-center h-screen bg-background text-foreground font-sans">
+        <div className="p-8 bg-glass-low backdrop-blur-md border border-glass-border rounded-xl shadow-xl w-96 text-center">
+          <div className="mb-6 bg-cyber-neon/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto text-cyber-neon">
             <Lock size={32} />
           </div>
-          <h2 className="text-2xl font-bold mb-2">Admin Access</h2>
-          <p className="text-slate-400 mb-6 text-sm">
+          <h2 className="text-2xl font-bold mb-2 text-foreground">
+            Admin Access
+          </h2>
+          <p className="text-muted-foreground mb-6 text-sm">
             Portfolio Management System
           </p>
           <button
             onClick={login}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 px-4 rounded transition-colors"
+            className="w-full bg-cyber-neon hover:bg-cyber-neon/90 text-black font-medium py-2.5 px-4 rounded-lg transition-all duration-200 ease-spring hover:shadow-lg hover:shadow-cyber-neon/30"
           >
             Sign in with Google
           </button>
@@ -301,29 +347,31 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans p-6 pb-32 pt-24">
+    <div className="min-h-screen bg-background text-foreground font-sans p-6 pb-32 pt-24">
       {/* Header */}
       <header className="flex justify-between items-center mb-10 max-w-6xl mx-auto">
         <div className="flex items-center gap-3">
-          <div className="bg-emerald-500/20 p-2 rounded-lg text-emerald-400">
+          <div className="bg-cyber-neon/20 p-2 rounded-lg text-cyber-neon">
             <Database size={24} />
           </div>
           <div>
-            <h1 className="text-xl font-bold">Content Manager</h1>
-            <div className="flex items-center gap-2 text-xs text-slate-500">
-              <span className="w-2 h-2 rounded-full bg-green-500" />
+            <h1 className="text-xl font-bold text-foreground">
+              Content Manager
+            </h1>
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <span className="w-2 h-2 rounded-full bg-cyber-neon" />
               Firestore Connected
             </div>
           </div>
         </div>
 
         <div className="flex items-center gap-4">
-          <span className="text-sm text-slate-400 hidden sm:block">
+          <span className="text-sm text-muted-foreground hidden sm:block">
             {user.email}
           </span>
           <button
             onClick={logout}
-            className="p-2 hover:bg-slate-800 rounded-full text-slate-400 hover:text-red-400 transition-colors"
+            className="p-2 hover:bg-glass-low rounded-full text-muted-foreground hover:text-cyber-pink transition-colors"
           >
             <LogOut size={20} />
           </button>
@@ -334,27 +382,27 @@ export default function AdminDashboard() {
       <main className="max-w-6xl mx-auto">
         <div className="flex justify-between items-end mb-6">
           <div>
-            <h2 className="text-lg font-semibold text-white">
+            <h2 className="text-lg font-semibold text-foreground">
               Project Repository
             </h2>
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-muted-foreground">
               Sync with GitHub to find new repositories.
             </p>
           </div>
 
           <div className="flex gap-3">
             {/* View Toggle */}
-            <div className="flex bg-slate-900 rounded-lg p-1 border border-slate-800 mr-2">
+            <div className="flex bg-glass-low rounded-lg p-1 border border-glass-border mr-2">
               <button
                 onClick={() => setViewMode('list')}
-                className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-slate-700 text-white' : 'text-slate-500 hover:text-slate-300'}`}
+                className={`p-1.5 rounded transition-colors ${viewMode === 'list' ? 'bg-cyber-neon text-black' : 'text-muted-foreground hover:text-foreground'}`}
                 title="List View"
               >
                 <List size={16} />
               </button>
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-slate-700 text-white' : 'text-slate-500 hover:text-slate-300'}`}
+                className={`p-1.5 rounded transition-colors ${viewMode === 'grid' ? 'bg-cyber-neon text-black' : 'text-muted-foreground hover:text-foreground'}`}
                 title="Grid View"
               >
                 <LayoutGrid size={16} />
@@ -364,7 +412,7 @@ export default function AdminDashboard() {
             <button
               onClick={migrateLegacyProjects}
               disabled={migrationLoading || loading}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm border border-slate-700 transition-all"
+              className="flex items-center gap-2 px-4 py-2 bg-glass-low hover:bg-glass-medium border border-glass-border text-foreground rounded-lg text-sm transition-all hover:border-cyber-cyan/50"
             >
               {migrationLoading ? (
                 <RefreshCw className="animate-spin" size={18} />
@@ -379,8 +427,8 @@ export default function AdminDashboard() {
               disabled={loading}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm transition-all ${
                 loading
-                  ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
-                  : 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-900/20'
+                  ? 'bg-glass-low text-muted-foreground cursor-not-allowed'
+                  : 'bg-cyber-neon hover:bg-cyber-neon/90 text-black shadow-lg shadow-cyber-neon/20'
               }`}
             >
               {loading ? (
@@ -398,8 +446,8 @@ export default function AdminDashboard() {
           className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}
         >
           {projects.length === 0 && !loading && (
-            <div className="text-center py-20 border-2 border-dashed border-slate-800 rounded-xl col-span-full">
-              <p className="text-slate-500">
+            <div className="text-center py-20 border-2 border-dashed border-glass-border rounded-xl col-span-full">
+              <p className="text-muted-foreground">
                 No projects found yet. Click Sync to start.
               </p>
             </div>
@@ -408,33 +456,36 @@ export default function AdminDashboard() {
           {projects.map((project) => (
             <div
               key={project.id}
-              className={`bg-slate-900 border rounded-xl overflow-hidden transition-all flex flex-col ${
+              className={`bg-glass-low backdrop-blur-md border rounded-xl overflow-hidden transition-all duration-300 ease-spring flex flex-col ${
                 project.status === 'published'
-                  ? 'border-green-900/50 shadow-none opacity-90'
-                  : 'border-slate-800 shadow-xl'
+                  ? 'border-cyber-neon/30 opacity-95'
+                  : 'border-glass-border hover:border-cyber-pink/50 shadow-lg'
               }`}
             >
               {editingId === project.id ? (
                 // --- Edit Mode ---
-                <div className="p-6 bg-slate-800/50 animate-in fade-in duration-300">
+                <div className="p-6 bg-glass-medium backdrop-blur-md animate-in fade-in duration-300">
                   {/* ... (Edit Content remains same) ... */}
                   <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-emerald-400 font-mono text-sm">
+                    <h3 className="text-cyber-neon font-mono text-sm">
                       Editing: {project.name || project.title}
                     </h3>
                     <button onClick={() => setEditingId(null)}>
-                      <X size={20} className="text-slate-500" />
+                      <X
+                        size={20}
+                        className="text-muted-foreground hover:text-cyber-pink"
+                      />
                     </button>
                   </div>
 
                   <div className="space-y-4">
                     {/* Simplified Edit Form for brevity in this replace, keeping logic identical */}
                     <div>
-                      <label className="block text-xs font-semibold text-slate-400 mb-1">
+                      <label className="block text-xs font-semibold text-muted-foreground mb-1">
                         Title
                       </label>
                       <input
-                        className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm text-slate-200"
+                        className="w-full bg-background border border-glass-border rounded-lg p-2 text-sm text-foreground focus:ring-2 focus:ring-cyber-neon outline-none"
                         value={editForm.title || ''}
                         onChange={(e) =>
                           setEditForm({ ...editForm, title: e.target.value })
@@ -442,11 +493,11 @@ export default function AdminDashboard() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-slate-400 mb-1">
+                      <label className="block text-xs font-semibold text-muted-foreground mb-1">
                         AI Generated Description
                       </label>
                       <textarea
-                        className="w-full bg-slate-950 border border-slate-700 rounded p-3 text-sm text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none min-h-[100px]"
+                        className="w-full bg-background border border-glass-border rounded-lg p-3 text-sm text-foreground focus:ring-2 focus:ring-cyber-neon outline-none min-h-[100px]"
                         value={editForm.description || ''}
                         onChange={(e) =>
                           setEditForm({
@@ -459,16 +510,16 @@ export default function AdminDashboard() {
 
                     {/* ... (Other Edit Fields) ... */}
                     <div>
-                      <label className="block text-xs font-semibold text-slate-400 mb-1 flex justify-between">
+                      <label className="block text-xs font-semibold text-muted-foreground mb-1 flex justify-between">
                         <span>Image URL (Screenshot)</span>
-                        <span className="text-indigo-400 font-normal">
+                        <span className="text-cyber-cyan font-normal">
                           {isUploading
                             ? 'Uploading...'
                             : 'Paste (Ctrl+V) enabled'}
                         </span>
                       </label>
                       <input
-                        className={`w-full bg-slate-950 border rounded p-2 text-sm text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-colors ${isUploading ? 'border-indigo-500 animate-pulse' : 'border-slate-700'}`}
+                        className={`w-full bg-background border rounded-lg p-2 text-sm text-foreground focus:ring-2 focus:ring-cyber-neon outline-none transition-colors ${isUploading ? 'border-cyber-cyan animate-pulse' : 'border-glass-border'}`}
                         value={editForm.imageUrl || ''}
                         onPaste={handlePaste}
                         onChange={(e) =>
@@ -487,11 +538,11 @@ export default function AdminDashboard() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-400 mb-1">
+                      <label className="block text-xs font-semibold text-muted-foreground mb-1">
                         Technologies (Comma separated)
                       </label>
                       <input
-                        className="w-full bg-slate-950 border border-slate-700 rounded p-3 text-sm text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none"
+                        className="w-full bg-background border border-glass-border rounded-lg p-3 text-sm text-foreground focus:ring-2 focus:ring-cyber-neon outline-none"
                         value={editForm.technologies?.join(', ') || ''}
                         onChange={(e) =>
                           setEditForm({
@@ -504,7 +555,7 @@ export default function AdminDashboard() {
                       />
                     </div>
 
-                    <div className="flex gap-4 p-4 bg-slate-900/50 rounded-lg">
+                    <div className="flex gap-4 p-4 bg-glass-low rounded-lg border border-glass-border">
                       <label className="flex items-center gap-2 text-sm cursor-pointer select-none">
                         <input
                           type="checkbox"
@@ -515,17 +566,17 @@ export default function AdminDashboard() {
                               isVisible: e.target.checked,
                             })
                           }
-                          className="rounded bg-slate-800 border-slate-600 text-indigo-500"
+                          className="rounded bg-background border-glass-border text-cyber-neon"
                         />
                         <Eye
                           size={16}
                           className={
                             editForm.isVisible !== false
-                              ? 'text-indigo-400'
-                              : 'text-slate-600'
+                              ? 'text-cyber-cyan'
+                              : 'text-muted-foreground'
                           }
                         />
-                        <span>Visible</span>
+                        <span className="text-foreground">Visible</span>
                       </label>
 
                       <label className="flex items-center gap-2 text-sm cursor-pointer select-none">
@@ -538,24 +589,24 @@ export default function AdminDashboard() {
                               isFeatured: e.target.checked,
                             })
                           }
-                          className="rounded bg-slate-800 border-slate-600 text-amber-500"
+                          className="rounded bg-background border-glass-border text-cyber-warning"
                         />
                         <Star
                           size={16}
                           className={
                             editForm.isFeatured
-                              ? 'fill-amber-500 text-amber-500'
-                              : 'text-slate-600'
+                              ? 'fill-cyber-warning text-cyber-warning'
+                              : 'text-muted-foreground'
                           }
                         />
-                        <span>Featured</span>
+                        <span className="text-foreground">Featured</span>
                       </label>
                     </div>
 
                     <div className="flex gap-3 pt-2">
                       <button
                         onClick={saveEdit}
-                        className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded text-sm"
+                        className="flex items-center gap-2 bg-cyber-neon hover:bg-cyber-neon/90 text-black px-4 py-2 rounded-lg text-sm transition-all hover:shadow-lg hover:shadow-cyber-neon/30"
                       >
                         <Check size={16} /> Save
                       </button>
@@ -570,7 +621,7 @@ export default function AdminDashboard() {
                   <div className="flex-1 flex flex-col">
                     <div className="flex items-center gap-3 mb-2 flex-wrap">
                       <h3
-                        className="text-xl font-bold text-white line-clamp-1"
+                        className="text-xl font-bold text-foreground line-clamp-1"
                         title={project.title || project.name}
                       >
                         {project.title || project.name}
@@ -578,25 +629,25 @@ export default function AdminDashboard() {
                       {/* Badges */}
                       <div className="flex gap-2">
                         {project.isPrivate && (
-                          <span className="px-2 py-0.5 bg-slate-800 text-slate-400 text-[10px] uppercase font-bold rounded border border-slate-700">
+                          <span className="px-2 py-0.5 bg-glass-low text-muted-foreground text-[10px] uppercase font-bold rounded border border-glass-border">
                             Private
                           </span>
                         )}
                         {project.status === 'new' && (
-                          <span className="px-2 py-0.5 bg-blue-900/50 text-blue-300 text-[10px] uppercase font-bold rounded border border-blue-800">
+                          <span className="px-2 py-0.5 bg-cyber-cyan/20 text-cyber-cyan text-[10px] uppercase font-bold rounded border border-cyber-cyan/50">
                             New
                           </span>
                         )}
                         {project.status === 'published' && (
-                          <span className="px-2 py-0.5 bg-green-900/50 text-green-300 text-[10px] uppercase font-bold rounded border border-green-800">
+                          <span className="px-2 py-0.5 bg-cyber-neon/20 text-cyber-neon text-[10px] uppercase font-bold rounded border border-cyber-neon/50">
                             Published
                           </span>
                         )}
                         {project.isFeatured && (
-                          <span className="px-2 py-0.5 bg-amber-900/30 text-amber-400 text-[10px] uppercase font-bold rounded border border-amber-800/50">
+                          <span className="px-2 py-0.5 bg-cyber-warning/20 text-cyber-warning text-[10px] uppercase font-bold rounded border border-cyber-warning/50">
                             <Star
                               size={10}
-                              className="inline fill-amber-400 mb-0.5"
+                              className="inline fill-cyber-warning mb-0.5"
                             />{' '}
                             Featured
                           </span>
@@ -605,7 +656,7 @@ export default function AdminDashboard() {
                     </div>
 
                     <p
-                      className={`text-slate-400 text-sm leading-relaxed mb-4 ${viewMode === 'grid' ? 'line-clamp-3' : ''}`}
+                      className={`text-muted-foreground text-sm leading-relaxed mb-4 ${viewMode === 'grid' ? 'line-clamp-3' : ''}`}
                     >
                       {project.description}
                     </p>
@@ -616,14 +667,14 @@ export default function AdminDashboard() {
                         .map((tech) => (
                           <span
                             key={tech}
-                            className="px-2 py-1 bg-slate-800 text-slate-300 text-xs rounded-md"
+                            className="px-2 py-1 bg-cyber-neon/10 text-cyber-neon border border-cyber-neon/30 text-xs rounded-md"
                           >
                             {tech}
                           </span>
                         ))}
                       {viewMode === 'grid' &&
                         (project.technologies?.length || 0) > 4 && (
-                        <span className="px-2 py-1 bg-slate-800 text-slate-500 text-xs rounded-md">
+                        <span className="px-2 py-1 bg-glass-low text-muted-foreground text-xs rounded-md border border-glass-border">
                             +{project.technologies!.length - 4}
                         </span>
                       )}
@@ -634,20 +685,20 @@ export default function AdminDashboard() {
                   <div
                     className={`flex gap-2 justify-center min-w-[140px] ${
                       viewMode === 'list'
-                        ? 'sm:flex-col sm:border-l sm:border-slate-800 sm:pl-6'
-                        : 'pt-4 border-t border-slate-800 mt-4'
+                        ? 'sm:flex-col sm:border-l sm:border-glass-border sm:pl-6'
+                        : 'pt-4 border-t border-glass-border mt-4'
                     }`}
                   >
                     <button
                       onClick={() => startEdit(project)}
-                      className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs rounded transition-colors"
+                      className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 py-2 bg-glass-low hover:bg-glass-medium border border-glass-border text-foreground text-xs rounded-lg transition-all hover:border-cyber-cyan/50"
                     >
                       <Edit2 size={14} /> Edit
                     </button>
 
                     <button
                       onClick={() => publishProject(project)}
-                      className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 py-2 text-white text-xs rounded transition-colors ${project.status === 'published' ? 'bg-slate-700 hover:bg-slate-600' : 'bg-indigo-600 hover:bg-indigo-500'}`}
+                      className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 py-2 text-xs rounded-lg transition-all ${project.status === 'published' ? 'bg-glass-low border border-glass-border text-foreground hover:border-cyber-cyan/50' : 'bg-cyber-neon hover:bg-cyber-neon/90 text-black'}`}
                     >
                       {project.status === 'published' ? (
                         <RefreshCw size={14} />
@@ -660,7 +711,7 @@ export default function AdminDashboard() {
                     </button>
 
                     <div
-                      className={`flex items-center justify-center gap-2 pt-2 text-[10px] text-slate-500 ${viewMode === 'grid' ? 'hidden' : ''}`}
+                      className={`flex items-center justify-center gap-2 pt-2 text-[10px] text-muted-foreground ${viewMode === 'grid' ? 'hidden' : ''}`}
                     >
                       <Cpu size={12} />
                       <span>AI Generated</span>
@@ -672,6 +723,61 @@ export default function AdminDashboard() {
           ))}
         </div>
       </main>
+
+      {/* Toast Notifications */}
+      {toasts.length > 0 && (
+        <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm">
+          {toasts.map((toast) => (
+            <div
+              key={toast.id}
+              className={`flex items-center gap-3 p-4 rounded-lg backdrop-blur-xl border shadow-lg animate-in slide-in-from-right duration-300 ${
+                toast.type === 'error'
+                  ? 'bg-cyber-error/20 border-cyber-error/50 text-cyber-error'
+                  : toast.type === 'success'
+                    ? 'bg-cyber-neon/20 border-cyber-neon/50 text-cyber-neon'
+                    : 'bg-cyber-cyan/20 border-cyber-cyan/50 text-cyber-cyan'
+              }`}
+            >
+              {toast.type === 'error' && <AlertCircle size={18} />}
+              {toast.type === 'success' && <CheckCircle size={18} />}
+              {toast.type === 'info' && <Info size={18} />}
+              <span className="text-sm flex-1">{toast.message}</span>
+              <button
+                onClick={() => dismissToast(toast.id)}
+                className="text-current opacity-70 hover:opacity-100 transition-opacity"
+              >
+                <X size={16} />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Confirmation Dialog */}
+      <Dialog
+        isOpen={confirmDialog.isOpen}
+        onClose={() => setConfirmDialog((prev) => ({ ...prev, isOpen: false }))}
+        title={confirmDialog.title}
+        size="sm"
+      >
+        <p className="text-muted-foreground mb-6">{confirmDialog.message}</p>
+        <div className="flex justify-end gap-3">
+          <button
+            onClick={() =>
+              setConfirmDialog((prev) => ({ ...prev, isOpen: false }))
+            }
+            className="px-4 py-2 bg-glass-low hover:bg-glass-medium border border-glass-border text-foreground rounded-lg text-sm transition-all"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={confirmDialog.onConfirm}
+            className="px-4 py-2 bg-cyber-neon hover:bg-cyber-neon/90 text-black rounded-lg text-sm font-medium transition-all"
+          >
+            Continue
+          </button>
+        </div>
+      </Dialog>
     </div>
   );
 }

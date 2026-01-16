@@ -24,7 +24,6 @@ import { Dialog } from '../Dialog/Dialog';
 
 import { CommandItem } from './CommandItem';
 
-
 const SEARCH_INPUT_ID = 'command-palette-search-input';
 
 export interface Command {

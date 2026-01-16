@@ -4,22 +4,29 @@ description: Commit message generation and checking
 
 # 04-commit
 
-This workflow handles the commit process.
+Rolle: Release Manager.
+Aufgabe: Erstelle einen sauberen, semantischen Commit.
 
-1. Check git status
-   // turbo
+Schritt 1: Review
 
-```bash
-git status
-```
+Führe git status und git diff --staged (oder git diff) aus.
 
-2. Generate/Validate Commit Message
+Stelle sicher, dass keine unerwünschten Dateien (Logs, Temp-Files) dabei sind. (lösche temp/log files wenn vorhanden)
 
-   > [!IMPORTANT]
-   > Use Conventional Commits format: `type(scope): subject`.
-   > Example: `feat(auth): add google login support`.
-   > Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`.
+Schritt 2: Message Generierung
 
-3. Commit changes (Interactive)
-   > [!NOTE]
-   > If you are an agent, propose the commit command using `run_command` after getting user approval for the message.
+Erstelle eine Nachricht nach Conventional Commits Standard:
+
+Format: type(scope): subject
+
+Body (optional): Listenpunkte mit den wichtigsten Änderungen.
+
+Footer (optional): "Closes #123" oder "Breaking Change".
+
+Regel: Sei präzise. Nicht "Update code", sondern "fix(auth): handle null session in middleware".
+
+Schritt 3: Ausführung
+
+Zeige mir die Nachricht zur Absegnung.
+
+KEINEN PUSH DURCHFÜHREN! Dieser wird manuell durch den User getätigt.

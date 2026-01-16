@@ -1,3 +1,11 @@
+/**
+ * @page AboutPage
+ * @description The about/biography page with cyber-noir styling.
+ * Implements the Neo-Victorian Software Standard's "Digital Hospitality" principle.
+ * @author Christian M. Lux
+ * @maintenance-pledge Semantic structure, glassmorphic panels, animated timeline.
+ */
+
 'use client';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -8,7 +16,6 @@ import { siGithub, siInspire, siBluesky, siGmail } from 'simple-icons';
 import Timeline from '@/components/sections/About/Timeline/Timeline';
 import { TimelineItem } from '@/components/sections/About/Timeline/Timeline';
 import { SimpleIcon } from '@/components/ui/SimpleIcon';
-
 
 const SOCIAL_ICONS: Record<string, string> = {
   github: siGithub.path,
@@ -102,13 +109,14 @@ export default function AboutPage({ params }: PageParams) {
 
   return (
     <div className="container mx-auto px-4 py-12">
+      {/* Hero Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="mb-16 text-center"
       >
-        <h1 className="mt-10 p-1 text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">
+        <h1 className="mt-10 p-1 text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyber-neon to-cyber-pink">
           {t('pageTitle', 'My Journey Through Technology')}
         </h1>
         <p className="text-lg md:text-xl max-w-3xl mx-auto text-muted-foreground">
@@ -119,43 +127,46 @@ export default function AboutPage({ params }: PageParams) {
         </p>
       </motion.div>
 
+      {/* About & Profile Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:mb-[5rem]">
-        <motion.div
+        {/* About Card */}
+        <motion.article
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="lg:col-span-2 bg-purple-gradient-r rounded-xl p-6 dark:shadow-mat-hover shadow-mat-base"
+          className="lg:col-span-2 bg-glass-low backdrop-blur-md border border-glass-border rounded-xl p-6 transition-all duration-300 ease-spring hover:border-cyber-neon/50"
         >
           <h2 className="text-2xl font-bold mb-4 text-foreground">
             {t('aboutSection.title', 'About Me')}
           </h2>
-          <p className="mb-4 text-gray-800 dark:text-gray-300">
+          <p className="mb-4 text-muted-foreground">
             {t(
               'aboutSection.paragraph1',
               'I have been fascinated by computers and technology since I was young. My journey started with customising forum signatures and templates, which sparked my interest in web development and design.',
             )}
           </p>
-          <p className="mb-4 text-gray-800 dark:text-gray-300">
+          <p className="mb-4 text-muted-foreground">
             {t(
               'aboutSection.paragraph2',
               "Gaming has always been a significant part of my life and has influenced my approach to problem-solving and creativity in technology. From building simple mods to developing full applications, I've brought that gaming mindset of persistence and innovation.",
             )}
           </p>
-          <p className="text-gray-800 dark:text-gray-300">
+          <p className="text-muted-foreground">
             {t(
               'aboutSection.paragraph3',
               "Today, I combine my technical skills with creative thinking to build solutions that are not only functional but engaging and intuitive. This portfolio represents the culmination of my experiences and showcases the projects I'm most proud of.",
             )}
           </p>
-        </motion.div>
+        </motion.article>
 
-        <motion.div
+        {/* Profile Card */}
+        <motion.aside
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="bg-purple-gradient-l rounded-xl p-6 flex flex-col justify-center items-center dark:shadow-mat-hover shadow-mat-base"
+          className="bg-glass-low backdrop-blur-md border border-glass-border rounded-xl p-6 flex flex-col justify-center items-center transition-all duration-300 ease-spring hover:border-cyber-pink/50"
         >
-          <div className="relative w-48 h-48 rounded-full overflow-hidden mb-6 border-4 border-primary">
+          <div className="relative w-48 h-48 rounded-full overflow-hidden mb-6 border-2 border-cyber-neon shadow-lg shadow-cyber-neon/20">
             <Image
               src="/assets/images/about/about_profile_2.jpg"
               alt="Profile"
@@ -176,17 +187,18 @@ export default function AboutPage({ params }: PageParams) {
               {skills.map((skill) => (
                 <span
                   key={skill}
-                  className="px-3 py-1 bg-muted text-gray-800 dark:text-gray-300 rounded-full text-sm"
+                  className="px-3 py-1 bg-cyber-neon/10 text-cyber-neon border border-cyber-neon/30 rounded-full text-sm font-medium transition-colors duration-200 hover:bg-cyber-neon/20"
                 >
                   {skill}
                 </span>
               ))}
             </div>
           </div>
-        </motion.div>
+        </motion.aside>
       </div>
 
-      <motion.div
+      {/* Timeline Section */}
+      <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
@@ -199,15 +211,16 @@ export default function AboutPage({ params }: PageParams) {
             <p className="text-muted-foreground">Timeline loading...</p>
           </div>
         )}
-      </motion.div>
+      </motion.section>
 
-      <motion.div
+      {/* Connect Section */}
+      <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.8 }}
         className="text-center mt-16"
       >
-        <h2 className="text-2xl font-bold mb-6 text-foreground ">
+        <h2 className="text-2xl font-bold mb-6 text-foreground">
           {t('connectSection.title', "Let's Connect")}
         </h2>
         <p className="text-lg max-w-2xl mx-auto mb-8 text-muted-foreground">
@@ -216,23 +229,23 @@ export default function AboutPage({ params }: PageParams) {
             'Interested in collaborating or just want to chat about the latest in tech or gaming? Feel free to reach out through any of the channels below.',
           )}
         </p>
-        <div className="flex justify-center space-x-6">
+        <div className="flex justify-center space-x-4">
           {socialLinks.map((social) => (
             <a
               key={social.name}
               href={
                 social.url.includes('@') ? 'mailto:' + social.url : social.url
               }
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="group"
               aria-label={social.name}
             >
               <span className="sr-only">{social.name}</span>
-              <div className="w-10 h-10 flex items-center justify-center border border-muted hover:border-primary rounded-full transition-colors">
+              <div className="w-12 h-12 flex items-center justify-center bg-glass-low backdrop-blur-md border border-glass-border rounded-full transition-all duration-200 ease-spring group-hover:border-cyber-neon group-hover:shadow-lg group-hover:shadow-cyber-neon/20 text-muted-foreground group-hover:text-cyber-neon">
                 {SOCIAL_ICONS[social.icon.toLowerCase()] ? (
                   <SimpleIcon
                     path={SOCIAL_ICONS[social.icon.toLowerCase()]}
                     title={social.name}
-                    size={20}
+                    size={22}
                   />
                 ) : (
                   <span className="text-sm">{social.icon}</span>
@@ -241,7 +254,7 @@ export default function AboutPage({ params }: PageParams) {
             </a>
           ))}
         </div>
-      </motion.div>
+      </motion.section>
     </div>
   );
 }

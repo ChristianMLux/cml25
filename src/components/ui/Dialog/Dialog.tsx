@@ -1,3 +1,11 @@
+/**
+ * @component Dialog
+ * @description A modal dialog with glassmorphism styling and spring animations.
+ * Implements the Neo-Victorian Software Standard's "Non-Intrusive UX" principle.
+ * @author Christian M. Lux
+ * @maintenance-pledge Uses HeadlessUI for accessibility; visuals are purely additive.
+ */
+
 'use client';
 
 import {
@@ -60,23 +68,25 @@ export function Dialog({
         className="relative z-50"
         onClose={closeOnEsc ? onClose : handleBackdropClose}
       >
+        {/* Backdrop with blur */}
         <TransitionChild
           as={Fragment}
-          enter="ease-out duration-300"
+          enter="ease-spring duration-300"
           enterFrom="opacity-0"
           enterTo="opacity-100"
           leave="ease-in duration-200"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm" />
         </TransitionChild>
 
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4">
+            {/* Panel with spring animation */}
             <TransitionChild
               as={Fragment}
-              enter="ease-out duration-300"
+              enter="ease-spring duration-300"
               enterFrom="opacity-0 scale-95"
               enterTo="opacity-100 scale-100"
               leave="ease-in duration-200"
@@ -84,12 +94,12 @@ export function Dialog({
               leaveTo="opacity-0 scale-95"
             >
               <DialogPanel
-                className={`w-full ${sizes[size]} transform overflow-hidden rounded-lg bg-white dark:bg-gray-800 p-6 shadow-xl transition-all ${className}`}
+                className={`relative w-full ${sizes[size]} transform overflow-hidden rounded-xl bg-glass-medium backdrop-blur-2xl border border-glass-border p-6 shadow-2xl transition-all ${className}`}
               >
                 {showCloseButton && (
                   <button
                     type="button"
-                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                    className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyber-neon rounded-md p-1"
                     onClick={onClose}
                     aria-label={t('common:dialog.close')}
                   >
@@ -100,14 +110,14 @@ export function Dialog({
                 {title && (
                   <DialogTitle
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
+                    className="text-lg font-semibold leading-6 text-foreground"
                   >
                     {title}
                   </DialogTitle>
                 )}
 
                 {description && (
-                  <Description className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                  <Description className="mt-2 text-sm text-muted-foreground">
                     {description}
                   </Description>
                 )}

@@ -4,14 +4,35 @@ description: Documentation consistency workflow
 
 # 03-docs
 
-This workflow ensures documentation is up to date.
+Rolle: Technical Writer.
+Aufgabe: Synchronisiere Code-Realität mit Dokumentation.
 
-1. Check for documentation updates
+Schritt 1: Change Analysis
 
-   > [!NOTE]
-   > Review the `docs/` folder to ensure implementation details in `docs/` are in sync with the codebase changes.
-   > If there are new features, add them to `docs/`.
+Schau dir den git diff der gestageten oder geänderten Dateien an.
 
-2. Update README if necessary
-   > [!NOTE]
-   > If architectural changes occurred, update `README.md`.
+Identifiziere:
+
+Neue Env-Variablen?
+
+Geänderte API-Endpunkte (Next.js Routes)?
+
+Änderungen an Pydantic Models oder TypeScript Interfaces?
+
+Schritt 2: Update Docstrings & JSDoc
+
+Gehe durch die geänderten Funktionen.
+
+Stimmen die @param und @returns noch?
+
+Wenn eine Funktion komplex ist und keinen Docstring hat: Erstelle einen prägnanten Docstring (Google Style für Python, TSDoc für TS).
+
+Schritt 3: Projekt-Doku
+
+Prüfe README.md oder spezifische Doku-Files (z.B. /docs/api.md).
+
+Wenn sich Setup-Schritte oder Voraussetzungen geändert haben, aktualisiere sie.
+
+Abschluss
+
+Zeige mir genau, welche Text-Passagen geändert wurden.

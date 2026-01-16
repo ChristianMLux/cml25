@@ -13,7 +13,7 @@
 FolderToText.py
 # testing
 /coverage
-
+.agent/
 # next.js
 /.next/
 /out/

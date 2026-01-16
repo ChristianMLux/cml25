@@ -16,7 +16,8 @@ export default function AnimatedBackground() {
       <div
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(circle at center, rgba(63,94,251,0.08) 0%, rgba(70,252,208,0.04) 100%)',
+          background:
+            'radial-gradient(circle at center, rgba(63,94,251,0.08) 0%, rgba(70,252,208,0.04) 100%)',
         }}
       />
 
@@ -54,7 +55,8 @@ export default function AnimatedBackground() {
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(180deg, rgba(15, 23, 42, 0.01) 0%, rgba(15, 23, 42, 0.02) 100%)',
+          background:
+            'linear-gradient(180deg, rgba(15, 23, 42, 0.01) 0%, rgba(15, 23, 42, 0.02) 100%)',
           mixBlendMode: 'multiply',
         }}
       />

@@ -1,3 +1,12 @@
+/**
+ * @page ProjectPage
+ * @description Individual project detail page with cyber-noir styling.
+ * Implements the Neo-Victorian Software Standard's "Digital Hospitality" principle.
+ * @author Christian M. Lux
+ * @maintenance-pledge Semantic structure, accessible links, glassmorphic elements.
+ */
+
+import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
@@ -62,67 +71,73 @@ export default async function ProjectPage({ params }: PageParams) {
       <div className="container mx-auto px-4 py-8 mt-10">
         <BackButton href="/projects" label="Zurück zu Projekten" />
 
-        <div className="mt-8">
-          <h1 className="text-3xl font-bold mb-4">{project.title}</h1>
-          <p className="text-lg mb-6">{project.description}</p>
+        <article className="mt-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            {project.title}
+          </h1>
+          <p className="text-lg text-muted-foreground mb-6">
+            {project.description}
+          </p>
 
           <div className="mb-8">
             <GalleryWrapper images={projectImages} />
           </div>
 
+          {/* Technologies */}
           {project.technologies && project.technologies.length > 0 && (
-            <div className="mb-6">
-              <h2 className="text-xl font-semibold mb-2">Technologien</h2>
+            <section className="mb-8">
+              <h2 className="text-xl font-semibold text-foreground mb-3">
+                Technologien
+              </h2>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100 rounded-full text-sm"
+                    className="px-3 py-1 bg-cyber-neon/10 text-cyber-neon border border-cyber-neon/30 rounded-full text-sm font-medium"
                   >
                     {tech}
                   </span>
                 ))}
               </div>
-            </div>
+            </section>
           )}
 
+          {/* Content */}
           {project.content && (
-            <div className="mb-8 prose dark:prose-invert max-w-none">
+            <section className="mb-8 prose prose-invert max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-cyber-cyan prose-a:no-underline hover:prose-a:underline prose-strong:text-foreground">
               <div dangerouslySetInnerHTML={{ __html: project.content }} />
-            </div>
+            </section>
           )}
 
+          {/* Tags */}
           {project.tags && project.tags.length > 0 && (
-            <div className="mb-6">
-              <h2 className="text-xl font-semibold mb-2">Tags</h2>
+            <section className="mb-8">
+              <h2 className="text-xl font-semibold text-foreground mb-3">
+                Tags
+              </h2>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200 rounded-full text-sm"
+                    className="px-3 py-1 bg-glass-low backdrop-blur-md border border-glass-border text-muted-foreground rounded-full text-sm transition-colors duration-200 hover:text-cyber-cyan hover:border-cyber-cyan/50"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
-            </div>
+            </section>
           )}
 
-          <div className="flex flex-wrap gap-4 mb-8">
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-4 mb-12">
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center px-5 py-2.5 bg-glass-low backdrop-blur-md border border-glass-border text-foreground rounded-full font-medium transition-all duration-200 ease-spring hover:border-cyber-neon/50 hover:text-cyber-neon focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyber-neon"
               >
-                <svg
-                  className="w-5 h-5 mr-2"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-                </svg>
+                <Github className="w-5 h-5 mr-2" />
                 GitHub Repository
               </a>
             )}
@@ -132,84 +147,68 @@ export default async function ProjectPage({ params }: PageParams) {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+                className="inline-flex items-center px-5 py-2.5 bg-cyber-neon text-black rounded-full font-medium transition-all duration-200 ease-spring hover:shadow-lg hover:shadow-cyber-neon/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyber-neon focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
-                <svg
-                  className="w-5 h-5 mr-2"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
+                <ExternalLink className="w-5 h-5 mr-2" />
                 Live Demo
               </a>
             )}
           </div>
 
+          {/* Related Projects */}
           {relatedProjects.length > 0 && (
-            <div className="mt-12">
-              <h2 className="text-2xl font-bold mb-4">Ähnliche Projekte</h2>
+            <section className="mt-16 pt-8 border-t border-glass-border">
+              <h2 className="text-2xl font-bold text-foreground mb-6">
+                Ähnliche Projekte
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {relatedProjects.map((relatedProject) => (
-                  <div
+                  <article
                     key={relatedProject.id}
-                    className="border dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                    className="bg-glass-low backdrop-blur-md border border-glass-border rounded-xl overflow-hidden transition-all duration-300 ease-spring hover:border-cyber-pink/50 hover:shadow-lg group"
                   >
                     <div className="h-40 overflow-hidden relative">
                       <Image
                         fill={true}
                         src={relatedProject.imageUrl}
                         alt={relatedProject.title}
-                        className="w-[10rem] h-[10rem] object-cover transition-transform hover:scale-105"
+                        className="object-cover transition-transform duration-500 ease-spring group-hover:scale-105"
                       />
                     </div>
                     <div className="p-4">
-                      <h3 className="font-bold">{relatedProject.title}</h3>
+                      <h3 className="font-bold text-foreground group-hover:text-cyber-neon transition-colors duration-200">
+                        {relatedProject.title}
+                      </h3>
                       <a
                         href={`/${locale}/projects/${relatedProject.id}`}
-                        className="text-blue-600 hover:text-blue-800 dark:text-blue-400 text-sm inline-flex items-center mt-2"
+                        className="text-cyber-cyan hover:text-cyber-neon text-sm inline-flex items-center mt-2 transition-colors duration-200"
                       >
                         Projekt ansehen
-                        <svg
-                          className="w-4 h-4 ml-1"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M5 12h14" />
-                          <path d="M12 5l7 7-7 7" />
-                        </svg>
+                        <ArrowRight className="w-4 h-4 ml-1" />
                       </a>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
-            </div>
+            </section>
           )}
-        </div>
+        </article>
       </div>
     );
   } catch (error) {
     console.error('Fehler beim Rendern der Projektseite:', error);
     return (
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-red-600 mb-4">
+        <h1 className="text-3xl font-bold text-cyber-pink mb-4">
           Fehler beim Laden des Projekts
         </h1>
-        <p>
+        <p className="text-muted-foreground">
           Es ist ein unerwarteter Fehler aufgetreten. Bitte versuche es später
           erneut.
         </p>
-        <BackButton href="/projects" label="Zurück zu Projekten" />
+        <div className="mt-6">
+          <BackButton href="/projects" label="Zurück zu Projekten" />
+        </div>
       </div>
     );
   }

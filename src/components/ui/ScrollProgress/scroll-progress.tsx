@@ -1,3 +1,10 @@
+/**
+ * @component ScrollProgress
+ * @description A scroll progress indicator with cyber-noir styling.
+ * @author Christian M. Lux
+ * @maintenance-pledge Accessible, spring-animated.
+ */
+
 'use client';
 
 import { motion, useScroll, useSpring } from 'framer-motion';
@@ -18,13 +25,13 @@ interface ScrollProgressProps {
 
 export default function ScrollProgress({
   alwaysVisible = false,
-  height = 4,
+  height = 3,
   className = '',
   showSections = false,
   zIndex = 60,
   colors = {
-    light: 'bg-primary',
-    dark: 'bg-primary',
+    light: 'bg-cyber-neon',
+    dark: 'bg-cyber-neon',
   },
 }: ScrollProgressProps) {
   const { scrollYProgress } = useScroll();
@@ -86,15 +93,15 @@ export default function ScrollProgress({
       aria-label="Reading progress"
       aria-valuenow={Math.round(scrollYProgress.get() * 100)}
       className="fixed top-0 left-0 right-0"
-      style={{ height: `${height}px`, zIndex: 60 }}
+      style={{ height: `${height}px`, zIndex }}
     >
       <motion.div
-        className={`h-full origin-left ${colorClass} ${className}`}
+        className={`h-full origin-left ${colorClass} shadow-[0_0_10px_rgba(255,95,31,0.5)] ${className}`}
         style={{ scaleX }}
       />
 
       {showSections && activeSection && (
-        <div className="absolute right-4 top-4 bg-white dark:bg-gray-800 px-2 py-1 text-xs rounded-md shadow-sm">
+        <div className="absolute right-4 top-4 bg-glass-low backdrop-blur-md border border-glass-border px-3 py-1 text-xs rounded-full text-muted-foreground shadow-lg">
           {activeSection.replaceAll('-', ' ')}
         </div>
       )}

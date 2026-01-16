@@ -1,14 +1,32 @@
+/**
+ * @component ContactForm
+ * @description A glassmorphic contact form with cyber-noir styling.
+ * Implements the Neo-Victorian Software Standard's "Digital Hospitality" principle.
+ * @author Christian M. Lux
+ * @maintenance-pledge Accessible, helpful validation messages, semantic structure.
+ */
+
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { motion } from 'framer-motion';
+import { Send } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import * as z from 'zod';
 
+import { Button } from '@/components/ui/Button/button';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from '@/components/ui/Card/Card';
 import { db } from '@/lib/firebase/firebase';
 import { useDialog } from '@/lib/store/dialogStore';
+import { cn } from '@/lib/utils';
 
 interface ContactFormProps {
   locale: string;
@@ -88,7 +106,7 @@ export default function ContactForm({ locale }: ContactFormProps) {
 
       dialog.alert(
         t('success.title', 'Nachricht gesendet'),
-        <p className="py-4">
+        <p className="py-4 text-muted-foreground">
           {t(
             'success.message',
             'Danke für deine Nachricht! Ich werde mich so schnell wie möglich bei dir melden.',
@@ -107,13 +125,13 @@ export default function ContactForm({ locale }: ContactFormProps) {
       dialog.alert(
         t('error.title', 'Fehler'),
         <div className="py-4">
-          <p>
+          <p className="text-muted-foreground">
             {t(
               'error.message',
               'Leider konnte deine Nachricht nicht gesendet werden. Bitte versuche es später noch einmal.',
             )}
           </p>
-          <p className="text-sm text-red-600 dark:text-red-400 mt-2">
+          <p className="text-sm text-cyber-pink mt-2">
             {err instanceof Error
               ? err.message
               : t('error.unknownError', 'Unbekannter Fehler')}
@@ -129,112 +147,160 @@ export default function ContactForm({ locale }: ContactFormProps) {
     }
   };
 
+  // Base input classes for glassmorphic styling
+  const inputBaseClasses = cn(
+    // Glassmorphism
+    'w-full p-3 bg-glass-low backdrop-blur-md border border-glass-border rounded-md',
+    // Text and transitions
+    'text-foreground placeholder:text-muted-foreground transition-all duration-200 ease-spring',
+    // Focus: Cyber-cyan glow
+    'focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan focus:shadow-[0_0_15px_rgba(0,255,255,0.3)]',
+  );
+
+  const inputErrorClasses =
+    'border-cyber-pink focus:border-cyber-pink focus:ring-cyber-pink focus:shadow-[0_0_15px_rgba(255,0,255,0.3)]';
+
   return (
-    <section className="p-[1.5rem]">
-      <motion.form
-        onSubmit={handleSubmit(onSubmit)}
-        className="space-y-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium mb-1">
-            {t('fields.name', 'Name')}
-          </label>
-          <input
-            id="name"
-            type="text"
-            className={`w-full p-3 bg-white dark:bg-gray-800 border ${
-              errors.name
-                ? 'border-red-500'
-                : 'border-gray-300 dark:border-gray-600'
-            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
-            placeholder={t('placeholders.name', 'Dein Name')}
-            {...register('name')}
-          />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
-          )}
-        </div>
+    <section className="py-16 px-4">
+      <div className="container max-w-2xl mx-auto">
+        <Card as="div" className="p-2 sm:p-4">
+          <CardHeader className="text-center pb-6">
+            <CardTitle className="text-2xl sm:text-3xl">
+              {t('title', 'Kontakt aufnehmen')}
+            </CardTitle>
+            <CardDescription className="text-base">
+              {t('subtitle', 'Ich freue mich auf deine Nachricht')}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <motion.form
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              {/* Name Field */}
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-foreground mb-2"
+                >
+                  {t('fields.name', 'Name')}
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  className={cn(
+                    inputBaseClasses,
+                    errors.name && inputErrorClasses,
+                  )}
+                  placeholder={t('placeholders.name', 'Dein Name')}
+                  {...register('name')}
+                />
+                {errors.name && (
+                  <p className="mt-2 text-sm text-cyber-pink">
+                    {errors.name.message}
+                  </p>
+                )}
+              </div>
 
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1">
-            {t('fields.email', 'E-Mail')}
-          </label>
-          <input
-            id="email"
-            type="email"
-            className={`w-full p-3 bg-white dark:bg-gray-800 border ${
-              errors.email
-                ? 'border-red-500'
-                : 'border-gray-300 dark:border-gray-600'
-            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
-            placeholder={t('placeholders.email', 'deine@email.com')}
-            {...register('email')}
-          />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-          )}
-        </div>
+              {/* Email Field */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-foreground mb-2"
+                >
+                  {t('fields.email', 'E-Mail')}
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  className={cn(
+                    inputBaseClasses,
+                    errors.email && inputErrorClasses,
+                  )}
+                  placeholder={t('placeholders.email', 'deine@email.com')}
+                  {...register('email')}
+                />
+                {errors.email && (
+                  <p className="mt-2 text-sm text-cyber-pink">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
 
-        <div>
-          <label htmlFor="subject" className="block text-sm font-medium mb-1">
-            {t('fields.subject', 'Betreff')}
-          </label>
-          <input
-            id="subject"
-            type="text"
-            className={`w-full p-3 bg-white dark:bg-gray-800 border ${
-              errors.subject
-                ? 'border-red-500'
-                : 'border-gray-300 dark:border-gray-600'
-            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
-            placeholder={t('placeholders.subject', 'Projektanfrage')}
-            {...register('subject')}
-          />
-          {errors.subject && (
-            <p className="mt-1 text-sm text-red-500">
-              {errors.subject.message}
-            </p>
-          )}
-        </div>
+              {/* Subject Field */}
+              <div>
+                <label
+                  htmlFor="subject"
+                  className="block text-sm font-medium text-foreground mb-2"
+                >
+                  {t('fields.subject', 'Betreff')}
+                </label>
+                <input
+                  id="subject"
+                  type="text"
+                  className={cn(
+                    inputBaseClasses,
+                    errors.subject && inputErrorClasses,
+                  )}
+                  placeholder={t('placeholders.subject', 'Projektanfrage')}
+                  {...register('subject')}
+                />
+                {errors.subject && (
+                  <p className="mt-2 text-sm text-cyber-pink">
+                    {errors.subject.message}
+                  </p>
+                )}
+              </div>
 
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium mb-1">
-            {t('fields.message', 'Nachricht')}
-          </label>
-          <textarea
-            id="message"
-            rows={5}
-            className={`w-full p-3 bg-white dark:bg-gray-800 border ${
-              errors.message
-                ? 'border-red-500'
-                : 'border-gray-300 dark:border-gray-600'
-            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
-            placeholder={t(
-              'placeholders.message',
-              'Beschreibe dein Projekt...',
-            )}
-            {...register('message')}
-          />
-          {errors.message && (
-            <p className="mt-1 text-sm text-red-500">
-              {errors.message.message}
-            </p>
-          )}
-        </div>
+              {/* Message Field */}
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-foreground mb-2"
+                >
+                  {t('fields.message', 'Nachricht')}
+                </label>
+                <textarea
+                  id="message"
+                  rows={5}
+                  className={cn(
+                    inputBaseClasses,
+                    'resize-none',
+                    errors.message && inputErrorClasses,
+                  )}
+                  placeholder={t(
+                    'placeholders.message',
+                    'Beschreibe dein Projekt...',
+                  )}
+                  {...register('message')}
+                />
+                {errors.message && (
+                  <p className="mt-2 text-sm text-cyber-pink">
+                    {errors.message.message}
+                  </p>
+                )}
+              </div>
 
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isSubmitting
-            ? t('buttons.sending', 'Wird gesendet...')
-            : t('buttons.send', 'Nachricht senden')}
-        </button>
-      </motion.form>
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                variant="cyber"
+                size="lg"
+                disabled={isSubmitting}
+                className="w-full"
+              >
+                {isSubmitting
+                  ? t('buttons.sending', 'Wird gesendet...')
+                  : t('buttons.send', 'Nachricht senden')}
+                {!isSubmitting && <Send className="ml-2 h-5 w-5" />}
+              </Button>
+            </motion.form>
+          </CardContent>
+        </Card>
+      </div>
     </section>
   );
 }

@@ -1,3 +1,11 @@
+/**
+ * @component Button
+ * @description A tactile, physics-based button component with 3D press states.
+ * Implements the Neo-Victorian Software Standard's "Intentional Ornamentation" principle.
+ * @author Christian M. Lux
+ * @maintenance-pledge Robust against minor layout shifts. All states visually distinct.
+ */
+
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
@@ -5,23 +13,30 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  // Base: relative positioning for 3D effect, spring transition, custom focus ring
+  'relative inline-flex items-center justify-center overflow-hidden rounded-md text-sm font-bold uppercase tracking-widest transition-all duration-200 ease-spring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyber-neon focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        // Default: Tactile neon button with 3D states
+        default:
+          'bg-cyber-neon/10 text-cyber-neon backdrop-blur-md border border-cyber-neon/50 shadow-tactile-md hover:bg-cyber-neon/20 hover:-translate-y-[2px] hover:shadow-tactile-lg active:translate-y-[2px] active:shadow-tactile-active',
         destructive:
-          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+          'bg-destructive/10 text-destructive backdrop-blur-md border border-destructive/50 shadow-tactile-md hover:bg-destructive/20 hover:-translate-y-[2px] hover:shadow-tactile-lg active:translate-y-[2px] active:shadow-tactile-active',
         outline:
-          'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+          'border border-glass-border bg-glass-low backdrop-blur-md hover:bg-glass-medium hover:-translate-y-[2px] hover:shadow-tactile-lg active:translate-y-[2px] active:shadow-tactile-active',
         secondary:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
+          'bg-secondary/80 text-secondary-foreground backdrop-blur-md border border-secondary shadow-tactile-md hover:bg-secondary hover:-translate-y-[2px] hover:shadow-tactile-lg active:translate-y-[2px] active:shadow-tactile-active',
+        ghost:
+          'hover:bg-accent/50 hover:text-accent-foreground backdrop-blur-sm hover:-translate-y-[1px] active:translate-y-[1px]',
+        link: 'text-cyber-cyan underline-offset-4 hover:underline',
+        // New cyber variant for high-emphasis actions
+        cyber:
+          'bg-cyber-neon text-black font-bold shadow-tactile-md hover:shadow-neon-glow hover:-translate-y-[2px] active:translate-y-[2px] active:shadow-tactile-active',
       },
       size: {
         default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
+        sm: 'h-9 rounded-md px-3 text-xs',
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',
       },

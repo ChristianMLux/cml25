@@ -1,4 +1,4 @@
-import { Inter } from 'next/font/google';
+import { Inter, Outfit } from 'next/font/google';
 import { Suspense } from 'react';
 import { ReactNode } from 'react';
 
@@ -18,6 +18,7 @@ import { locales } from '../../../config/i18n-config';
 import '../../styles/globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -54,18 +55,22 @@ export default async function RootLayout({
   const { locale } = await params;
 
   return (
-    <html lang={locale} suppressHydrationWarning className={inter.variable}>
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className={`${inter.variable} ${outfit.variable}`}
+    >
       <head />
-      <body className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 relative">
+      <body className="min-h-screen bg-background text-foreground relative font-sans">
         <ThemeProvider>
           <I18nProvider locale={locale}>
             <AnimatedBackground />
             <ScrollProgress
               alwaysVisible={true}
-              height={1}
+              height={3}
               colors={{
-                light: 'bg-blue-600',
-                dark: 'bg-blue-400',
+                light: 'bg-cyber-neon',
+                dark: 'bg-cyber-neon',
               }}
               zIndex={60}
             />

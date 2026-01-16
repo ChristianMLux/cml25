@@ -1,4 +1,4 @@
-@import './command-palette.css';
+@import "./command-palette.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -25,9 +25,16 @@
     --destructive-foreground: 210 40% 98%;
     --ring: 215 20.2% 65.1%;
     --radius: 0.5rem;
+
+    /* Glassmorphism Variables */
+    --glass-low: rgba(255, 255, 255, 0.05);
+    --glass-medium: rgba(255, 255, 255, 0.1);
+    --glass-high: rgba(255, 255, 255, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.15);
   }
   .dark {
-    --background: 224 71% 4%;
+    --background: 0 0% 0%; /* True Black for OLED */
+
     --foreground: 213 31% 91%;
     --muted: 223 47% 11%;
     --muted-foreground: 215.4 16.3% 56.9%;
@@ -57,8 +64,8 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings:
-      'rlig' 1,
-      'calt' 1;
+      "rlig" 1,
+      "calt" 1;
   }
   .aspect-square {
     aspect-ratio: 1 / 1;
@@ -80,8 +87,8 @@ kbd {
   display: inline-block;
   padding: 0.1em 0.4em;
   font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace;
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
   font-size: 0.75em;
   line-height: 1.4;
   color: #6b7280;
@@ -163,5 +170,20 @@ kbd {
     .timeline-item-ultranarrow {
       @apply border-t-4 pt-2 mt-4;
     }
+  }
+}
+
+@layer utilities {
+  @media (prefers-reduced-motion: no-preference) {
+    .text-kinetic-hover {
+      transition: font-weight 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .text-kinetic-hover:hover {
+      font-weight: 600;
+    }
+  }
+
+  .glass-panel {
+    @apply bg-glass-low backdrop-blur-xl border border-glass-border;
   }
 }
