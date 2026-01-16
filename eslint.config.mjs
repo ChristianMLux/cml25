@@ -35,7 +35,7 @@ const eslintConfig = [
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-non-null-assertion": "warn",
-      "@typescript-eslint/type-annotation-spacing": "error",
+
 
       "react/prop-types": "off",
       "react/react-in-jsx-scope": "off",

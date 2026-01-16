@@ -4,13 +4,12 @@ const withBundleAnalyzer =
   process.env.ANALYZE === "true"
     ? // eslint-disable-next-line @typescript-eslint/no-require-imports
       require("@next/bundle-analyzer")({ enabled: true })
-    : (config) => config;
+    : (config: import("next").NextConfig) => config;
 
-const nextConfig = {
+const nextConfig: import("next").NextConfig = {
   reactStrictMode: true,
 
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: [
       "framer-motion",
       "@headlessui/react",
